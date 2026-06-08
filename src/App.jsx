@@ -1760,21 +1760,12 @@ function AutomationAIPage() {
           >
             Interact with our Personal Assistant
           </h2>
-
-          <iframe
-            src="https://huggingface.co/spaces/ImpactQi/PersonalAssitant/embed"
-            style={{
-              borderRadius: "16px",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 10px 50px rgba(0,0,0,0.3)",
-              width: "100%",
-              height: "800px",
-              minHeight: "600px",
-            }}
-            title="ImpactQi Personal Assistant"
-            allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; execution-while-not-rendered; execution-while-out-of-viewport; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-            allowFullScreen
-          />
+<iframe
+	src="https://impactqi-personalassitant.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
         </div>
       </div>
     </section>
