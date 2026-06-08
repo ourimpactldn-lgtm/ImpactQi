@@ -2895,7 +2895,7 @@ function HomePage() {
                 marginBottom: "25px",
               }}
             >
-              AI • DATA INTELLIGENCE • CREATIVE HEALTH • EQUITY SYSTEMS
+              AI • DATA INTELLIGENCE • CREATIVE HEALTH • EQUITY SYSTEMA
             </p>
 
             <h1
