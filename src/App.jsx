@@ -1409,47 +1409,66 @@ function WorkflowCarousel() {
 }
 
 function AutomationAIPage() {
-  const capabilities = [
-    {
-      title: "Workflow Automation",
-      description:
-        "Replacing repetitive manual processes with intelligent automated workflows.",
-    },
-    {
-      title: "Self-Service Portals",
-      description:
-        "Reducing administrative burden through user-centred digital experiences.",
-    },
-    {
-      title: "Real-Time Dashboards",
-      description:
-        "Transforming operational data into live business intelligence.",
-    },
-    {
-      title: "AI Assistants",
-      description:
-        "Building practical AI tools for knowledge retrieval and decision support.",
-    },
-    {
-      title: "Data Pipelines",
-      description:
-        "Connecting fragmented systems into a single source of truth.",
-    },
-    {
-      title: "Process Intelligence",
-      description:
-        "Understanding bottlenecks and improving organisational performance.",
-    },
-  ];
+  const sectionTag = {
+    color: "#60A5FA",
+    letterSpacing: "1.2px",
+    fontWeight: 700,
+    marginBottom: "14px",
+    textTransform: "uppercase",
+    fontSize: "12px"
+  };
 
-  const experiments = [
-    "AI Reporting",
-    "Knowledge Assistants",
-    "Document Analysis",
-    "AI Agents",
-    "Community Intelligence",
-    "Meeting Summaries",
-  ];
+  const automationText = {
+    color: "#CBD5E1",
+    lineHeight: 1.9,
+    fontSize: "16px",
+    margin: 0
+  };
+
+  const surfaceCard = {
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "28px",
+    padding: "30px",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
+    backdropFilter: "blur(14px)"
+  };
+
+  const mediaCard = {
+    overflow: "hidden",
+    borderRadius: "28px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.04)",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.22)"
+  };
+
+  const chipStyle = {
+    padding: "12px 16px",
+    borderRadius: "999px",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    color: "#E2E8F0",
+    fontSize: "13px",
+    fontWeight: 600
+  };
+
+  const listStyle = {
+    margin: 0,
+    paddingLeft: "20px",
+    color: "#CBD5E1",
+    lineHeight: 2,
+    fontSize: "15px"
+  };
+
+  const promptCard = {
+    padding: "16px 18px",
+    borderRadius: "18px",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    color: "#E2E8F0",
+    fontSize: "15px",
+    lineHeight: 1.7
+  };
 
   return (
     <section
@@ -1459,34 +1478,29 @@ function AutomationAIPage() {
         padding: "140px 80px 100px",
         background: "#07111F",
         color: "white",
-        boxSizing: "border-box",
+        boxSizing: "border-box"
       }}
     >
-      <div
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "1380px", margin: "0 auto" }}>
         <p
           style={{
             color: "#60A5FA",
             fontWeight: 700,
             letterSpacing: "1.5px",
             textTransform: "uppercase",
-            marginBottom: "20px",
+            marginBottom: "20px"
           }}
         >
-          Automation & AI
+          Automation AI
         </p>
 
         <h1
           style={{
             fontSize: "84px",
-            lineHeight: "0.95",
+            lineHeight: 0.95,
             letterSpacing: "-4px",
             maxWidth: "1000px",
-            marginBottom: "30px",
+            margin: "0 0 28px"
           }}
         >
           Building intelligent systems that remove friction.
@@ -1494,280 +1508,467 @@ function AutomationAIPage() {
 
         <p
           style={{
-            maxWidth: "800px",
+            maxWidth: "820px",
             fontSize: "22px",
-            lineHeight: "1.9",
+            lineHeight: 1.9,
             color: "#CBD5E1",
-            marginBottom: "90px",
+            marginBottom: "90px"
           }}
         >
-          I design and build digital systems that automate workflows, capture
-          data automatically, generate insight in real time and support better
-          decision-making.
+          This page showcases end-to-end workforce automation, adaptive cards in Microsoft Teams,
+          NHS-focused AI agents and a chatbot demo designed to support information access,
+          operational efficiency and better user experience.
         </p>
 
         <div
           style={{
-            borderRadius: "36px",
-            overflow: "hidden",
-            background: "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            marginBottom: "80px",
-          }}
-        >
-          <div
-            style={{
-              padding: "50px",
-            }}
-          >
-            <p style={sectionTag}>Featured Build</p>
-
-            <h2
-              style={{
-                fontSize: "52px",
-                marginBottom: "25px",
-              }}
-            >
-              End-to-End Workforce Automation
-            </h2>
-
-            <div
-              className="automation-feature-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gap: "24px",
-              }}
-            >
-              <div>
-                <h3>Challenge</h3>
-                <p style={automationText}>
-                  Shared mailbox management, manual triage, inconsistent data
-                  capture and limited reporting.
-                </p>
-              </div>
-
-              <div>
-                <h3>Solution</h3>
-                <p style={automationText}>
-                  Power Apps, automation workflows, self-service forms and
-                  real-time analytics.
-                </p>
-              </div>
-
-              <div>
-                <h3>Outcome</h3>
-                <p style={automationText}>
-                  Reduced administration, improved visibility and live
-                  operational intelligence.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <img
-            src="/automation-dashboard.JPG"
-            alt="Automation dashboard"
-            style={{
-              width: "100%",
-              display: "block",
-            }}
-          />
-        </div>
-
-        <div
-          style={{
+            ...surfaceCard,
             marginBottom: "100px",
+            padding: "48px"
           }}
         >
-          <p style={sectionTag}>Transformation Journey</p>
-
-          <div
-            className="automation-before-after-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "32px",
-            }}
-          >
-            <div style={processCard}>
-              <h3>Before</h3>
-
-              <ul style={workflowList}>
-                <li>Shared Mailbox</li>
-                <li>Manual Triage</li>
-                <li>Email Tracking</li>
-                <li>Spreadsheets</li>
-                <li>Delayed Reporting</li>
-              </ul>
-            </div>
-
-            <div style={processCard}>
-              <h3>After</h3>
-
-              <ul style={workflowList}>
-                <li>Self-Service Portal</li>
-                <li>Automated Workflows</li>
-                <li>Central Data Store</li>
-                <li>Power BI Dashboards</li>
-                <li>Real-Time Reporting</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-          }}
-        >
-          <p style={sectionTag}>Workflow Evolution</p>
-
-          <WorkflowCarousel />
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-          }}
-        >
-          <p style={sectionTag}>Architecture</p>
-
-          <div style={architectureCard}>
-            <div>User</div>
-            <div>↓</div>
-            <div>Portal</div>
-            <div>↓</div>
-            <div>Automation Layer</div>
-            <div>↓</div>
-            <div>Data Layer</div>
-            <div>↓</div>
-            <div>Reporting Layer</div>
-            <div>↓</div>
-            <div>Decision Makers</div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-          }}
-        >
-          <p style={sectionTag}>Build Components</p>
-
-          <div
-            className="automation-capability-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3,1fr)",
-              gap: "24px",
-            }}
-          >
-            {capabilities.map((item) => (
-              <div key={item.title} style={capabilityCard}>
-                <h3>{item.title}</h3>
-
-                <p style={automationText}>{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-          }}
-        >
-          <p style={sectionTag}>Automation Gallery</p>
-
-          <div
-            className="automation-gallery-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3,1fr)",
-              gap: "20px",
-            }}
-          >
-            <img src="/dashboard 1.JPG" alt="Dashboard view 1" style={galleryImage} />
-            <img src="/dashboard 2.JPG" alt="Dashboard view 2" style={galleryImage} />
-            <img src="/dashboard 3.JPG" alt="Dashboard view 3" style={galleryImage} />
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-          }}
-        >
-          <p style={sectionTag}>Behind The Scenes</p>
-
-          <div style={architectureCard}>
-            <div>Discovery</div>
-            <div>↓</div>
-            <div>Process Mapping</div>
-            <div>↓</div>
-            <div>Automation Design</div>
-            <div>↓</div>
-            <div>Build</div>
-            <div>↓</div>
-            <div>Testing</div>
-            <div>↓</div>
-            <div>Deployment</div>
-          </div>
-        </div>
-        <div>
-          <p style={sectionTag}>Current Experiments</p>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "16px",
-              flexWrap: "wrap",
-            }}
-          >
-            {experiments.map((item) => (
-              <div
-                key={item}
-                style={{
-                  padding: "14px 20px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginTop: "120px",
-            paddingTop: "80px",
-            borderTop: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          <p style={sectionTag}>Try Our AI Assistant</p>
-
+          <p style={sectionTag}>Featured Build</p>
           <h2
             style={{
-              fontSize: "48px",
-              lineHeight: "1.1",
-              letterSpacing: "-2px",
-              maxWidth: "700px",
-              marginBottom: "40px",
+              fontSize: "52px",
+              margin: "0 0 24px",
+              letterSpacing: "-1.8px",
+              color: "white"
             }}
           >
-            Interact with our Personal Assistant
+            End-to-End Workforce Automation
           </h2>
-<Chatbot />        
-</div>
+
+          <div
+            className="automation-feature-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: "24px",
+              marginBottom: "28px"
+            }}
+          >
+            <div
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "22px",
+                padding: "24px"
+              }}
+            >
+              <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Challenge</h3>
+              <p style={automationText}>
+                Requests were managed across multiple routes with manual triage,
+                inconsistent data capture and limited visibility of demand, activity and outcomes.
+              </p>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "22px",
+                padding: "24px"
+              }}
+            >
+              <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Solution</h3>
+              <p style={automationText}>
+                Power Apps, Power Automate, SharePoint and real-time dashboards were combined
+                into a structured pathway with clearer routing, stronger data capture and better oversight.
+              </p>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "22px",
+                padding: "24px"
+              }}
+            >
+              <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Outcome</h3>
+              <p style={automationText}>
+                Administration was reduced, process handling became more consistent,
+                and operational teams gained stronger live visibility for decision-making.
+              </p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.1fr 0.9fr",
+              gap: "28px",
+              alignItems: "start"
+            }}
+            className="automation-before-after-grid"
+          >
+            <div style={mediaCard}>
+              <img
+                src="automation-dashboard.JPG"
+                alt="Automation dashboard"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  aspectRatio: "16 / 10",
+                  objectFit: "cover"
+                }}
+              />
+            </div>
+
+            <div style={{ ...surfaceCard, background: "rgba(255,255,255,0.04)" }}>
+              <p style={sectionTag}>What this changed</p>
+              <p style={{ ...automationText, marginBottom: "18px" }}>
+                This end-to-end build transformed a fragmented, manual process into a connected
+                digital workflow. By combining self-service forms, automation, SharePoint data capture
+                and live reporting, the system reduced admin burden, improved visibility and created a
+                more reliable operating model for workforce activity.
+              </p>
+              <ul style={listStyle}>
+                <li>Centralised intake replaced fragmented email handling.</li>
+                <li>Automated routing reduced repetitive manual processing.</li>
+                <li>Structured data capture improved reporting quality.</li>
+                <li>Dashboards created stronger operational visibility.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "100px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "28px"
+          }}
+          className="automation-capability-grid"
+        >
+          <div>
+            <p style={sectionTag}>Teams Showcase</p>
+            <h2
+              style={{
+                margin: "0 0 18px",
+                fontSize: "46px",
+                letterSpacing: "-1.6px",
+                color: "white"
+              }}
+            >
+              Adaptive Cards in Microsoft Teams
+            </h2>
+
+            <div style={mediaCard}>
+              <video
+                controls
+                muted
+                loop
+                playsInline
+                poster="adaptive-cards-poster.jpg"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  aspectRatio: "16 / 10",
+                  objectFit: "cover",
+                  background: "#020617"
+                }}
+              >
+                <source src="adaptive-cards-demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+
+            <div style={{ marginTop: "22px" }}>
+              <p style={automationText}>
+                These adaptive card experiences bring automation directly into Microsoft Teams,
+                allowing users to receive updates, review information and take action without leaving
+                their main working environment.
+              </p>
+              <p style={{ ...automationText, marginTop: "14px" }}>
+                This helps reduce delays, improves consistency and makes routine processes easier
+                to manage at scale.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ ...surfaceCard, height: "100%" }}>
+            <p style={sectionTag}>What this demonstrates</p>
+            <h3
+              style={{
+                margin: "0 0 18px",
+                fontSize: "32px",
+                letterSpacing: "-1px",
+                color: "white"
+              }}
+            >
+              In-workflow action and response
+            </h3>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                flexWrap: "wrap",
+                marginBottom: "22px"
+              }}
+            >
+              <div style={chipStyle}>In-Teams action handling</div>
+              <div style={chipStyle}>Faster response flow</div>
+              <div style={chipStyle}>Reduced email dependency</div>
+              <div style={chipStyle}>Clearer decision points</div>
+              <div style={chipStyle}>User-centred interface</div>
+            </div>
+
+            <p style={automationText}>
+              Adaptive cards work best here when they are shown as part of the wider workflow
+              rather than as a standalone feature. This section shows how the interaction layer
+              sits on top of the automation and data structure.
+            </p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "100px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "28px"
+          }}
+          className="automation-gallery-grid"
+        >
+          <div>
+            <p style={sectionTag}>AI Agents</p>
+            <h2
+              style={{
+                margin: "0 0 18px",
+                fontSize: "46px",
+                letterSpacing: "-1.6px",
+                color: "white"
+              }}
+            >
+              NHS-Focused AI Agents
+            </h2>
+
+            <div style={mediaCard}>
+              <img
+                src="nhs-agent.jpeg"
+                alt="NHS AI agent interface"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  aspectRatio: "16 / 10",
+                  objectFit: "cover"
+                }}
+              />
+            </div>
+
+            <div style={{ marginTop: "22px" }}>
+              <p style={automationText}>
+                These agents were created to support staff with quicker access to information,
+                clearer navigation and more consistent responses to common queries.
+              </p>
+              <p style={{ ...automationText, marginTop: "14px" }}>
+                They demonstrate how AI can be applied in an NHS context to strengthen
+                operational support while keeping the experience practical, accessible and user-focused.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ ...surfaceCard, height: "100%" }}>
+            <p style={sectionTag}>Typical value areas</p>
+            <h3
+              style={{
+                margin: "0 0 18px",
+                fontSize: "32px",
+                letterSpacing: "-1px",
+                color: "white"
+              }}
+            >
+              Staff support and service navigation
+            </h3>
+
+            <ul style={listStyle}>
+              <li>Information retrieval for common staff questions and guidance.</li>
+              <li>Faster signposting to the right process, form, team or next step.</li>
+              <li>More consistent responses across repeated operational queries.</li>
+              <li>Support for day-to-day navigation without adding extra admin burden.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          style={{
+            ...surfaceCard,
+            padding: "42px",
+            marginBottom: "80px"
+          }}
+        >
+          <p style={sectionTag}>Interactive Demo</p>
+          <h2
+            style={{
+              margin: "0 0 18px",
+              fontSize: "48px",
+              lineHeight: 1.08,
+              letterSpacing: "-2px",
+              color: "white",
+              maxWidth: "700px"
+            }}
+          >
+            Chatbot Demo
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "0.8fr 1.2fr",
+              gap: "28px",
+              alignItems: "start"
+            }}
+            className="workflow-carousel-grid"
+          >
+            <div>
+              <p style={{ ...automationText, marginBottom: "22px" }}>
+                This chatbot demo shows how conversational AI can be used to support information
+                access and user guidance in a practical way. It is designed to reduce repetitive
+                questions, improve navigation and provide a more responsive digital support experience.
+              </p>
+
+              <div style={{ display: "grid", gap: "14px" }}>
+                <div style={promptCard}>How does the workforce automation process work?</div>
+                <div style={promptCard}>What can the AI agent help users with?</div>
+                <div style={promptCard}>Show an example of a Teams adaptive card workflow.</div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "28px",
+                overflow: "hidden",
+                boxShadow: "0 20px 50px rgba(0,0,0,0.22)"
+              }}
+            >
+              <div
+                style={{
+                  padding: "18px 22px",
+                  borderBottom: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  background: "rgba(255,255,255,0.03)"
+                }}
+              >
+                <strong style={{ color: "white", fontSize: "15px" }}>AI Assistant Demo</strong>
+                <span style={{ color: "#93C5FD", fontSize: "13px", fontWeight: 700 }}>Demo ready</span>
+              </div>
+
+              <div
+                style={{
+                  padding: "22px",
+                  display: "grid",
+                  gap: "16px"
+                }}
+              >
+                <div
+                  style={{
+                    maxWidth: "85%",
+                    padding: "16px 18px",
+                    borderRadius: "20px",
+                    borderTopLeftRadius: "8px",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    color: "#E2E8F0",
+                    lineHeight: 1.7,
+                    fontSize: "15px"
+                  }}
+                >
+                  Hello. I can help explain the workflow, show how the Teams cards fit into the
+                  process, or outline what the NHS AI agents are designed to support.
+                </div>
+
+                <div
+                  style={{
+                    maxWidth: "78%",
+                    marginLeft: "auto",
+                    padding: "16px 18px",
+                    borderRadius: "20px",
+                    borderTopRightRadius: "8px",
+                    background: "linear-gradient(90deg, #2563EB, #60A5FA)",
+                    color: "white",
+                    lineHeight: 1.7,
+                    fontSize: "15px"
+                  }}
+                >
+                  How does the automation improve the process?
+                </div>
+
+                <div
+                  style={{
+                    maxWidth: "85%",
+                    padding: "16px 18px",
+                    borderRadius: "20px",
+                    borderTopLeftRadius: "8px",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    color: "#E2E8F0",
+                    lineHeight: 1.7,
+                    fontSize: "15px"
+                  }}
+                >
+                  It reduces fragmented manual handling by introducing structured intake,
+                  automated routing, centralised data capture and clearer reporting.
+                  That creates better consistency, visibility and efficiency across the workflow.
+                </div>
+              </div>
+
+              <div
+                style={{
+                  padding: "18px 22px",
+                  borderTop: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  gap: "12px",
+                  alignItems: "center"
+                }}
+              >
+                <div
+                  style={{
+                    flex: 1,
+                    minHeight: "48px",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "0 16px",
+                    color: "#94A3B8",
+                    fontSize: "14px",
+                    background: "rgba(255,255,255,0.04)"
+                  }}
+                >
+                  Type a question for the demo assistant…
+                </div>
+
+                <button
+                  type="button"
+                  aria-label="Send message"
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "999px",
+                    border: "none",
+                    background: "linear-gradient(90deg, #2563EB, #60A5FA)",
+                    color: "white",
+                    fontWeight: 700,
+                    cursor: "pointer"
+                  }}
+                >
+                  ↑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
-
 /* ---------------- RESEARCH PAGE ---------------- */
 
 function ResearchPage() {
