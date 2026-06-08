@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import Chatbot from "./components/Chatbot";
 
 /* ---------------- ICONS ---------------- */
 
@@ -1760,13 +1761,8 @@ function AutomationAIPage() {
           >
             Interact with our Personal Assistant
           </h2>
-<iframe
-	src="https://impactqi-personalassitant.hf.space"
-	frameborder="0"
-	width="850"
-	height="450"
-></iframe>
-        </div>
+<Chatbot />        
+</div>
       </div>
     </section>
   );
