@@ -1,6 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Chatbot from "./components/Chatbot";
-
 /* ---------------- ICONS ---------------- */
 
 function IconShell({
@@ -79,7 +77,25 @@ function UsersIcon() {
     </svg>
   );
 }
-
+function CurrencyPoundIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16 5a4 4 0 0 0-8 0v3" />
+      <path d="M6 11h8" />
+      <path d="M6 15h6" />
+      <path d="M6 19h10" />
+    </svg>
+  );
+}
 function BriefcaseIcon() {
   return (
     <svg
@@ -1189,27 +1205,24 @@ function FilmProjectsPage() {
 function WorkflowCarousel() {
   const slides = [
     {
-      title: "Old Workflow",
+      title: " Legacy Process",
       image: "/Old workflow.JPG",
       description: [
-        "Applications and requests were managed across multiple routes including placements, internships, work experience and observerships.",
-        "The process relied on manual handling, inconsistent data capture and limited visibility of demand, activity and outcomes.",
+        " Workforce programmes, placements and application requests were managed through fragmented processes, creating administrative overhead, inconsistent data collection and limited visibility of service demand and performance.",
       ],
     },
     {
-      title: "Transition",
+      title: " Digital Transformation",
       image: "/Transition.JPG",
       description: [
-        "The process was redesigned to streamline requests through a structured digital pathway.",
-        "Applications moved from email-driven workflows to automated forms, centralised data collection and standardised processing.",
+        " The service was redesigned into a structured digital workflow, replacing manual and email-based processes with automated request handling, centralised data management and standardised operational controls.",
       ],
     },
     {
-      title: "New Workflow",
+      title: " Integrated Solution",
       image: "/New workflow.JPG",
       description: [
-        "Power Automate, SharePoint and Power BI were combined to create an integrated ecosystem.",
-        "Requests are routed automatically, data is captured in real time and dashboards provide live operational intelligence for decision-makers.",
+        " Power Automate, SharePoint and Power BI were brought together to create a connected digital ecosystem that automates workflow management, captures data in real time and provides end-to-end visibility across service delivery.",
       ],
     },
   ];
@@ -1407,7 +1420,177 @@ function WorkflowCarousel() {
     </div>
   );
 }
+function AutomationImageCarousel() {
+  const images = [
+    "/Old workflow.JPG",
+    "/Transition.JPG",
+    "/New workflow.JPG",
+"/dashboard 1.JPG"
+  ];
 
+  const slides = [
+  {
+    title: "Old Workflow",
+    description: [
+      "Applications and requests were managed across multiple routes including placements, internships, work experience and observerships.",
+      "The process relied on manual handling, inconsistent data capture and limited visibility of demand, activity and outcomes."
+    ]
+  },
+  {
+    title: "Transition",
+    description: [
+      "The process was redesigned to streamline requests through a structured digital pathway.",
+      "Applications moved from email-driven workflows to automated forms, centralised data collection and standardised processing."
+    ]
+  },
+  {
+    title: "New Workflow",
+    description: [
+      "Power Automate, SharePoint and Power BI were combined to create an integrated ecosystem.",
+      "Requests are routed automatically, data is captured in real time and dashboards provide live operational intelligence for decision-makers."
+    ]
+  },
+  {
+    title: " Operational Intelligence",
+    description: [
+      " Live reporting and workforce analytics provide actionable insight into application volumes, demographic trends and programme activity, enabling data-driven decision-making, improved resource planning and more effective service delivery..",
+    ]
+  }
+];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          minHeight: "clamp(600px, 70vh, 900px)",
+          borderRadius: "30px",
+          overflow: "hidden",
+          background: "#020617",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(96,165,250,0.08)"
+        }}
+      >
+        {images.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt="Automation workflow visual"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              opacity: index === activeIndex ? 1 : 0,
+              transition: "opacity 700ms ease",
+              padding: "28px",
+              background: "#020617"
+            }}
+          />
+        ))}
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "16px",
+            display: "flex",
+            gap: "8px",
+            zIndex: 3
+          }}
+        >
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              aria-label={`Show workflow image ${i + 1}`}
+              style={{
+                width: i === activeIndex ? "22px" : "8px",
+                height: "8px",
+                borderRadius: "999px",
+                border: "none",
+                background:
+                  i === activeIndex
+                    ? "linear-gradient(90deg,#2563EB,#60A5FA)"
+                    : "rgba(255,255,255,0.3)",
+                cursor: "pointer",
+                transition: "all 200ms ease"
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div
+        key={activeIndex}
+        style={{
+          margin: "24px auto 0",
+          width: "100%",
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "28px",
+          padding: "28px",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
+          animation: "fadeCard 500ms ease"
+        }}
+      >
+        <p
+          style={{
+            color: "#60A5FA",
+            fontSize: "12px",
+            fontWeight: "800",
+            letterSpacing: "1.4px",
+            textTransform: "uppercase",
+            marginBottom: "12px"
+          }}
+        >
+          {slides[activeIndex].title}
+        </p>
+
+        <h3
+          style={{
+            margin: "0 0 18px",
+            fontSize: "32px",
+            color: "white",
+            letterSpacing: "-1px"
+          }}
+        >
+          {slides[activeIndex].title}
+        </h3>
+
+        <div style={{ display: "grid", gap: "14px" }}>
+          {slides[activeIndex].description.map((text, i) => (
+            <p
+              key={i}
+              style={{
+                margin: 0,
+                color: "#CBD5E1",
+                fontSize: "16px",
+                lineHeight: "1.8"
+              }}
+            >
+              {text}
+            </p>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
 function AutomationAIPage() {
   const sectionTag = {
     color: "#60A5FA",
@@ -1515,9 +1698,7 @@ function AutomationAIPage() {
             marginBottom: "90px"
           }}
         >
-          This page showcases end-to-end workforce automation, adaptive cards in Microsoft Teams,
-          NHS-focused AI agents and a chatbot demo designed to support information access,
-          operational efficiency and better user experience.
+          This page showcases digital transformation solutions that improve service delivery, streamline business processes and enhance user engagement through workflow automation, intelligent services and integrated digital experiences.
         </p>
 
         <div
@@ -1558,9 +1739,7 @@ function AutomationAIPage() {
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Challenge</h3>
               <p style={automationText}>
-                Requests were managed across multiple routes with manual triage,
-                inconsistent data capture and limited visibility of demand, activity and outcomes.
-              </p>
+Disparate processes and manual handling created inefficiencies, inconsistent user experiences and limited oversight of operational performance.              </p>
             </div>
 
             <div
@@ -1573,9 +1752,7 @@ function AutomationAIPage() {
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Solution</h3>
               <p style={automationText}>
-                Power Apps, Power Automate, SharePoint and real-time dashboards were combined
-                into a structured pathway with clearer routing, stronger data capture and better oversight.
-              </p>
+                An integrated digital service was developed to streamline workflows, automate key processes and provide a single source of truth for operational management.              </p>
             </div>
 
             <div
@@ -1588,211 +1765,14 @@ function AutomationAIPage() {
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Outcome</h3>
               <p style={automationText}>
-                Administration was reduced, process handling became more consistent,
-                and operational teams gained stronger live visibility for decision-making.
+                The solution improved efficiency, strengthened governance, enhanced visibility of service activity and enabled more effective, data-driven decision-making.
               </p>
             </div>
           </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.1fr 0.9fr",
-              gap: "28px",
-              alignItems: "start"
-            }}
-            className="automation-before-after-grid"
-          >
-            <div style={mediaCard}>
-              <img
-                src="automation-dashboard.JPG"
-                alt="Automation dashboard"
-                style={{
-                  width: "100%",
-                  display: "block",
-                  aspectRatio: "16 / 10",
-                  objectFit: "cover"
-                }}
-              />
-            </div>
-
-            <div style={{ ...surfaceCard, background: "rgba(255,255,255,0.04)" }}>
-              <p style={sectionTag}>What this changed</p>
-              <p style={{ ...automationText, marginBottom: "18px" }}>
-                This end-to-end build transformed a fragmented, manual process into a connected
-                digital workflow. By combining self-service forms, automation, SharePoint data capture
-                and live reporting, the system reduced admin burden, improved visibility and created a
-                more reliable operating model for workforce activity.
-              </p>
-              <ul style={listStyle}>
-                <li>Centralised intake replaced fragmented email handling.</li>
-                <li>Automated routing reduced repetitive manual processing.</li>
-                <li>Structured data capture improved reporting quality.</li>
-                <li>Dashboards created stronger operational visibility.</li>
-              </ul>
-            </div>
-          </div>
+<div style={mediaCard}>
+  <AutomationImageCarousel />
+</div>
         </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "28px"
-          }}
-          className="automation-capability-grid"
-        >
-          <div>
-            <p style={sectionTag}>Teams Showcase</p>
-            <h2
-              style={{
-                margin: "0 0 18px",
-                fontSize: "46px",
-                letterSpacing: "-1.6px",
-                color: "white"
-              }}
-            >
-              Adaptive Cards in Microsoft Teams
-            </h2>
-
-            <div style={mediaCard}>
-              <video
-                controls
-                muted
-                loop
-                playsInline
-                poster="adaptive-cards-poster.jpg"
-                style={{
-                  width: "100%",
-                  display: "block",
-                  aspectRatio: "16 / 10",
-                  objectFit: "cover",
-                  background: "#020617"
-                }}
-              >
-                <source src="adaptive-cards-demo.mp4" type="video/mp4" />
-              </video>
-            </div>
-
-            <div style={{ marginTop: "22px" }}>
-              <p style={automationText}>
-                These adaptive card experiences bring automation directly into Microsoft Teams,
-                allowing users to receive updates, review information and take action without leaving
-                their main working environment.
-              </p>
-              <p style={{ ...automationText, marginTop: "14px" }}>
-                This helps reduce delays, improves consistency and makes routine processes easier
-                to manage at scale.
-              </p>
-            </div>
-          </div>
-
-          <div style={{ ...surfaceCard, height: "100%" }}>
-            <p style={sectionTag}>What this demonstrates</p>
-            <h3
-              style={{
-                margin: "0 0 18px",
-                fontSize: "32px",
-                letterSpacing: "-1px",
-                color: "white"
-              }}
-            >
-              In-workflow action and response
-            </h3>
-
-            <div
-              style={{
-                display: "flex",
-                gap: "12px",
-                flexWrap: "wrap",
-                marginBottom: "22px"
-              }}
-            >
-              <div style={chipStyle}>In-Teams action handling</div>
-              <div style={chipStyle}>Faster response flow</div>
-              <div style={chipStyle}>Reduced email dependency</div>
-              <div style={chipStyle}>Clearer decision points</div>
-              <div style={chipStyle}>User-centred interface</div>
-            </div>
-
-            <p style={automationText}>
-              Adaptive cards work best here when they are shown as part of the wider workflow
-              rather than as a standalone feature. This section shows how the interaction layer
-              sits on top of the automation and data structure.
-            </p>
-          </div>
-        </div>
-
-        <div
-          style={{
-            marginBottom: "100px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "28px"
-          }}
-          className="automation-gallery-grid"
-        >
-          <div>
-            <p style={sectionTag}>AI Agents</p>
-            <h2
-              style={{
-                margin: "0 0 18px",
-                fontSize: "46px",
-                letterSpacing: "-1.6px",
-                color: "white"
-              }}
-            >
-              NHS-Focused AI Agents
-            </h2>
-
-            <div style={mediaCard}>
-              <img
-                src="nhs-agent.jpeg"
-                alt="NHS AI agent interface"
-                style={{
-                  width: "100%",
-                  display: "block",
-                  aspectRatio: "16 / 10",
-                  objectFit: "cover"
-                }}
-              />
-            </div>
-
-            <div style={{ marginTop: "22px" }}>
-              <p style={automationText}>
-                These agents were created to support staff with quicker access to information,
-                clearer navigation and more consistent responses to common queries.
-              </p>
-              <p style={{ ...automationText, marginTop: "14px" }}>
-                They demonstrate how AI can be applied in an NHS context to strengthen
-                operational support while keeping the experience practical, accessible and user-focused.
-              </p>
-            </div>
-          </div>
-
-          <div style={{ ...surfaceCard, height: "100%" }}>
-            <p style={sectionTag}>Typical value areas</p>
-            <h3
-              style={{
-                margin: "0 0 18px",
-                fontSize: "32px",
-                letterSpacing: "-1px",
-                color: "white"
-              }}
-            >
-              Staff support and service navigation
-            </h3>
-
-            <ul style={listStyle}>
-              <li>Information retrieval for common staff questions and guidance.</li>
-              <li>Faster signposting to the right process, form, team or next step.</li>
-              <li>More consistent responses across repeated operational queries.</li>
-              <li>Support for day-to-day navigation without adding extra admin burden.</li>
-            </ul>
-          </div>
-        </div>
-
         <div
           style={{
             ...surfaceCard,
@@ -1811,7 +1791,7 @@ function AutomationAIPage() {
               maxWidth: "700px"
             }}
           >
-            Chatbot Demo
+            AI Digital Assistant
           </h2>
 
           <div
@@ -1825,15 +1805,15 @@ function AutomationAIPage() {
           >
             <div>
               <p style={{ ...automationText, marginBottom: "22px" }}>
-                This chatbot demo shows how conversational AI can be used to support information
-                access and user guidance in a practical way. It is designed to reduce repetitive
-                questions, improve navigation and provide a more responsive digital support experience.
+         This demonstration showcases how AI-powered conversational services can enhance user support, streamline access to information and improve digital service delivery. By providing immediate, context-aware assistance, organisations can reduce support demand, improve user experience and increase operational efficiency.
+Example capabilities:
+
               </p>
 
               <div style={{ display: "grid", gap: "14px" }}>
-                <div style={promptCard}>How does the workforce automation process work?</div>
-                <div style={promptCard}>What can the AI agent help users with?</div>
-                <div style={promptCard}>Show an example of a Teams adaptive card workflow.</div>
+                <div style={promptCard}> How can workforce automation streamline service delivery and operational processes?</div>
+                <div style={promptCard}> How does the digital assistant support users with information, guidance and task completion?</div>
+                <div style={promptCard}> How can interactive workflow experiences accelerate approvals, communications and service requests?</div>
               </div>
             </div>
 
@@ -1881,7 +1861,7 @@ function AutomationAIPage() {
                   }}
                 >
                   Hello. I can help explain the workflow, show how the Teams cards fit into the
-                  process, or outline what the NHS AI agents are designed to support.
+                  process, or outline what the AI agents are designed to support.
                 </div>
 
                 <div
@@ -1965,6 +1945,154 @@ function AutomationAIPage() {
             </div>
           </div>
         </div>
+        <div
+          style={{
+            marginBottom: "100px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "28px"
+          }}
+          className="automation-capability-grid"
+        >
+          <div>
+            <p style={sectionTag}>Teams Showcase</p>
+            <h2
+              style={{
+                margin: "0 0 18px",
+                fontSize: "46px",
+                letterSpacing: "-1.6px",
+                color: "white"
+              }}
+            >
+              Microsoft Teams Service Integration
+            </h2>
+
+            <div style={mediaCard}>
+<img
+  src="/adaptive-card.gif"
+  alt="Adaptive Cards Demo"
+  style={{
+    width: "100%",
+    display: "block",
+    aspectRatio: "16 / 10",
+    objectFit: "contain",
+    background: "#020617"
+  }}
+/>
+            </div>
+          </div>
+
+          <div style={{ ...surfaceCard, height: "100%" }}>
+            <p style={sectionTag}>What this demonstrates</p>
+            <h3
+              style={{
+                margin: "0 0 18px",
+                fontSize: "32px",
+                letterSpacing: "-1px",
+                color: "white"
+              }}
+            >
+              Integrated Service Delivery
+            </h3>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                flexWrap: "wrap",
+                marginBottom: "22px"
+              }}
+            >
+<div style={chipStyle}>Integrated workflow management</div>
+<div style={chipStyle}>Streamlined user journeys</div>
+<div style={chipStyle}>Reduced administrative overhead</div>
+<div style={chipStyle}>Faster service delivery</div>
+<div style={chipStyle}>Scalable digital solutions</div>            
+</div>
+
+            <p style={automationText}>
+These solutions demonstrate how intelligent workflow automation can transform service delivery by bringing communications, approvals and operational processes into a seamless digital experience. By reducing manual intervention and streamlining user interactions, organisations can improve efficiency, accelerate response times, enhance user experience and deliver scalable services that support long-term growth and operational excellence.
+
+            </p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "100px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "28px"
+          }}
+          className="automation-gallery-grid"
+        >
+          <div>
+            <p style={sectionTag}>AI Agents</p>
+            <h2
+              style={{
+                margin: "0 0 18px",
+                fontSize: "46px",
+                letterSpacing: "-1.6px",
+                color: "white"
+              }}
+            >
+              AI-Powered Knowledge and Service Platforms
+            </h2>
+<div
+  style={{
+    ...mediaCard,
+    height: "720px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }}
+>
+  <img
+    src="/nhs-agent.JPG"
+    alt=" AI-powered knowledge platform"
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+      display: "block",
+      background: "#020617"
+    }}
+  />
+</div>
+ </div>
+
+<div style={{ ...surfaceCard, height: "100%" }}>
+  <p style={sectionTag}>Platform Capabilities</p>
+
+  <h3
+    style={{
+      margin: "0 0 18px",
+      fontSize: "32px",
+      letterSpacing: "-1px",
+      color: "white"
+    }}
+  >
+    Intelligent Knowledge and Service Delivery
+  </h3>
+
+<ul style={listStyle}>
+  <li> Reducing manual queries and standardising responses, we improve efficiency, enhancing consistency and supporting better decision-making across workforce and service delivery.</li>
+
+  <li>Provideing conversational access to organisational knowledge, policies, procedures and business information through a single digital interface.</li>
+
+  <li>Connecting users with relevant forms, systems, guidance and resources, reducing time spent navigating complex environments.</li>
+
+  <li>Improveing consistency by delivering standardised information and reducing variation across support interactions.</li>
+
+  <li>Reduceing demand on operational teams by handling high-volume, repeatable enquiries automatically.</li>
+
+  <li>Integrates with Microsoft 365, SharePoint, Teams and business systems to create a seamless digital experience.</li>
+
+  <li>Supporting scalable digital service delivery while enabling teams to focus on higher-value work and strategic priorities.</li>
+  </ul>
+</div>
+        </div>
+
       </div>
     </section>
   );
@@ -2665,46 +2793,46 @@ function HomePage() {
 
   const stats = useMemo(
     () => [
-      {
-        target: 1000000,
-        label: "Resident Ecosystem Reach",
-        icon: <UsersIcon />,
-        duration: 675,
-        display: "millionPlus",
-      },
-      {
-        target: 25000,
-        label: "NHS Workforce Reach",
-        icon: <ActivityIcon />,
-        duration: 600,
-        display: "thousand",
-      },
-      {
-        target: 17,
-        label: "Countries Reached",
-        icon: <GlobeIcon />,
-        duration: 450,
-      },
-      {
-        target: 4160,
-        label: "Annual Hours Saved",
-        icon: <BriefcaseIcon />,
-        duration: 550,
-      },
-      {
-        target: 20,
-        label: "Reduction in Hospital Waiting Times",
-        icon: <ActivityIcon />,
-        duration: 475,
-        suffix: "%",
-      },
-      {
-        target: 81,
-        label: "Global Majority Engagement",
-        icon: <UsersIcon />,
-        duration: 500,
-        suffix: "%",
-      },
+    {
+  target: 1000000,
+  label: "Population Coverage",
+  icon: <UsersIcon />,
+  duration: 675,
+  display: "millionPlus",
+},
+{
+  target: 25000,
+  label: "Workforce Served",
+  icon: <ActivityIcon />,
+  duration: 600,
+  display: "thousand",
+},
+{
+  target: 4160,
+  label: "Annual Work Hours Saved",
+  icon: <BriefcaseIcon />,
+  duration: 550,
+},
+{
+  target: 91500,
+  label: "Annual Cost Savings",
+  icon: < CurrencyPoundIcon />,
+  duration: 500,
+  prefix: "£",
+},
+{
+  target: 20,
+  label: "Reduction in Hospital Waiting Times",
+  icon: <ActivityIcon />,
+  duration: 475,
+  suffix: "%",
+},
+{
+  target: 27,
+  label: "Countries Reached",
+  icon: <GlobeIcon />,
+  duration: 450,
+},
     ],
     []
   );
@@ -2768,12 +2896,12 @@ function HomePage() {
           "You were a huge help in the development of this event and I am grateful for the time you dedicated to supporting it.",
       },
       {
-        name: "Michael Chen",
-        role: "WORKFORCE TRANSFORMATION LEAD",
-        image: "/michael-chen.jpg",
-        alt: "Michael Chen",
+        name: "Desiree Saunders",
+        role: "ASSISTANT GENERAL MANAGER (NHS)",
+        image: "/desiree-saunders.jpg",
+        alt: "Desiree Saunders",
         quote:
-          "A rare ability to translate complex data into practical action across workforce and community settings.",
+          "The Portal is highly user-friendly, with clear guidance and an intuitive process throughout. The support is outstanding, responsive, helpful, and committed to ensuring a positive experience.",
       },
     ],
     []
@@ -2907,9 +3035,8 @@ function HomePage() {
                 maxWidth: "950px",
               }}
             >
-              Intelligent Systems.
+              Digital Transformations
               <br />
-              Human-Centred Impact.
             </h1>
 
             <p
@@ -2921,10 +3048,8 @@ function HomePage() {
                 marginBottom: "45px",
               }}
             >
-              Delivering AI-assisted workforce insight, culturally informed
-              engagement and evidence-led transformation across NHS, education
-              and public sector systems.
-            </p>
+              Delivering intelligent automation, workforce analytics and AI-powered solutions that improve efficiency, strengthen decision-making and enhance service delivery across NHS, education and public sector organisations.
+         </p>
 
             <div
               style={{
