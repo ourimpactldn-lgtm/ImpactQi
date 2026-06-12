@@ -1,4 +1,148 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+
+/* ---------------- GLOBAL STYLES (shared across components) ---------------- */
+const sectionTag = {
+  color: "#60A5FA",
+  letterSpacing: "1px",
+  fontWeight: 700,
+  marginBottom: "15px",
+};
+const sectionHeading = {
+  fontSize: "58px",
+  lineHeight: "1.1",
+  letterSpacing: "-2px",
+  maxWidth: "1000px",
+  margin: 0,
+};
+const filmBodyText = {
+  color: "#CBD5E1",
+  lineHeight: "1.85",
+  fontSize: "16px",
+  margin: 0,
+};
+
+const primaryButton = {
+  background: "linear-gradient(90deg,#2563EB,#60A5FA)",
+  color: "white",
+  border: "none",
+  padding: "18px 34px",
+  borderRadius: "14px",
+  fontSize: "16px",
+  fontWeight: "700",
+  cursor: "pointer",
+  boxShadow: "0 10px 30px rgba(37,99,235,0.35)",
+};
+
+const secondaryButton = {
+  background: "rgba(255,255,255,0.06)",
+  color: "white",
+  border: "1px solid rgba(255,255,255,0.08)",
+  padding: "18px 34px",
+  borderRadius: "14px",
+  fontSize: "16px",
+  fontWeight: "700",
+  cursor: "pointer",
+  backdropFilter: "blur(12px)",
+};
+
+const sliderButton = {
+  width: "52px",
+  height: "52px",
+  borderRadius: "999px",
+  border: "1px solid rgba(255,255,255,0.1)",
+  background: "rgba(7,17,31,0.78)",
+  color: "white",
+  fontSize: "18px",
+  fontWeight: "700",
+  cursor: "pointer",
+  backdropFilter: "blur(12px)",
+  boxShadow: "0 10px 24px rgba(0,0,0,0.28)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const metricCard = {
+  background: "rgba(255,255,255,0.06)",
+  backdropFilter: "blur(18px)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "24px",
+  padding: "24px 24px 22px",
+  minWidth: "0",
+  boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
+};
+
+const statNumber = {
+  margin: 0,
+  fontSize: "36px",
+  lineHeight: 1.05,
+  color: "#60A5FA",
+  letterSpacing: "-1px",
+};
+
+const statText = {
+  color: "#CBD5E1",
+  marginTop: "10px",
+  fontSize: "14px",
+  lineHeight: "1.55",
+  maxWidth: "18ch",
+};
+
+const testimonialCard = {
+  background: "rgba(255,255,400,0.06)",
+  backdropFilter: "blur(18px)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "30px",
+  padding: "40px",
+};
+
+const avatar = {
+  width: "85px",
+  height: "85px",
+  borderRadius: "50%",
+  objectFit: "cover",
+  marginBottom: "20px",
+};
+
+const role = {
+  color: "#60A5FA",
+  fontSize: "13px",
+  letterSpacing: "1px",
+  marginBottom: "18px",
+};
+
+const quote = {
+  color: "#CBD5E1",
+  lineHeight: "1.9",
+};
+
+const detailRow = {
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "16px",
+  padding: "14px 0",
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
+};
+
+const detailLabel = {
+  color: "#93C5FD",
+  fontWeight: 700,
+  fontSize: "13px",
+  letterSpacing: "1px",
+  textTransform: "uppercase",
+};
+
+const detailValue = {
+  color: "#E2E8F0",
+  textAlign: "right",
+  maxWidth: "60%",
+};
+
+const automationText = {
+  color: "#CBD5E1",
+  lineHeight: "1.9",
+};
+
 /* ---------------- ICONS ---------------- */
 
 function IconShell({
@@ -128,26 +272,6 @@ function ActivityIcon() {
       strokeLinejoin="round"
     >
       <polyline points="22 12 18 12 15 19 9 5 6 12 2 12" />
-    </svg>
-  );
-}
-
-function ResearchIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <path d="M14 2v6h6" />
-      <path d="M8 13h8" />
-      <path d="M8 17h6" />
     </svg>
   );
 }
@@ -464,7 +588,7 @@ function GifDeck() {
       label: "Research and Engagement",
       panelEyebrow: "RESEARCH & COMMUNITY ENGAGEMENT",
       panelTitle: "GLOBAL KNOWLEDGE REACH",
-      panelStat: "17 Countries",
+      panelStat: "27 Countries",
       panelBody:
         "Research, learning and improvement programmes delivered across five continents.",
       icon: "research",
@@ -807,6 +931,20 @@ function FilmProjectsPage() {
 
   const selectedWorks = [
     {
+      title: "Vacci-Nation",
+      type: "Feature Film",
+      description:
+        "A public health film addressing vaccine hesitancy through community-centred communication.",
+      link: "https://youtu.be/54kEGQShgEs",
+    },
+    {
+      title: "Young Sutton Voices - Understanding the Autism Spectrum",
+      type: "Feature Film",
+      description:
+        "A youth-centred film exploring autism awareness, lived experience and inclusive dialogue.",
+      link: "https://www.youtube.com/watch?v=wKq1nso9XbA",
+    },
+    {
       title: "Interview with Vanessa McCain",
       type: "Community Interview",
       description:
@@ -819,21 +957,7 @@ function FilmProjectsPage() {
       description:
         "A discussion on Grenfell recovery, faith-based support and culturally sensitive outreach.",
       link: "https://youtu.be/FCkgYwuSQiI",
-    },
-    {
-      title: "Young Sutton Voices - Understanding the Autism Spectrum",
-      type: "Feature Film",
-      description:
-        "A youth-centred film exploring autism awareness, lived experience and inclusive dialogue.",
-      link: "https://www.youtube.com/watch?v=wKq1nso9XbA",
-    },
-    {
-      title: "Vacci-Nation",
-      type: "Feature Film",
-      description:
-        "A public health film addressing vaccine hesitancy through community-centred communication.",
-      link: "https://youtu.be/54kEGQShgEs",
-    },
+    }, 
   ];
 
   const sharedImageCard = {
@@ -1592,22 +1716,6 @@ function AutomationImageCarousel() {
   );
 }
 function AutomationAIPage() {
-  const sectionTag = {
-    color: "#60A5FA",
-    letterSpacing: "1.2px",
-    fontWeight: 700,
-    marginBottom: "14px",
-    textTransform: "uppercase",
-    fontSize: "12px"
-  };
-
-  const automationText = {
-    color: "#CBD5E1",
-    lineHeight: 1.9,
-    fontSize: "16px",
-    margin: 0
-  };
-
   const surfaceCard = {
     background: "rgba(255,255,255,0.05)",
     border: "1px solid rgba(255,255,255,0.08)",
@@ -1676,7 +1784,7 @@ function AutomationAIPage() {
         >
           Automation AI
         </p>
-
+        <section id="automation"></section>
         <h1
           style={{
             fontSize: "84px",
@@ -2124,7 +2232,7 @@ function ResearchPage() {
       {
         id: 4,
         title:
-          "Corporate Social Responsibility and Coping with COVID-19 Pandemic in the Global Health Service Institutions: The United Kingdom",
+          "CSR and Coping with COVID-19 Pandemic in the Global Health Service Institutions: The United Kingdom",
         type: "Book Chapter",
         year: 2023,
         summary:
@@ -2349,7 +2457,7 @@ function ResearchPage() {
         >
           Research & Publications
         </p>
-
+        <section id="research"></section>
         <h1
           style={{
             fontSize: "76px",
@@ -2784,21 +2892,106 @@ function ResearchPage() {
     </section>
   );
 }
+function TrustBar() {
+  const items = [
+    "Springer Published Author",
+    "NHS Digital Transformation",
+    "Public Health Specialist",
+    "Community Impact Projects",
+  ];
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % items.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [items.length]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "10px",
+        marginTop: "24px",
+        marginBottom: "18px",
+        alignItems: "center",
+      }}
+    >
+      {items.map((item, index) => {
+        const isActive = index === activeIndex;
+
+        return (
+          <div
+            key={item}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "8px 14px",
+              borderRadius: "999px",
+              background: isActive
+                ? "linear-gradient(135deg, rgba(96,165,250,0.18), rgba(59,130,246,0.10))"
+                : "rgba(255,255,255,0.02)",
+              border: isActive
+                ? "1px solid rgba(147,197,253,0.30)"
+                : "1px solid rgba(255,255,255,0.05)",
+              fontSize: "12px",
+              fontWeight: "500",
+              color: isActive ? "#EAF3FF" : "rgba(255,255,255,0.7)",
+              boxShadow: isActive
+                ? "0 0 0 1px rgba(96,165,250,0.10), 0 0 22px rgba(59,130,246,0.14)"
+                : "none",
+              transform: isActive ? "translateY(-1px)" : "translateY(0px)",
+              transition:
+                "background 260ms ease, border 260ms ease, color 260ms ease, box-shadow 260ms ease, transform 260ms ease",
+            }}
+          >
+            <span
+              style={{
+                width: "5px",
+                height: "5px",
+                borderRadius: "50%",
+                background: isActive ? "#93C5FD" : "#60A5FA",
+                boxShadow: isActive ? "0 0 12px rgba(96,165,250,0.8)" : "none",
+                transition: "all 260ms ease",
+              }}
+            />
+            {item}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 /* ---------------- HOME PAGE ---------------- */
 
-function HomePage() {
+function HomePage({ onNavigate }) {
   const statsRef = useRef(null);
   const [startStats, setStartStats] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const searchContainerRef = useRef(null);
 
   const stats = useMemo(
     () => [
-    {
-  target: 1000000,
-  label: "Population Coverage",
-  icon: <UsersIcon />,
-  duration: 675,
-  display: "millionPlus",
+   {
+  target: 4160,
+  label: "Annual Work Hours Saved",
+  icon: <BriefcaseIcon />,
+  duration: 550,
+},
+{
+  target: 91500,
+  label: "Cost Savings",
+  icon: < CurrencyPoundIcon />,
+  duration: 500,
+  prefix: "£",
 },
 {
   target: 25000,
@@ -2808,24 +3001,18 @@ function HomePage() {
   display: "thousand",
 },
 {
-  target: 4160,
-  label: "Annual Work Hours Saved",
-  icon: <BriefcaseIcon />,
-  duration: 550,
-},
-{
-  target: 91500,
-  label: "Annual Cost Savings",
-  icon: < CurrencyPoundIcon />,
-  duration: 500,
-  prefix: "£",
-},
-{
   target: 20,
   label: "Reduction in Hospital Waiting Times",
   icon: <ActivityIcon />,
   duration: 475,
   suffix: "%",
+},
+      {
+  target: 1000000,
+  label: "Population Coverage",
+  icon: <UsersIcon />,
+  duration: 675,
+  display: "millionPlus",
 },
 {
   target: 27,
@@ -2906,6 +3093,153 @@ function HomePage() {
     ],
     []
   );
+
+  // ---------- SEARCH INDEX (covers everything on the site) ----------
+  const searchIndex = useMemo(() => {
+    const results = [];
+
+    // 1. Home page content
+    results.push({
+      type: "Home",
+      title: "Digital Transformations",
+      description: "Transforming complex processes into intelligent digital services through automation, analytics and AI.",
+      page: "home",
+    });
+    stats.forEach(stat => {
+      results.push({
+        type: "Key Stat",
+        title: stat.label,
+        description: `${stat.prefix || ""}${stat.target}${stat.suffix || ""} – ${stat.label}`,
+        page: "home",
+      });
+    });
+    testimonials.forEach(t => {
+      results.push({
+        type: "Testimonial",
+        title: t.name,
+        description: t.quote.substring(0, 120),
+        page: "home",
+      });
+    });
+
+    // 2. Film project page
+    const filmProject = {
+      title: "Documentary Storytelling for Public Health and Community Impact",
+      description: "A project-led body of film work combining interviews, public health communication, youth voice and community documentation.",
+      page: "film",
+    };
+    results.push({ type: "Film Project", ...filmProject });
+    const selectedWorks = [
+      { title: "Vacci-Nation", description: "A public health film addressing vaccine hesitancy." },
+      { title: "Young Sutton Voices", description: "A youth-centred film exploring autism awareness." },
+      { title: "Interview with Vanessa McCain", description: "Conversation on resilience and advocacy." },
+      { title: "Interview with Abdurahman Sayed", description: "Discussion on Grenfell recovery and faith-based support." }
+    ];
+    selectedWorks.forEach(work => {
+      results.push({
+        type: "Film",
+        title: work.title,
+        description: work.description,
+        page: "film",
+      });
+    });
+
+    // 3. Research publications (using the same data as ResearchPage)
+    const publicationsData = [
+      { title: "Leveraging Performative Arts Programmes for Enhancing Skills and Well-Being in Global Majority Youth", type: "Book Chapter", summary: "This peer-reviewed chapter explores the role of public health, creative arts, recruitment and widening participation." },
+      { title: "CSR and Coping with COVID-19 Pandemic in the Global Health Service Institutions: The United Kingdom", type: "Book Chapter", summary: "Investigates how CSR supported the NHS and disadvantaged communities." },
+      { title: "How Human Factors Can Enhance Delivery of Equality, Diversity, and Inclusion", type: "Guidance Document", summary: "Explores how human factors can enhance EDI delivery." },
+      { title: "Responding to a Crisis", type: "Magazine Article", summary: "Explores human factors in civic disaster planning." },
+      { title: "Our Impact (Quarter 1, 2022)", type: "Magazine", summary: "Explores health, human factors, and inclusivity." },
+      { title: "Our Impact (7th Issue)", type: "Magazine", summary: "Explores social justice, AI ethics, and systemic reform." }
+    ];
+    publicationsData.forEach(pub => {
+      results.push({
+        type: `Publication (${pub.type})`,
+        title: pub.title,
+        description: pub.summary,
+        page: "research",
+      });
+    });
+
+    // 4. Automation & AI page
+    const automationItems = [
+      { title: "End-to-End Workforce Automation", description: "Power Automate, SharePoint and Power BI integrated ecosystem." },
+      { title: "AI Digital Assistant", description: "Conversational AI to enhance user support." },
+      { title: "Microsoft Teams Service Integration", description: "Adaptive Cards for integrated service delivery." },
+      { title: "AI-Powered Knowledge Platforms", description: "Conversational access to organisational knowledge." }
+    ];
+    automationItems.forEach(item => {
+      results.push({
+        type: "Automation & AI",
+        title: item.title,
+        description: item.description,
+        page: "automation",
+      });
+    });
+
+    return results;
+  }, [stats, testimonials]);
+
+  // Real‑time search filter
+  useEffect(() => {
+    const term = searchTerm.trim().toLowerCase();
+    if (term.length < 2) {
+      setSearchResults([]);
+      setShowResults(false);
+      setSelectedIndex(-1);
+      return;
+    }
+    const filtered = searchIndex.filter(item =>
+      item.title.toLowerCase().includes(term) ||
+      item.description.toLowerCase().includes(term)
+    );
+    setSearchResults(filtered);
+    setShowResults(true);
+    setSelectedIndex(-1);
+  }, [searchTerm, searchIndex]);
+
+  const handleResultClick = (result) => {
+    onNavigate(result.page);
+    setShowResults(false);
+    setSearchTerm("");
+    // Optional: scroll to section if needed
+    if (result.page === "automation") {
+      setTimeout(() => document.getElementById("automation")?.scrollIntoView({ behavior: "smooth" }), 100);
+    } else if (result.page === "research") {
+      setTimeout(() => document.getElementById("research")?.scrollIntoView({ behavior: "smooth" }), 100);
+    } else if (result.page === "film") {
+      setTimeout(() => document.getElementById("film")?.scrollIntoView({ behavior: "smooth" }), 100);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (!showResults || searchResults.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % searchResults.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + searchResults.length) % searchResults.length);
+    } else if (e.key === "Enter" && selectedIndex >= 0) {
+      e.preventDefault();
+      handleResultClick(searchResults[selectedIndex]);
+    } else if (e.key === "Escape") {
+      setShowResults(false);
+      setSearchTerm("");
+    }
+  };
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+        setShowResults(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const visibleTestimonials = getVisibleTestimonials(
@@ -3048,32 +3382,100 @@ function HomePage() {
                 marginBottom: "45px",
               }}
             >
-              Delivering intelligent automation, workforce analytics and AI-powered solutions that improve efficiency, strengthen decision-making and enhance service delivery across NHS, education and public sector organisations.
-         </p>
+              Transforming complex processes into intelligent digital services through automation, analytics and AI—reducing administrative burden, improving visibility and enabling better decisions.
+            </p>
 
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "720px",
-                marginBottom: "40px",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search insights, analytics, dashboards, reports..."
-                style={{
-                  width: "100%",
-                  padding: "24px 28px",
-                  borderRadius: "20px",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(255,255,255,0.06)",
-                  backdropFilter: "blur(12px)",
-                  color: "white",
-                  fontSize: "17px",
-                  outline: "none",
-                  boxShadow: "0 15px 40px rgba(0,0,0,0.25)",
-                }}
-              />
+            {/* SEARCH COMPONENT */}
+            <div ref={searchContainerRef} style={{ position: "relative", width: "100%", maxWidth: "720px", marginBottom: "40px" }}>
+              <div style={{ display: "flex", gap: "12px" }}>
+                <input
+                  type="text"
+                  placeholder="Search anything on this site..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  onFocus={() => searchTerm.length >= 2 && setShowResults(true)}
+                  style={{
+                    flex: 1,
+                    padding: "24px 28px",
+                    borderRadius: "20px",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.06)",
+                    backdropFilter: "blur(12px)",
+                    color: "white",
+                    fontSize: "17px",
+                    outline: "none",
+                    boxShadow: "0 15px 40px rgba(0,0,0,0.25)",
+                  }}
+                />
+                <button
+                  onClick={() => setShowResults(!showResults)}
+                  style={{
+                    padding: "0 32px",
+                    borderRadius: "20px",
+                    border: "none",
+                    cursor: "pointer",
+                    background: "linear-gradient(135deg,#2563EB,#60A5FA)",
+                    color: "white",
+                    fontWeight: "600",
+                    fontSize: "16px",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0 15px 30px rgba(37,99,235,0.3)",
+                  }}
+                >
+                  🔍 Search
+                </button>
+              </div>
+
+              {/* Dropdown results */}
+              {showResults && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    right: 0,
+                    marginTop: "12px",
+                    background: "rgba(7,17,31,0.95)",
+                    backdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "20px",
+                    maxHeight: "400px",
+                    overflowY: "auto",
+                    zIndex: 100,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                  }}
+                >
+                  {searchResults.length === 0 && searchTerm.length >= 2 ? (
+                    <div style={{ padding: "20px", color: "#CBD5E1", textAlign: "center" }}>
+                      No results found for "{searchTerm}"
+                    </div>
+                  ) : (
+                    searchResults.map((result, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => handleResultClick(result)}
+                        style={{
+                          padding: "16px 20px",
+                          borderBottom: "1px solid rgba(255,255,255,0.05)",
+                          cursor: "pointer",
+                          transition: "background 0.2s",
+                          background: selectedIndex === idx ? "rgba(96,165,250,0.15)" : "transparent",
+                        }}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                      >
+                        <div style={{ fontSize: "12px", color: "#60A5FA", marginBottom: "4px" }}>
+                          {result.type}
+                        </div>
+                        <div style={{ fontWeight: "600", color: "white" }}>{result.title}</div>
+                        <div style={{ fontSize: "13px", color: "#CBD5E1", marginTop: "4px" }}>
+                          {result.description.length > 100 ? result.description.substring(0, 100) + "…" : result.description}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
             </div>
 
             <div
@@ -3084,15 +3486,15 @@ function HomePage() {
                 flexWrap: "wrap",
               }}
             >
-              <button style={primaryButton}>Explore Insights</button>
+              <button style={primaryButton}>Book a Consultation</button>
               <button
                 style={secondaryButton}
-                onClick={() => window.dispatchEvent(new CustomEvent("go-automation"))}
+                onClick={() => onNavigate("automation")}
               >
-                View Automation
+                View Case Studies
               </button>
             </div>
-
+            <TrustBar />
             <div
               ref={statsRef}
               className="stats-grid"
@@ -3101,6 +3503,7 @@ function HomePage() {
                 gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
                 gap: "22px",
                 maxWidth: "980px",
+                marginTop: "38px"
               }}
             >
               <SequentialStats stats={stats} start={startStats} />
@@ -3289,21 +3692,384 @@ function HomePage() {
   );
 }
 
+/* ---------------- FLOATING CHAT WIDGET ---------------- */
+function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem("chatMessages");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return [
+      {
+        role: "bot",
+        text: "Hello. I'm the Impact QI AI Assistant. Ask me about publications, research, public health, documentaries, widening participation, or automation projects.",
+        timestamp: Date.now(),
+      },
+    ];
+  });
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
+  }, [messages]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  useEffect(() => {
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 200);
+  }, [isOpen]);
+
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return;
+
+    const userMessage = input.trim();
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", text: userMessage, timestamp: Date.now() },
+    ]);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
+      const data = await res.json();
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          text: data.reply || "No response received.",
+          timestamp: Date.now(),
+        },
+      ]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          text: "Sorry, I couldn't connect to the AI service.",
+          timestamp: Date.now(),
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") sendMessage();
+    if (e.key === "Escape") setIsOpen(false);
+  };
+
+  const clearChat = () => {
+    setMessages([
+      {
+        role: "bot",
+        text: "Chat cleared. Ask me anything!",
+        timestamp: Date.now(),
+      },
+    ]);
+  };
+
+  const formatTime = (timestamp) =>
+    new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+  return (
+    <div style={{ position: "fixed", bottom: "24px", right: "24px", zIndex: 1000 }}>
+      {/* Floating button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Open chat"
+        style={{
+          width: "60px",
+          height: "60px",
+          borderRadius: "30px",
+          background: "linear-gradient(135deg, #2563EB, #60A5FA)",
+          border: "none",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "transform 0.2s",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      </button>
+
+      {/* Chat window */}
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: "80px",
+            right: "0",
+            width: "380px",
+            maxWidth: "calc(100vw - 48px)",
+            height: "560px",
+            background: "#0A1222",
+            borderRadius: "24px",
+            border: "1px solid rgba(96,165,250,0.4)",
+            boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            animation: "fadeInUp 0.2s ease-out",
+          }}
+        >
+          {/* Header */}
+          <div
+            style={{
+              padding: "16px 20px",
+              background: "rgba(37,99,235,0.15)",
+              borderBottom: "1px solid rgba(255,255,255,0.1)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "5px",
+                  background: "#60A5FA",
+                  boxShadow: "0 0 8px #60A5FA",
+                }}
+              />
+              <span style={{ fontWeight: "bold", color: "#93C5FD" }}>Impact QI AI</span>
+            </div>
+            <div style={{ display: "flex", gap: "12px" }}>
+              <button
+                onClick={clearChat}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#94A3B8",
+                  cursor: "pointer",
+                  fontSize: "16px",
+                }}
+                title="Clear chat"
+              >
+                🗑️
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#CBD5E1",
+                  cursor: "pointer",
+                  fontSize: "20px",
+                }}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+            }}
+          >
+            {messages.map((msg, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: msg.role === "user" ? "flex-end" : "flex-start",
+                }}
+              >
+                <div
+                  style={{
+                    maxWidth: "85%",
+                    padding: "10px 14px",
+                    borderRadius: "18px",
+                    background:
+                      msg.role === "user"
+                        ? "linear-gradient(135deg, #2563EB, #60A5FA)"
+                        : "rgba(255,255,255,0.08)",
+                    color: "white",
+                    fontSize: "14px",
+                    lineHeight: "1.4",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {msg.text}
+                </div>
+                <span
+                  style={{
+                    fontSize: "10px",
+                    color: "#64748B",
+                    marginTop: "4px",
+                    marginLeft: msg.role === "user" ? 0 : "8px",
+                    marginRight: msg.role === "user" ? "8px" : 0,
+                  }}
+                >
+                  {msg.timestamp ? formatTime(msg.timestamp) : ""}
+                </span>
+              </div>
+            ))}
+            {loading && (
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "8px" }}>
+                <div
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    padding: "10px 14px",
+                    borderRadius: "18px",
+                    display: "flex",
+                    gap: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      background: "#93C5FD",
+                      borderRadius: "4px",
+                      animation: "bounce 1.4s infinite ease-in-out",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      background: "#93C5FD",
+                      borderRadius: "4px",
+                      animation: "bounce 1.4s infinite ease-in-out 0.2s",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      background: "#93C5FD",
+                      borderRadius: "4px",
+                      animation: "bounce 1.4s infinite ease-in-out 0.4s",
+                    }}
+                  />
+                </div>
+                <span style={{ fontSize: "12px", color: "#94A3B8" }}>Thinking...</span>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input area */}
+          <div
+            style={{
+              padding: "12px 16px",
+              borderTop: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(0,0,0,0.2)",
+              display: "flex",
+              gap: "10px",
+            }}
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder="Ask a question..."
+              style={{
+                flex: 1,
+                padding: "12px 16px",
+                borderRadius: "30px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                background: "rgba(255,255,255,0.05)",
+                color: "white",
+                outline: "none",
+                fontSize: "14px",
+              }}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={loading}
+              style={{
+                background: "linear-gradient(135deg, #2563EB, #60A5FA)",
+                border: "none",
+                borderRadius: "30px",
+                padding: "10px 20px",
+                color: "white",
+                fontWeight: "bold",
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.6 : 1,
+              }}
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Animations */}
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes bounce {
+          0%, 60%, 100% {
+            transform: translateY(0);
+          }
+          30% {
+            transform: translateY(-6px);
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 /* ---------------- APP ---------------- */
 
 export default function App() {
   const [activePage, setActivePage] = useState("home");
 
-  useEffect(() => {
-    const goAutomation = () => setActivePage("automation");
-    window.addEventListener("go-automation", goAutomation);
-    return () => window.removeEventListener("go-automation", goAutomation);
-  }, []);
-
   const navItemStyle = (page) => ({
-    ...navLink,
     color: activePage === page ? "#93C5FD" : "#CBD5E1",
+    textDecoration: "none",
+    fontWeight: "600",
+    fontSize: "16px",
   });
+
+  const navButtonReset = {
+    background: "transparent",
+    border: "none",
+    padding: 0,
+    cursor: "pointer",
+  };
 
   return (
     <div
@@ -3505,204 +4271,11 @@ export default function App() {
       ) : activePage === "automation" ? (
         <AutomationAIPage />
       ) : (
-        <HomePage />
+        <HomePage onNavigate={setActivePage} />
       )}
+
+      {/* Floating chat widget – appears on all pages */}
+      <ChatWidget />
     </div>
   );
 }
-
-/* ---------------- STYLES ---------------- */
-
-const navLink = {
-  color: "#CBD5E1",
-  textDecoration: "none",
-  fontWeight: "600",
-  fontSize: "16px",
-};
-
-const navButtonReset = {
-  background: "transparent",
-  border: "none",
-  padding: 0,
-  cursor: "pointer",
-};
-
-const primaryButton = {
-  background: "linear-gradient(90deg,#2563EB,#60A5FA)",
-  color: "white",
-  border: "none",
-  padding: "18px 34px",
-  borderRadius: "14px",
-  fontSize: "16px",
-  fontWeight: "700",
-  cursor: "pointer",
-  boxShadow: "0 10px 30px rgba(37,99,235,0.35)",
-};
-
-const secondaryButton = {
-  background: "rgba(255,255,255,0.06)",
-  color: "white",
-  border: "1px solid rgba(255,255,255,0.08)",
-  padding: "18px 34px",
-  borderRadius: "14px",
-  fontSize: "16px",
-  fontWeight: "700",
-  cursor: "pointer",
-  backdropFilter: "blur(12px)",
-};
-
-const sliderButton = {
-  width: "52px",
-  height: "52px",
-  borderRadius: "999px",
-  border: "1px solid rgba(255,255,255,0.1)",
-  background: "rgba(7,17,31,0.78)",
-  color: "white",
-  fontSize: "18px",
-  fontWeight: "700",
-  cursor: "pointer",
-  backdropFilter: "blur(12px)",
-  boxShadow: "0 10px 24px rgba(0,0,0,0.28)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const metricCard = {
-  background: "rgba(255,255,255,0.06)",
-  backdropFilter: "blur(18px)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "24px",
-  padding: "24px 24px 22px",
-  minWidth: "0",
-  boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
-};
-
-const statNumber = {
-  margin: 0,
-  fontSize: "36px",
-  lineHeight: 1.05,
-  color: "#60A5FA",
-  letterSpacing: "-1px",
-};
-
-const statText = {
-  color: "#CBD5E1",
-  marginTop: "10px",
-  fontSize: "14px",
-  lineHeight: "1.55",
-  maxWidth: "18ch",
-};
-
-const sectionTag = {
-  color: "#60A5FA",
-  letterSpacing: "1px",
-  fontWeight: "700",
-  marginBottom: "15px",
-};
-
-const sectionHeading = {
-  fontSize: "58px",
-  lineHeight: "1.1",
-  letterSpacing: "-2px",
-  maxWidth: "1000px",
-  margin: 0,
-};
-
-const testimonialCard = {
-  background: "rgba(255,255,255,0.06)",
-  backdropFilter: "blur(18px)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "30px",
-  padding: "40px",
-};
-
-const avatar = {
-  width: "85px",
-  height: "85px",
-  borderRadius: "50%",
-  objectFit: "cover",
-  marginBottom: "20px",
-};
-
-const role = {
-  color: "#60A5FA",
-  fontSize: "13px",
-  letterSpacing: "1px",
-  marginBottom: "18px",
-};
-
-const quote = {
-  color: "#CBD5E1",
-  lineHeight: "1.9",
-};
-
-const detailRow = {
-  display: "flex",
-  justifyContent: "space-between",
-  gap: "16px",
-  padding: "14px 0",
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
-};
-
-const detailLabel = {
-  color: "#93C5FD",
-  fontWeight: 700,
-  fontSize: "13px",
-  letterSpacing: "1px",
-  textTransform: "uppercase",
-};
-
-const detailValue = {
-  color: "#E2E8F0",
-  textAlign: "right",
-  maxWidth: "60%",
-};
-
-const filmBodyText = {
-  color: "#CBD5E1",
-  lineHeight: "1.85",
-  fontSize: "16px",
-  margin: 0,
-};
-
-const automationText = {
-  color: "#CBD5E1",
-  lineHeight: "1.9",
-};
-
-const processCard = {
-  background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "28px",
-  padding: "30px",
-};
-
-const workflowList = {
-  lineHeight: "2.2",
-  color: "#CBD5E1",
-};
-
-const capabilityCard = {
-  background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "24px",
-  padding: "28px",
-};
-
-const architectureCard = {
-  background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "28px",
-  padding: "50px",
-  textAlign: "center",
-  fontSize: "22px",
-  lineHeight: "2",
-};
-
-const galleryImage = {
-  width: "100%",
-  borderRadius: "20px",
-  border: "1px solid rgba(255,255,255,0.08)",
-  display: "block",
-};
