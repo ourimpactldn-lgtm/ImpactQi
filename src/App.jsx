@@ -89,7 +89,7 @@ const statText = {
 };
 
 const testimonialCard = {
-  background: "rgba(255,255,400,0.06)",
+  background: "rgba(255,255,255,0.06)",
   backdropFilter: "blur(18px)",
   border: "1px solid rgba(255,255,255,0.08)",
   borderRadius: "30px",
@@ -909,7 +909,7 @@ function GifDeck() {
   );
 }
 
-/* ---------------- FILM PROJECT PAGE ---------------- */
+/* ---------------- FILM PROJECT PAGE (with premium borders) ---------------- */
 
 function FilmProjectsPage() {
   const project = {
@@ -957,16 +957,8 @@ function FilmProjectsPage() {
       description:
         "A discussion on Grenfell recovery, faith-based support and culturally sensitive outreach.",
       link: "https://youtu.be/FCkgYwuSQiI",
-    }, 
+    },
   ];
-
-  const sharedImageCard = {
-    borderRadius: "28px",
-    overflow: "hidden",
-    border: "1px solid rgba(255,255,255,0.08)",
-    boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
-    background: "#020617",
-  };
 
   const sharedImageStyle = {
     width: "100%",
@@ -976,8 +968,49 @@ function FilmProjectsPage() {
     objectFit: "cover",
   };
 
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <section
+      id="film"
       style={{
         width: "100%",
         minHeight: "100vh",
@@ -987,6 +1020,7 @@ function FilmProjectsPage() {
         boxSizing: "border-box",
       }}
     >
+      <style>{animatedBorderStyles}</style>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <p
           style={{
@@ -1082,26 +1116,12 @@ function FilmProjectsPage() {
             marginBottom: "72px",
           }}
         >
-          <div
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "28px",
-              padding: "30px",
-            }}
-          >
+          <div className="premium-border-card" style={{ padding: "30px" }}>
             <p style={sectionTag}>Project Overview</p>
             <p style={filmBodyText}>{project.overview}</p>
           </div>
 
-          <div
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "28px",
-              padding: "30px",
-            }}
-          >
+          <div className="premium-border-card" style={{ padding: "30px" }}>
             <p style={sectionTag}>Approach</p>
             <p style={filmBodyText}>{project.approach}</p>
             <p style={{ ...sectionTag, marginTop: "24px" }}>Outcome</p>
@@ -1118,7 +1138,7 @@ function FilmProjectsPage() {
             marginBottom: "72px",
           }}
         >
-          <div style={sharedImageCard}>
+          <div className="premium-border-card" style={{ padding: "0", overflow: "hidden" }}>
             <img
               src="/UYG.JPG"
               alt="Collage of documentary interview and community footage"
@@ -1126,7 +1146,7 @@ function FilmProjectsPage() {
             />
           </div>
 
-          <div style={sharedImageCard}>
+          <div className="premium-border-card" style={{ padding: "0", overflow: "hidden" }}>
             <img
               src="/WhatsApp Image 2026-06-05 at 12.11.25.jpeg"
               alt="Behind the scenes collage showing documentary filming process"
@@ -1161,15 +1181,13 @@ function FilmProjectsPage() {
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="premium-border-card"
                 style={{
                   textDecoration: "none",
                   color: "inherit",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: "24px",
                   padding: "24px",
                   display: "block",
-                  boxShadow: "0 18px 40px rgba(0,0,0,0.18)",
+                  transition: "transform 0.3s, box-shadow 0.3s",
                 }}
               >
                 <div
@@ -1256,10 +1274,12 @@ function FilmProjectsPage() {
           }}
         >
           <div
+            className="premium-border-card"
             style={{
-              ...sharedImageCard,
               height: "100%",
               display: "flex",
+              padding: "0",
+              overflow: "hidden",
             }}
           >
             <img
@@ -1270,10 +1290,8 @@ function FilmProjectsPage() {
           </div>
 
           <div
+            className="premium-border-card"
             style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "28px",
               padding: "30px",
               height: "100%",
               display: "flex",
@@ -1324,7 +1342,7 @@ function FilmProjectsPage() {
   );
 }
 
-/* ---------------- AUTOMATION PAGE ---------------- */
+/* ---------------- AUTOMATION PAGE (with premium borders) ---------------- */
 
 function WorkflowCarousel() {
   const slides = [
@@ -1363,6 +1381,46 @@ function WorkflowCarousel() {
 
   const activeSlide = slides[activeIndex];
 
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <div
       style={{
@@ -1373,15 +1431,15 @@ function WorkflowCarousel() {
       }}
       className="workflow-carousel-grid"
     >
+      <style>{animatedBorderStyles}</style>
       <div
+        className="premium-border-card"
         style={{
           position: "relative",
           borderRadius: "30px",
           overflow: "hidden",
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "rgba(255,255,255,0.04)",
-          boxShadow: "0 24px 60px rgba(0,0,0,0.24)",
           minHeight: "620px",
+          padding: 0,
         }}
       >
         {slides.map((slide, index) => (
@@ -1443,13 +1501,9 @@ function WorkflowCarousel() {
 
       <div
         key={activeSlide.title}
+        className="premium-border-card"
         style={{
-          background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: "30px",
           padding: "34px",
-          backdropFilter: "blur(14px)",
-          boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -1544,12 +1598,13 @@ function WorkflowCarousel() {
     </div>
   );
 }
+
 function AutomationImageCarousel() {
   const images = [
     "/Old workflow.JPG",
     "/Transition.JPG",
     "/New workflow.JPG",
-"/dashboard 1.JPG"
+    "/dashboard 1.JPG"
   ];
 
   const slides = [
@@ -1587,13 +1642,54 @@ function AutomationImageCarousel() {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % images.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <>
+      <style>{animatedBorderStyles}</style>
       <div
+        className="premium-border-card"
         style={{
           position: "relative",
           width: "100%",
@@ -1661,15 +1757,12 @@ function AutomationImageCarousel() {
 
       <div
         key={activeIndex}
+        className="premium-border-card"
         style={{
           margin: "24px auto 0",
           width: "100%",
-          background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: "28px",
           padding: "28px",
-          boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
-          animation: "fadeCard 500ms ease"
+          animation: "fadeCard 500ms ease",
         }}
       >
         <p
@@ -1715,6 +1808,7 @@ function AutomationImageCarousel() {
     </>
   );
 }
+
 function AutomationAIPage() {
   const surfaceCard = {
     background: "rgba(255,255,255,0.05)",
@@ -1722,7 +1816,8 @@ function AutomationAIPage() {
     borderRadius: "28px",
     padding: "30px",
     boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
-    backdropFilter: "blur(14px)"
+    backdropFilter: "blur(14px)",
+    transition: "transform 0.3s, border-color 0.3s, box-shadow 0.3s",
   };
 
   const mediaCard = {
@@ -1730,7 +1825,7 @@ function AutomationAIPage() {
     borderRadius: "28px",
     border: "1px solid rgba(255,255,255,0.08)",
     background: "rgba(255,255,255,0.04)",
-    boxShadow: "0 20px 50px rgba(0,0,0,0.22)"
+    boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
   };
 
   const chipStyle = {
@@ -1740,7 +1835,7 @@ function AutomationAIPage() {
     border: "1px solid rgba(255,255,255,0.08)",
     color: "#E2E8F0",
     fontSize: "13px",
-    fontWeight: 600
+    fontWeight: 600,
   };
 
   const listStyle = {
@@ -1748,7 +1843,7 @@ function AutomationAIPage() {
     paddingLeft: "20px",
     color: "#CBD5E1",
     lineHeight: 2,
-    fontSize: "15px"
+    fontSize: "15px",
   };
 
   const promptCard = {
@@ -1758,8 +1853,48 @@ function AutomationAIPage() {
     border: "1px solid rgba(255,255,255,0.08)",
     color: "#E2E8F0",
     fontSize: "15px",
-    lineHeight: 1.7
+    lineHeight: 1.7,
   };
+
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
 
   return (
     <section
@@ -1772,6 +1907,7 @@ function AutomationAIPage() {
         boxSizing: "border-box"
       }}
     >
+      <style>{animatedBorderStyles}</style>
       <div style={{ maxWidth: "1380px", margin: "0 auto" }}>
         <p
           style={{
@@ -1810,10 +1946,10 @@ function AutomationAIPage() {
         </p>
 
         <div
+          className="premium-border-card"
           style={{
-            ...surfaceCard,
             marginBottom: "100px",
-            padding: "48px"
+            padding: "48px",
           }}
         >
           <p style={sectionTag}>Featured Build</p>
@@ -1838,37 +1974,36 @@ function AutomationAIPage() {
             }}
           >
             <div
+              key="Challenge"
+              className="premium-border-card"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "22px",
-                padding: "24px"
+                padding: "24px",
               }}
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Challenge</h3>
               <p style={automationText}>
-Disparate processes and manual handling created inefficiencies, inconsistent user experiences and limited oversight of operational performance.              </p>
+                Disparate processes and manual handling created inefficiencies, inconsistent user experiences and limited oversight of operational performance.
+              </p>
             </div>
 
             <div
+              key="Solution"
+              className="premium-border-card"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "22px",
-                padding: "24px"
+                padding: "24px",
               }}
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Solution</h3>
               <p style={automationText}>
-                An integrated digital service was developed to streamline workflows, automate key processes and provide a single source of truth for operational management.              </p>
+                An integrated digital service was developed to streamline workflows, automate key processes and provide a single source of truth for operational management.
+              </p>
             </div>
 
             <div
+              key="Outcome"
+              className="premium-border-card"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "22px",
-                padding: "24px"
+                padding: "24px",
               }}
             >
               <h3 style={{ margin: "0 0 12px", fontSize: "24px", color: "white" }}>Outcome</h3>
@@ -1877,15 +2012,16 @@ Disparate processes and manual handling created inefficiencies, inconsistent use
               </p>
             </div>
           </div>
-<div style={mediaCard}>
-  <AutomationImageCarousel />
-</div>
+          <div style={mediaCard}>
+            <AutomationImageCarousel />
+          </div>
         </div>
+
         <div
+          className="premium-border-card"
           style={{
-            ...surfaceCard,
             padding: "42px",
-            marginBottom: "80px"
+            marginBottom: "80px",
           }}
         >
           <p style={sectionTag}>Interactive Demo</p>
@@ -1913,9 +2049,8 @@ Disparate processes and manual handling created inefficiencies, inconsistent use
           >
             <div>
               <p style={{ ...automationText, marginBottom: "22px" }}>
-         This demonstration showcases how AI-powered conversational services can enhance user support, streamline access to information and improve digital service delivery. By providing immediate, context-aware assistance, organisations can reduce support demand, improve user experience and increase operational efficiency.
-Example capabilities:
-
+                This demonstration showcases how AI-powered conversational services can enhance user support, streamline access to information and improve digital service delivery. By providing immediate, context-aware assistance, organisations can reduce support demand, improve user experience and increase operational efficiency.
+                Example capabilities:
               </p>
 
               <div style={{ display: "grid", gap: "14px" }}>
@@ -1926,12 +2061,11 @@ Example capabilities:
             </div>
 
             <div
+              className="premium-border-card"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "28px",
                 overflow: "hidden",
-                boxShadow: "0 20px 50px rgba(0,0,0,0.22)"
+                boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
+                padding: 0,
               }}
             >
               <div
@@ -2053,6 +2187,7 @@ Example capabilities:
             </div>
           </div>
         </div>
+
         <div
           style={{
             marginBottom: "100px",
@@ -2075,22 +2210,28 @@ Example capabilities:
               Microsoft Teams Service Integration
             </h2>
 
-            <div style={mediaCard}>
-<img
-  src="/adaptive-card.gif"
-  alt="Adaptive Cards Demo"
-  style={{
-    width: "100%",
-    display: "block",
-    aspectRatio: "16 / 10",
-    objectFit: "contain",
-    background: "#020617"
-  }}
-/>
+            <div className="premium-border-card" style={{ overflow: "hidden", padding: 0 }}>
+              <img
+                src="/adaptive-card.gif"
+                alt="Adaptive Cards Demo"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  aspectRatio: "16 / 10",
+                  objectFit: "contain",
+                  background: "#020617"
+                }}
+              />
             </div>
           </div>
 
-          <div style={{ ...surfaceCard, height: "100%" }}>
+          <div
+            className="premium-border-card"
+            style={{
+              height: "100%",
+              padding: "30px",
+            }}
+          >
             <p style={sectionTag}>What this demonstrates</p>
             <h3
               style={{
@@ -2111,16 +2252,15 @@ Example capabilities:
                 marginBottom: "22px"
               }}
             >
-<div style={chipStyle}>Integrated workflow management</div>
-<div style={chipStyle}>Streamlined user journeys</div>
-<div style={chipStyle}>Reduced administrative overhead</div>
-<div style={chipStyle}>Faster service delivery</div>
-<div style={chipStyle}>Scalable digital solutions</div>            
-</div>
+              <div style={chipStyle}>Integrated workflow management</div>
+              <div style={chipStyle}>Streamlined user journeys</div>
+              <div style={chipStyle}>Reduced administrative overhead</div>
+              <div style={chipStyle}>Faster service delivery</div>
+              <div style={chipStyle}>Scalable digital solutions</div>            
+            </div>
 
             <p style={automationText}>
-These solutions demonstrate how intelligent workflow automation can transform service delivery by bringing communications, approvals and operational processes into a seamless digital experience. By reducing manual intervention and streamlining user interactions, organisations can improve efficiency, accelerate response times, enhance user experience and deliver scalable services that support long-term growth and operational excellence.
-
+              These solutions demonstrate how intelligent workflow automation can transform service delivery by bringing communications, approvals and operational processes into a seamless digital experience. By reducing manual intervention and streamlining user interactions, organisations can improve efficiency, accelerate response times, enhance user experience and deliver scalable services that support long-term growth and operational excellence.
             </p>
           </div>
         </div>
@@ -2146,66 +2286,68 @@ These solutions demonstrate how intelligent workflow automation can transform se
             >
               AI-Powered Knowledge and Service Platforms
             </h2>
-<div
-  style={{
-    ...mediaCard,
-    height: "720px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }}
->
-  <img
-    src="/nhs-agent.JPG"
-    alt=" AI-powered knowledge platform"
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "contain",
-      display: "block",
-      background: "#020617"
-    }}
-  />
-</div>
- </div>
+            <div
+              className="premium-border-card"
+              style={{
+                height: "720px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 0,
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src="/nhs-agent.JPG"
+                alt=" AI-powered knowledge platform"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                  background: "#020617"
+                }}
+              />
+            </div>
+          </div>
 
-<div style={{ ...surfaceCard, height: "100%" }}>
-  <p style={sectionTag}>Platform Capabilities</p>
+          <div
+            className="premium-border-card"
+            style={{
+              height: "100%",
+              padding: "30px",
+            }}
+          >
+            <p style={sectionTag}>Platform Capabilities</p>
 
-  <h3
-    style={{
-      margin: "0 0 18px",
-      fontSize: "32px",
-      letterSpacing: "-1px",
-      color: "white"
-    }}
-  >
-    Intelligent Knowledge and Service Delivery
-  </h3>
+            <h3
+              style={{
+                margin: "0 0 18px",
+                fontSize: "32px",
+                letterSpacing: "-1px",
+                color: "white"
+              }}
+            >
+              Intelligent Knowledge and Service Delivery
+            </h3>
 
-<ul style={listStyle}>
-  <li> Reducing manual queries and standardising responses, we improve efficiency, enhancing consistency and supporting better decision-making across workforce and service delivery.</li>
-
-  <li>Provideing conversational access to organisational knowledge, policies, procedures and business information through a single digital interface.</li>
-
-  <li>Connecting users with relevant forms, systems, guidance and resources, reducing time spent navigating complex environments.</li>
-
-  <li>Improveing consistency by delivering standardised information and reducing variation across support interactions.</li>
-
-  <li>Reduceing demand on operational teams by handling high-volume, repeatable enquiries automatically.</li>
-
-  <li>Integrates with Microsoft 365, SharePoint, Teams and business systems to create a seamless digital experience.</li>
-
-  <li>Supporting scalable digital service delivery while enabling teams to focus on higher-value work and strategic priorities.</li>
-  </ul>
-</div>
+            <ul style={listStyle}>
+              <li>Reducing manual queries and standardising responses, we improve efficiency, enhancing consistency and supporting better decision-making across workforce and service delivery.</li>
+              <li>Providing conversational access to organisational knowledge, policies, procedures and business information through a single digital interface.</li>
+              <li>Connecting users with relevant forms, systems, guidance and resources, reducing time spent navigating complex environments.</li>
+              <li>Improving consistency by delivering standardised information and reducing variation across support interactions.</li>
+              <li>Reducing demand on operational teams by handling high-volume, repeatable enquiries automatically.</li>
+              <li>Integrates with Microsoft 365, SharePoint, Teams and business systems to create a seamless digital experience.</li>
+              <li>Supporting scalable digital service delivery while enabling teams to focus on higher-value work and strategic priorities.</li>
+            </ul>
+          </div>
         </div>
-
       </div>
     </section>
   );
 }
-/* ---------------- RESEARCH PAGE ---------------- */
+
+/* ---------------- RESEARCH PAGE (with premium borders) ---------------- */
 
 function ResearchPage() {
   const publications = useMemo(
@@ -2434,8 +2576,49 @@ function ResearchPage() {
     setActiveIndex((prev) => (prev - 1 + publications.length) % publications.length);
   };
 
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <section
+      id="research"
       style={{
         width: "100%",
         minHeight: "100vh",
@@ -2445,6 +2628,7 @@ function ResearchPage() {
         boxSizing: "border-box",
       }}
     >
+      <style>{animatedBorderStyles}</style>
       <div style={{ maxWidth: "1320px", margin: "0 auto" }}>
         <p
           style={{
@@ -2457,7 +2641,6 @@ function ResearchPage() {
         >
           Research & Publications
         </p>
-        <section id="research"></section>
         <h1
           style={{
             fontSize: "76px",
@@ -2495,18 +2678,13 @@ function ResearchPage() {
           className="research-feature-grid"
         >
           <div
+            className="premium-border-card"
             style={{
-              position: "relative",
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "34px",
               padding: "34px",
-              boxShadow: "0 24px 70px rgba(0,0,0,0.3)",
-              backdropFilter: "blur(14px)",
-              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
               minHeight: "640px",
             }}
-            className="featured-publication-panel"
           >
             <div
               style={{
@@ -2515,6 +2693,8 @@ function ResearchPage() {
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015) 45%, rgba(255,255,255,0.01) 100%)",
                 pointerEvents: "none",
+                zIndex: 1,
+                borderRadius: "28px",
               }}
             />
 
@@ -2658,6 +2838,7 @@ function ResearchPage() {
                       background:
                         activePublication.coverTheme || "rgba(255,255,255,0.08)",
                       boxShadow: "0 22px 50px rgba(0,0,0,0.28)",
+                      borderRadius: "20px",
                     }}
                   >
                     {activePublication.coverImage ? (
@@ -2695,12 +2876,11 @@ function ResearchPage() {
           </div>
 
           <div
+            className="premium-border-card"
             style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "30px",
               padding: "28px",
-              backdropFilter: "blur(14px)",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <div
@@ -2814,17 +2994,11 @@ function ResearchPage() {
             <div
               key={item.id}
               onClick={() => setActiveIndex(index)}
+              className="premium-border-card"
               style={{
-                background: "rgba(255,255,255,0.05)",
-                border:
-                  index === activeIndex
-                    ? "1px solid rgba(96,165,250,0.34)"
-                    : "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "28px",
-                overflow: "hidden",
                 cursor: "pointer",
-                boxShadow: "0 18px 40px rgba(0,0,0,0.22)",
-                transition: "transform 240ms ease, box-shadow 240ms ease",
+                overflow: "hidden",
+                transition: "transform 0.3s, box-shadow 0.3s",
               }}
             >
               <div
@@ -2892,6 +3066,7 @@ function ResearchPage() {
     </section>
   );
 }
+
 function TrustBar() {
   const items = [
     "Springer Published Author",
@@ -2967,7 +3142,8 @@ function TrustBar() {
     </div>
   );
 }
-/* ---------------- HOME PAGE ---------------- */
+
+/* ---------------- HOME PAGE (with premium testimonial quotes and working consultation button) ---------------- */
 
 function HomePage({ onNavigate }) {
   const statsRef = useRef(null);
@@ -2980,46 +3156,46 @@ function HomePage({ onNavigate }) {
 
   const stats = useMemo(
     () => [
-   {
-  target: 4160,
-  label: "Annual Work Hours Saved",
-  icon: <BriefcaseIcon />,
-  duration: 550,
-},
-{
-  target: 91500,
-  label: "Cost Savings",
-  icon: < CurrencyPoundIcon />,
-  duration: 500,
-  prefix: "£",
-},
-{
-  target: 25000,
-  label: "Workforce Served",
-  icon: <ActivityIcon />,
-  duration: 600,
-  display: "thousand",
-},
-{
-  target: 20,
-  label: "Reduction in Hospital Waiting Times",
-  icon: <ActivityIcon />,
-  duration: 475,
-  suffix: "%",
-},
       {
-  target: 1000000,
-  label: "Population Coverage",
-  icon: <UsersIcon />,
-  duration: 675,
-  display: "millionPlus",
-},
-{
-  target: 27,
-  label: "Countries Reached",
-  icon: <GlobeIcon />,
-  duration: 450,
-},
+        target: 4160,
+        label: "Annual Work Hours Saved",
+        icon: <BriefcaseIcon />,
+        duration: 550,
+      },
+      {
+        target: 91500,
+        label: "Cost Savings",
+        icon: <CurrencyPoundIcon />,
+        duration: 500,
+        prefix: "£",
+      },
+      {
+        target: 25000,
+        label: "Workforce Served",
+        icon: <ActivityIcon />,
+        duration: 600,
+        display: "thousand",
+      },
+      {
+        target: 20,
+        label: "Reduction in Hospital Waiting Times",
+        icon: <ActivityIcon />,
+        duration: 475,
+        suffix: "%",
+      },
+      {
+        target: 1000000,
+        label: "Population Coverage",
+        icon: <UsersIcon />,
+        duration: 675,
+        display: "millionPlus",
+      },
+      {
+        target: 27,
+        label: "Countries Reached",
+        icon: <GlobeIcon />,
+        duration: 450,
+      },
     ],
     []
   );
@@ -3102,10 +3278,11 @@ function HomePage({ onNavigate }) {
     results.push({
       type: "Home",
       title: "Digital Transformations",
-      description: "Transforming complex processes into intelligent digital services through automation, analytics and AI.",
+      description:
+        "Transforming complex processes into intelligent digital services through automation, analytics and AI.",
       page: "home",
     });
-    stats.forEach(stat => {
+    stats.forEach((stat) => {
       results.push({
         type: "Key Stat",
         title: stat.label,
@@ -3113,7 +3290,7 @@ function HomePage({ onNavigate }) {
         page: "home",
       });
     });
-    testimonials.forEach(t => {
+    testimonials.forEach((t) => {
       results.push({
         type: "Testimonial",
         title: t.name,
@@ -3123,19 +3300,32 @@ function HomePage({ onNavigate }) {
     });
 
     // 2. Film project page
-    const filmProject = {
+    results.push({
+      type: "Film Project",
       title: "Documentary Storytelling for Public Health and Community Impact",
-      description: "A project-led body of film work combining interviews, public health communication, youth voice and community documentation.",
+      description:
+        "A project-led body of film work combining interviews, public health communication, youth voice and community documentation.",
       page: "film",
-    };
-    results.push({ type: "Film Project", ...filmProject });
+    });
     const selectedWorks = [
-      { title: "Vacci-Nation", description: "A public health film addressing vaccine hesitancy." },
-      { title: "Young Sutton Voices", description: "A youth-centred film exploring autism awareness." },
-      { title: "Interview with Vanessa McCain", description: "Conversation on resilience and advocacy." },
-      { title: "Interview with Abdurahman Sayed", description: "Discussion on Grenfell recovery and faith-based support." }
+      {
+        title: "Vacci-Nation",
+        description: "A public health film addressing vaccine hesitancy.",
+      },
+      {
+        title: "Young Sutton Voices",
+        description: "A youth-centred film exploring autism awareness.",
+      },
+      {
+        title: "Interview with Vanessa McCain",
+        description: "Conversation on resilience and advocacy.",
+      },
+      {
+        title: "Interview with Abdurahman Sayed",
+        description: "Discussion on Grenfell recovery and faith-based support.",
+      },
     ];
-    selectedWorks.forEach(work => {
+    selectedWorks.forEach((work) => {
       results.push({
         type: "Film",
         title: work.title,
@@ -3144,16 +3334,45 @@ function HomePage({ onNavigate }) {
       });
     });
 
-    // 3. Research publications (using the same data as ResearchPage)
+    // 3. Research publications
     const publicationsData = [
-      { title: "Leveraging Performative Arts Programmes for Enhancing Skills and Well-Being in Global Majority Youth", type: "Book Chapter", summary: "This peer-reviewed chapter explores the role of public health, creative arts, recruitment and widening participation." },
-      { title: "CSR and Coping with COVID-19 Pandemic in the Global Health Service Institutions: The United Kingdom", type: "Book Chapter", summary: "Investigates how CSR supported the NHS and disadvantaged communities." },
-      { title: "How Human Factors Can Enhance Delivery of Equality, Diversity, and Inclusion", type: "Guidance Document", summary: "Explores how human factors can enhance EDI delivery." },
-      { title: "Responding to a Crisis", type: "Magazine Article", summary: "Explores human factors in civic disaster planning." },
-      { title: "Our Impact (Quarter 1, 2022)", type: "Magazine", summary: "Explores health, human factors, and inclusivity." },
-      { title: "Our Impact (7th Issue)", type: "Magazine", summary: "Explores social justice, AI ethics, and systemic reform." }
+      {
+        title:
+          "Leveraging Performative Arts Programmes for Enhancing Skills and Well-Being in Global Majority Youth",
+        type: "Book Chapter",
+        summary:
+          "This peer-reviewed chapter explores the role of public health, creative arts, recruitment and widening participation.",
+      },
+      {
+        title:
+          "CSR and Coping with COVID-19 Pandemic in the Global Health Service Institutions: The United Kingdom",
+        type: "Book Chapter",
+        summary:
+          "Investigates how CSR supported the NHS and disadvantaged communities.",
+      },
+      {
+        title:
+          "How Human Factors Can Enhance Delivery of Equality, Diversity, and Inclusion",
+        type: "Guidance Document",
+        summary: "Explores how human factors can enhance EDI delivery.",
+      },
+      {
+        title: "Responding to a Crisis",
+        type: "Magazine Article",
+        summary: "Explores human factors in civic disaster planning.",
+      },
+      {
+        title: "Our Impact (Quarter 1, 2022)",
+        type: "Magazine",
+        summary: "Explores health, human factors, and inclusivity.",
+      },
+      {
+        title: "Our Impact (7th Issue)",
+        type: "Magazine",
+        summary: "Explores social justice, AI ethics, and systemic reform.",
+      },
     ];
-    publicationsData.forEach(pub => {
+    publicationsData.forEach((pub) => {
       results.push({
         type: `Publication (${pub.type})`,
         title: pub.title,
@@ -3164,12 +3383,25 @@ function HomePage({ onNavigate }) {
 
     // 4. Automation & AI page
     const automationItems = [
-      { title: "End-to-End Workforce Automation", description: "Power Automate, SharePoint and Power BI integrated ecosystem." },
-      { title: "AI Digital Assistant", description: "Conversational AI to enhance user support." },
-      { title: "Microsoft Teams Service Integration", description: "Adaptive Cards for integrated service delivery." },
-      { title: "AI-Powered Knowledge Platforms", description: "Conversational access to organisational knowledge." }
+      {
+        title: "End-to-End Workforce Automation",
+        description:
+          "Power Automate, SharePoint and Power BI integrated ecosystem.",
+      },
+      {
+        title: "AI Digital Assistant",
+        description: "Conversational AI to enhance user support.",
+      },
+      {
+        title: "Microsoft Teams Service Integration",
+        description: "Adaptive Cards for integrated service delivery.",
+      },
+      {
+        title: "AI-Powered Knowledge Platforms",
+        description: "Conversational access to organisational knowledge.",
+      },
     ];
-    automationItems.forEach(item => {
+    automationItems.forEach((item) => {
       results.push({
         type: "Automation & AI",
         title: item.title,
@@ -3190,9 +3422,10 @@ function HomePage({ onNavigate }) {
       setSelectedIndex(-1);
       return;
     }
-    const filtered = searchIndex.filter(item =>
-      item.title.toLowerCase().includes(term) ||
-      item.description.toLowerCase().includes(term)
+    const filtered = searchIndex.filter(
+      (item) =>
+        item.title.toLowerCase().includes(term) ||
+        item.description.toLowerCase().includes(term)
     );
     setSearchResults(filtered);
     setShowResults(true);
@@ -3203,14 +3436,20 @@ function HomePage({ onNavigate }) {
     onNavigate(result.page);
     setShowResults(false);
     setSearchTerm("");
-    // Optional: scroll to section if needed
-    if (result.page === "automation") {
-      setTimeout(() => document.getElementById("automation")?.scrollIntoView({ behavior: "smooth" }), 100);
-    } else if (result.page === "research") {
-      setTimeout(() => document.getElementById("research")?.scrollIntoView({ behavior: "smooth" }), 100);
-    } else if (result.page === "film") {
-      setTimeout(() => document.getElementById("film")?.scrollIntoView({ behavior: "smooth" }), 100);
-    }
+    setTimeout(() => {
+      if (result.page === "automation") {
+        const el = document.getElementById("automation");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else if (result.page === "research") {
+        const el = document.getElementById("research");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else if (result.page === "film") {
+        const el = document.getElementById("film");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else if (result.page === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const handleKeyDown = (e) => {
@@ -3230,7 +3469,6 @@ function HomePage({ onNavigate }) {
     }
   };
 
-  // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
@@ -3247,6 +3485,8 @@ function HomePage({ onNavigate }) {
     testimonialIndex,
     3
   );
+  const autoIntervalRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
 
   const nextTestimonials = () => {
     setTestimonialIndex((prev) => (prev + 3) % testimonials.length);
@@ -3257,6 +3497,17 @@ function HomePage({ onNavigate }) {
       (prev) => (prev - 3 + testimonials.length) % testimonials.length
     );
   };
+
+  useEffect(() => {
+    if (isHovering) {
+      if (autoIntervalRef.current) clearInterval(autoIntervalRef.current);
+      return;
+    }
+    autoIntervalRef.current = setInterval(() => {
+      nextTestimonials();
+    }, 6000);
+    return () => clearInterval(autoIntervalRef.current);
+  }, [isHovering, testimonials.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -3382,10 +3633,9 @@ function HomePage({ onNavigate }) {
                 marginBottom: "45px",
               }}
             >
-              Transforming complex processes into intelligent digital services through automation, analytics and AI—reducing administrative burden, improving visibility and enabling better decisions.
+              Transforming complex processes into intelligent digital services through automation, analytics and AI, reducing administrative burden, improving visibility and enabling better decisions.
             </p>
 
-            {/* SEARCH COMPONENT */}
             <div ref={searchContainerRef} style={{ position: "relative", width: "100%", maxWidth: "720px", marginBottom: "40px" }}>
               <div style={{ display: "flex", gap: "12px" }}>
                 <input
@@ -3423,11 +3673,10 @@ function HomePage({ onNavigate }) {
                     boxShadow: "0 15px 30px rgba(37,99,235,0.3)",
                   }}
                 >
-                  🔍 Search
+                  Search
                 </button>
               </div>
 
-              {/* Dropdown results */}
               {showResults && (
                 <div
                   style={{
@@ -3469,7 +3718,9 @@ function HomePage({ onNavigate }) {
                         </div>
                         <div style={{ fontWeight: "600", color: "white" }}>{result.title}</div>
                         <div style={{ fontSize: "13px", color: "#CBD5E1", marginTop: "4px" }}>
-                          {result.description.length > 100 ? result.description.substring(0, 100) + "…" : result.description}
+                          {result.description.length > 100
+                            ? result.description.substring(0, 100) + "…"
+                            : result.description}
                         </div>
                       </div>
                     ))
@@ -3486,7 +3737,12 @@ function HomePage({ onNavigate }) {
                 flexWrap: "wrap",
               }}
             >
-              <button style={primaryButton}>Book a Consultation</button>
+              <button
+                style={primaryButton}
+                onClick={() => onNavigate("services")}
+              >
+                Book a Consultation
+              </button>
               <button
                 style={secondaryButton}
                 onClick={() => onNavigate("automation")}
@@ -3503,7 +3759,7 @@ function HomePage({ onNavigate }) {
                 gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
                 gap: "22px",
                 maxWidth: "980px",
-                marginTop: "38px"
+                marginTop: "38px",
               }}
             >
               <SequentialStats stats={stats} start={startStats} />
@@ -3621,6 +3877,8 @@ function HomePage({ onNavigate }) {
           padding: "0 80px 140px",
           boxSizing: "border-box",
         }}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         <div
           style={{
@@ -3678,17 +3936,907 @@ function HomePage({ onNavigate }) {
             }}
           >
             {visibleTestimonials.map((item) => (
-              <div key={item.name} style={testimonialCard}>
-                <img src={item.image} alt={item.alt} style={avatar} />
-                <h3>{item.name}</h3>
-                <p style={role}>{item.role}</p>
-                <p style={quote}>“{item.quote}”</p>
+              <div
+                key={item.name}
+                style={{
+                  ...testimonialCard,
+                  transition: "all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)",
+                  transform: "translateY(0)",
+                  animation: "fadeCard 0.5s ease-out",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+                className="premium-testimonial-card"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-8px) scale(1.01)";
+                  e.currentTarget.style.borderColor = "rgba(96,165,250,0.3)";
+                  e.currentTarget.style.boxShadow = "0 25px 45px rgba(0,0,0,0.3), 0 0 0 1px rgba(96,165,250,0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.boxShadow = "0 15px 40px rgba(0,0,0,0.2)";
+                }}
+              >
+                <div style={{ position: "relative", zIndex: 2 }}>
+                  <img src={item.image} alt={item.alt} style={avatar} />
+                  <h3 style={{ fontSize: "22px", marginBottom: "6px", color: "white" }}>
+                    {item.name}
+                  </h3>
+                  <p style={role}>{item.role}</p>
+                  <div style={{ position: "relative", marginTop: "16px" }}>
+                    <span
+                      style={{
+                        fontSize: "70px",
+                        position: "absolute",
+                        top: "-30px",
+                        left: "-15px",
+                        opacity: 0.25,
+                        color: "#60A5FA",
+                        fontFamily: "Georgia, serif",
+                        pointerEvents: "none",
+                      }}
+                    >
+                      “
+                    </span>
+                    <p
+                      style={{
+                        ...quote,
+                        fontSize: "18px",
+                        fontWeight: 500,
+                        lineHeight: "1.65",
+                        color: "#F1F5F9",
+                        textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                        transition: "color 0.2s ease, text-shadow 0.2s ease",
+                        paddingLeft: "24px",
+                        marginTop: "8px",
+                      }}
+                    >
+                      {item.quote}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "4px",
+                    background: "linear-gradient(90deg, #60A5FA, #A855F7, #60A5FA)",
+                    backgroundSize: "200% auto",
+                    animation: "gradientMove 3s linear infinite",
+                  }}
+                />
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
+        .premium-testimonial-card {
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .premium-testimonial-card:hover p {
+          color: #FFFFFF;
+          text-shadow: 0 0 6px rgba(96,165,250,0.3);
+        }
+      `}</style>
     </>
+  );
+}
+
+/* ---------------- SERVICES PAGE (unchanged, already has premium borders) ---------------- */
+
+function ServicesPage() {
+  const services = [
+    {
+      title: "AI Automation & Digital Transformation",
+      description: "Streamline your operations and reduce manual overhead with intelligent workflow automation.",
+      detailedDescription: "We build custom AI solutions that automate repetitive tasks, connect your systems, and provide real-time visibility into your operations. Our approach combines Power Automate, SharePoint, Power BI, and AI agents to create end-to-end digital services that save time and money.",
+      quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
+      benefits: [
+        "4,160+ annual work hours saved",
+        "£91,500+ cost savings achieved",
+        "Real-time dashboards and analytics",
+        "Seamless integration with existing systems",
+      ],
+      icon: (
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="5" width="10" height="10" rx="2" stroke="url(#gradRobot)" strokeWidth="1.5" />
+          <circle cx="10" cy="10" r="1.2" fill="url(#gradRobot)" />
+          <circle cx="14" cy="10" r="1.2" fill="url(#gradRobot)" />
+          <line x1="12" y1="5" x2="12" y2="2" stroke="url(#gradRobot)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="12" cy="2" r="1" fill="url(#gradRobot)" />
+          <rect x="8" y="15" width="8" height="6" rx="1.5" stroke="url(#gradRobot)" strokeWidth="1.5" />
+          <line x1="6" y1="16" x2="4" y2="14" stroke="url(#gradRobot)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="18" y1="16" x2="20" y2="14" stroke="url(#gradRobot)" strokeWidth="1.5" strokeLinecap="round" />
+          <defs>
+            <linearGradient id="gradRobot" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      title: "Film & Documentary Production",
+      description: "Tell your story through powerful, human-centred visual narratives.",
+      detailedDescription: "Our film projects focus on public health, community impact, and social change. We produce documentaries, interviews, and campaign films that amplify underrepresented voices and drive engagement. From concept to final edit, we handle everything.",
+      quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
+      benefits: [
+        "Community-centred documentaries and interviews",
+        "Multi-camera, 6K raw workflow",
+        "Cinematic aerial and drone storytelling",
+        "Distribution-ready final deliverables",
+      ],
+      icon: (
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="16" height="12" rx="2" stroke="url(#grad2)" strokeWidth="1.5" />
+          <path d="M18 9L22 6V18L18 15" stroke="url(#grad2)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="8" cy="12" r="2" fill="url(#grad2)" />
+          <defs>
+            <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      title: "Research & Insights",
+      description: "Evidence-based research that drives informed decision-making.",
+      detailedDescription: "We provide high-quality research, evaluation, impact measurement, and strategic reporting services for public, private, and third-sector organisations. From programme evaluations and stakeholder research to evidence reviews and policy analysis, we help clients generate the insights needed to drive improvement and demonstrate impact.",
+      quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
+      benefits: [
+        "Independent evaluations",
+        "Impact & outcomes reporting",
+        "Research & data analysis",
+        "Actionable recommendations",
+      ],
+      icon: (
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#grad3)" strokeWidth="1.5" />
+          <path d="M7 16L10 12L13 15L18 9" stroke="url(#grad3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M7 12H7.01M17 12H17.01" stroke="url(#grad3)" strokeWidth="2" strokeLinecap="round" />
+          <defs>
+            <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      title: "Training & Capability Building",
+      description: "Empowering teams with the knowledge and skills to thrive.",
+      detailedDescription: "We design and deliver bespoke training programmes covering Artificial Intelligence (AI), Equality, Diversity & Inclusion (EDI), digital skills, workforce development, and organisational change. Our interactive workshops equip teams with practical tools, actionable strategies, and the confidence to drive meaningful improvement.",
+      quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
+      benefits: [
+        "AI & digital transformation training",
+        "EDI & cultural competency development",
+        "Interactive workshops & masterclasses",
+        "Bespoke learning programmes",
+      ],
+      icon: (
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 6V4M12 6C13.1046 6 14 6.89543 14 8C14 9.10457 13.1046 10 12 10M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10M12 10V12M12 12H9M12 12H15M12 12V14M12 14C9.79086 14 8 15.7909 8 18M12 14C14.2091 14 16 15.7909 16 18" stroke="url(#grad4)" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M12 20V22" stroke="url(#grad4)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="12" cy="12" r="9" stroke="url(#grad4)" strokeWidth="1.5" />
+          <defs>
+            <linearGradient id="grad4" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+  ];
+
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
+  const primaryButton = {
+    display: "inline-block",
+    padding: "12px 24px",
+    background: "linear-gradient(135deg, #60A5FA 0%, #A855F7 100%)",
+    borderRadius: "40px",
+    color: "white",
+    fontWeight: 600,
+    fontSize: "14px",
+    border: "none",
+    cursor: "pointer",
+    transition: "opacity 0.2s, transform 0.2s",
+    opacity: 0.9,
+  };
+
+  return (
+    <section
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        padding: "140px 80px 100px",
+        background: "#07111F",
+        color: "white",
+        boxSizing: "border-box",
+      }}
+    >
+      <style>{animatedBorderStyles}</style>
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        <p
+          style={{
+            color: "#60A5FA",
+            textTransform: "uppercase",
+            letterSpacing: "1.4px",
+            fontWeight: 700,
+            marginBottom: "18px",
+          }}
+        >
+          What We Offer
+        </p>
+
+        <h1
+          style={{
+            fontSize: "76px",
+            lineHeight: "0.96",
+            letterSpacing: "-3px",
+            margin: "0 0 20px",
+            maxWidth: "980px",
+          }}
+        >
+          Services That Drive Real Impact
+        </h1>
+
+        <p
+          style={{
+            color: "#CBD5E1",
+            fontSize: "21px",
+            lineHeight: "1.85",
+            maxWidth: "780px",
+            margin: "0 0 60px",
+          }}
+        >
+          We help organisations move from ambition to implementation through AI, film, and research.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            gap: "30px",
+          }}
+        >
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className="premium-border-card"
+              style={{
+                flex: "1 1 0%",
+                minWidth: 0,
+                padding: "32px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div style={{ marginBottom: "24px" }}>{service.icon}</div>
+              <h2
+                style={{
+                  fontSize: "32px",
+                  marginBottom: "16px",
+                  color: "white",
+                  letterSpacing: "-1px",
+                }}
+              >
+                {service.title}
+              </h2>
+              <p
+                style={{
+                  color: "#60A5FA",
+                  fontSize: "18px",
+                  marginBottom: "20px",
+                  lineHeight: "1.5",
+                }}
+              >
+                {service.description}
+              </p>
+              <p
+                style={{
+                  color: "#CBD5E1",
+                  fontSize: "16px",
+                  lineHeight: "1.8",
+                  marginBottom: "24px",
+                }}
+              >
+                {service.detailedDescription}
+              </p>
+              <div style={{ marginBottom: "24px" }}>
+                {service.benefits.map((benefit, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "#60A5FA",
+                      }}
+                    />
+                    <span style={{ color: "#E2E8F0", fontSize: "14px" }}>
+                      {benefit}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href={service.quoteLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  ...primaryButton,
+                  textAlign: "center",
+                  textDecoration: "none",
+                  marginTop: "auto",
+                }}
+              >
+                Get a Quote →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- CONTACT PAGE - PREMIUM OVERHAUL (unchanged) ---------------- */
+
+function ContactPage() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 5000);
+  };
+
+  return (
+    <section
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        padding: "140px 80px 100px",
+        background: "#07111F",
+        color: "white",
+        boxSizing: "border-box",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "-20%",
+          right: "-10%",
+          width: "600px",
+          height: "600px",
+          background: "radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%)",
+          filter: "blur(80px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-20%",
+          left: "-10%",
+          width: "500px",
+          height: "500px",
+          background: "radial-gradient(circle, rgba(168,85,247,0.15), transparent 70%)",
+          filter: "blur(80px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 2 }}>
+        <div style={{ textAlign: "center", marginBottom: "60px" }}>
+          <p
+            style={{
+              color: "#60A5FA",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              fontWeight: 700,
+              marginBottom: "18px",
+            }}
+          >
+            Get In Touch
+          </p>
+          <h1
+            style={{
+              fontSize: "76px",
+              lineHeight: "0.96",
+              letterSpacing: "-3px",
+              margin: "0 0 20px",
+            }}
+          >
+            Let's Work Together
+          </h1>
+          <p
+            style={{
+              color: "#CBD5E1",
+              fontSize: "21px",
+              lineHeight: "1.85",
+              maxWidth: "780px",
+              margin: "0 auto",
+            }}
+          >
+            Ready to transform your organisation? Get in touch to discuss how we can help.
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "60px",
+            alignItems: "start",
+          }}
+          className="contact-grid"
+        >
+          <div>
+            <div
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(16px)",
+                borderRadius: "36px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "40px",
+                marginBottom: "32px",
+                transition: "transform 0.3s, box-shadow 0.3s",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              className="contact-info-card"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.borderColor = "rgba(96,165,250,0.4)";
+                e.currentTarget.style.boxShadow = "0 25px 40px rgba(0,0,0,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "4px",
+                  background: "linear-gradient(90deg, #60A5FA, #A855F7, #EC4899)",
+                }}
+              />
+              <h2 style={{ fontSize: "28px", marginBottom: "32px", letterSpacing: "-1px" }}>
+                Direct Contact
+              </h2>
+              <div style={{ marginBottom: "28px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "44px",
+                      height: "44px",
+                      borderRadius: "50%",
+                      background: "rgba(96,165,250,0.15)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#60A5FA"
+                      strokeWidth="2"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ color: "#60A5FA", marginBottom: "4px", fontWeight: 600 }}>
+                      Email
+                    </p>
+                    <a
+                      href="mailto:impactqi@proton.me"
+                      style={{ color: "#E2E8F0", textDecoration: "none", fontSize: "18px" }}
+                    >
+                      ImpactQi@proton.me
+                    </a>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "44px",
+                      height: "44px",
+                      borderRadius: "50%",
+                      background: "rgba(96,165,250,0.15)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#60A5FA"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ color: "#60A5FA", marginBottom: "4px", fontWeight: 600 }}>
+                      Location
+                    </p>
+                    <p style={{ color: "#CBD5E1", margin: 0 }}>London, United Kingdom</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p style={{ color: "#60A5FA", marginBottom: "8px", fontWeight: 600 }}>Follow Us</p>
+                <div style={{ display: "flex", gap: "20px" }}>
+                  <a
+                    href="#"
+                    style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
+                    onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="#"
+                    style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
+                    onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
+                  >
+                    Twitter/X
+                  </a>
+                  <a
+                    href="#"
+                    style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
+                    onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                background: "linear-gradient(135deg, rgba(96,165,250,0.1), rgba(168,85,247,0.1))",
+                borderRadius: "36px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "32px",
+                textAlign: "center",
+                transition: "transform 0.3s",
+              }}
+              className="quote-card"
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-6px)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+            >
+              <h3 style={{ fontSize: "24px", marginBottom: "12px" }}>Get a Quote</h3>
+              <p style={{ color: "#CBD5E1", marginBottom: "24px" }}>
+                Tell us about your project and receive a customised quote within 48 hours.
+              </p>
+              <a
+                href="https://forms.office.com/r/qa1Z2eSKM1"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  ...primaryButton,
+                  textDecoration: "none",
+                  display: "inline-block",
+                  padding: "14px 32px",
+                }}
+              >
+                Request a Quote →
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(16px)",
+                borderRadius: "36px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "40px",
+                marginBottom: "32px",
+                transition: "transform 0.3s",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.borderColor = "rgba(96,165,250,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "4px",
+                  background: "linear-gradient(90deg, #A855F7, #60A5FA, #EC4899)",
+                }}
+              />
+              <h2 style={{ fontSize: "28px", marginBottom: "16px", letterSpacing: "-1px" }}>
+                Book a Free Consultation
+              </h2>
+              <p style={{ color: "#CBD5E1", marginBottom: "28px", lineHeight: "1.8" }}>
+                Schedule a 30‑minute discovery call to discuss your needs and explore how we can
+                help.
+              </p>
+              <a
+                href="https://calendly.com/ourimpactldn/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  ...secondaryButton,
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "16px 32px",
+                  background: "linear-gradient(135deg, #2563EB, #60A5FA)",
+                  border: "none",
+                }}
+              >
+                <span>Book Your Slot</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(16px)",
+                borderRadius: "36px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "40px",
+              }}
+            >
+              <h2 style={{ fontSize: "28px", marginBottom: "24px", letterSpacing: "-1px" }}>
+                Send a Message
+              </h2>
+              {submitted ? (
+                <div
+                  style={{
+                    background: "rgba(96,165,250,0.2)",
+                    padding: "20px",
+                    borderRadius: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  <p style={{ color: "#60A5FA", marginBottom: "8px" }}>✓ Message sent!</p>
+                  <p style={{ color: "#CBD5E1" }}>We'll get back to you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  <div style={{ marginBottom: "24px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        marginBottom: "8px",
+                        color: "#93C5FD",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        borderRadius: "16px",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "rgba(255,255,255,0.04)",
+                        color: "white",
+                        fontSize: "16px",
+                        outline: "none",
+                        transition: "border 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#60A5FA")}
+                      onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "24px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        marginBottom: "8px",
+                        color: "#93C5FD",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        borderRadius: "16px",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "rgba(255,255,255,0.04)",
+                        color: "white",
+                        fontSize: "16px",
+                        outline: "none",
+                        transition: "border 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#60A5FA")}
+                      onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "28px" }}>
+                    <label
+                      style={{
+                        display: "block",
+                        marginBottom: "8px",
+                        color: "#93C5FD",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      rows="4"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        borderRadius: "16px",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "rgba(255,255,255,0.04)",
+                        color: "white",
+                        fontSize: "16px",
+                        outline: "none",
+                        fontFamily: "inherit",
+                        resize: "vertical",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#60A5FA")}
+                      onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    style={{
+                      ...primaryButton,
+                      width: "100%",
+                      padding: "16px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Send Message →
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .contact-info-card:hover, .quote-card:hover, .contact-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+          border-color: rgba(96,165,250,0.3);
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -3744,6 +4892,11 @@ function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userMessage }),
       });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
       const data = await res.json();
       setMessages((prev) => [
         ...prev,
@@ -3754,11 +4907,12 @@ function ChatWidget() {
         },
       ]);
     } catch (err) {
+      console.error("Chat fetch error:", err);
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
-          text: "Sorry, I couldn't connect to the AI service.",
+          text: `Error: ${err.message}. Check console for details.`,
           timestamp: Date.now(),
         },
       ]);
@@ -3766,7 +4920,6 @@ function ChatWidget() {
       setLoading(false);
     }
   };
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter") sendMessage();
     if (e.key === "Escape") setIsOpen(false);
@@ -3787,7 +4940,6 @@ function ChatWidget() {
 
   return (
     <div style={{ position: "fixed", bottom: "24px", right: "24px", zIndex: 1000 }}>
-      {/* Floating button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Open chat"
@@ -3812,7 +4964,6 @@ function ChatWidget() {
         </svg>
       </button>
 
-      {/* Chat window */}
       {isOpen && (
         <div
           style={{
@@ -3832,7 +4983,6 @@ function ChatWidget() {
             animation: "fadeInUp 0.2s ease-out",
           }}
         >
-          {/* Header */}
           <div
             style={{
               padding: "16px 20px",
@@ -3884,7 +5034,6 @@ function ChatWidget() {
             </div>
           </div>
 
-          {/* Messages */}
           <div
             style={{
               flex: 1,
@@ -3935,7 +5084,9 @@ function ChatWidget() {
               </div>
             ))}
             {loading && (
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "8px" }}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "8px" }}
+              >
                 <div
                   style={{
                     background: "rgba(255,255,255,0.08)",
@@ -3979,7 +5130,6 @@ function ChatWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input area */}
           <div
             style={{
               padding: "12px 16px",
@@ -4027,7 +5177,6 @@ function ChatWidget() {
         </div>
       )}
 
-      {/* Animations */}
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -4141,7 +5290,8 @@ export default function App() {
             .automation-feature-grid,
             .automation-capability-grid,
             .automation-gallery-grid,
-            .workflow-carousel-grid {
+            .workflow-carousel-grid,
+            .contact-grid {
               grid-template-columns: 1fr !important;
               gap: 32px !important;
             }
@@ -4246,6 +5396,9 @@ export default function App() {
           <button onClick={() => setActivePage("home")} style={navButtonReset}>
             <span style={navItemStyle("home")}>Home</span>
           </button>
+          <button onClick={() => setActivePage("services")} style={navButtonReset}>
+            <span style={navItemStyle("services")}>Services</span>
+          </button>
           <button onClick={() => setActivePage("automation")} style={navButtonReset}>
             <span style={navItemStyle("automation")}>Automation & AI</span>
           </button>
@@ -4255,10 +5408,7 @@ export default function App() {
           <button onClick={() => setActivePage("research")} style={navButtonReset}>
             <span style={navItemStyle("research")}>Research</span>
           </button>
-          <button onClick={() => setActivePage("home")} style={navButtonReset}>
-            <span style={navItemStyle("membership")}>Membership</span>
-          </button>
-          <button onClick={() => setActivePage("home")} style={navButtonReset}>
+          <button onClick={() => setActivePage("contact")} style={navButtonReset}>
             <span style={navItemStyle("contact")}>Contact</span>
           </button>
         </div>
@@ -4270,11 +5420,14 @@ export default function App() {
         <FilmProjectsPage />
       ) : activePage === "automation" ? (
         <AutomationAIPage />
+      ) : activePage === "services" ? (
+        <ServicesPage />
+      ) : activePage === "contact" ? (
+        <ContactPage />
       ) : (
         <HomePage onNavigate={setActivePage} />
       )}
 
-      {/* Floating chat widget – appears on all pages */}
       <ChatWidget />
     </div>
   );
