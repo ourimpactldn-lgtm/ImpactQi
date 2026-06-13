@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import Chatbot from "./components/Chatbot";
 
 /* ---------------- GLOBAL STYLES (shared across components) ---------------- */
 const sectionTag = {
@@ -608,9 +609,13 @@ function GifDeck() {
   const [activeIndex, setActiveIndex] = useState(0);
   const currentHero = gifs[activeIndex];
 
-  const nextGif = () => {
-    setActiveIndex((prev) => (prev + 1) % gifs.length);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % gifs.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [gifs.length]);
 
   return (
     <div
@@ -877,39 +882,12 @@ function GifDeck() {
           </div>
         </div>
 
-        <button
-          onClick={nextGif}
-          aria-label="Show next hero"
-          style={{
-            position: "absolute",
-            right: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 30,
-            width: "62px",
-            height: "62px",
-            borderRadius: "999px",
-            border: "1px solid rgba(255,255,255,0.18)",
-            background: "rgba(7,17,31,0.68)",
-            backdropFilter: "blur(14px)",
-            color: "white",
-            fontSize: "20px",
-            fontWeight: "700",
-            cursor: "pointer",
-            boxShadow: "0 14px 34px rgba(0,0,0,0.3)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          →
-        </button>
       </div>
     </div>
   );
 }
 
-/* ---------------- FILM PROJECT PAGE (with premium borders) ---------------- */
+/* ---------------- FILM PROJECT PAGE ---------------- */
 
 function FilmProjectsPage() {
   const project = {
@@ -957,8 +935,16 @@ function FilmProjectsPage() {
       description:
         "A discussion on Grenfell recovery, faith-based support and culturally sensitive outreach.",
       link: "https://youtu.be/FCkgYwuSQiI",
-    },
+    }, 
   ];
+
+  const sharedImageCard = {
+    borderRadius: "28px",
+    overflow: "hidden",
+    border: "1px solid rgba(255,255,255,0.08)",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.22)",
+    background: "#020617",
+  };
 
   const sharedImageStyle = {
     width: "100%",
@@ -1087,12 +1073,22 @@ function FilmProjectsPage() {
         </div>
 
         <div
+          className="premium-border-card"
           style={{
             marginBottom: "72px",
             borderRadius: "32px",
             overflow: "hidden",
-            border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: "0 30px 80px rgba(0,0,0,0.35)",
+            boxShadow: "0 35px 90px rgba(0,0,0,0.42)",
+            padding: 0,
+            background: "#020617",
+            transform: "translateZ(0)",
+            position: "relative",
+            backgroundImage:
+              "linear-gradient(#020617, #020617), conic-gradient(from 0deg, #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA)",
+            backgroundOrigin: "border-box",
+            backgroundClip: "padding-box, border-box",
+            border: "1px solid transparent",
+            animation: "rotateGradient 4s linear infinite",
           }}
         >
           <img
@@ -1103,6 +1099,7 @@ function FilmProjectsPage() {
               display: "block",
               aspectRatio: "16 / 8.5",
               objectFit: "cover",
+              objectPosition: "center 18%",
             }}
           />
         </div>
@@ -1132,26 +1129,49 @@ function FilmProjectsPage() {
         <div
           className="film-collage-grid"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "24px",
             marginBottom: "72px",
           }}
         >
-          <div className="premium-border-card" style={{ padding: "0", overflow: "hidden" }}>
-            <img
-              src="/UYG.JPG"
-              alt="Collage of documentary interview and community footage"
-              style={sharedImageStyle}
-            />
-          </div>
+          <div
+            className="premium-border-card"
+            style={{
+              padding: "18px",
+              overflow: "hidden",
+              borderRadius: "32px",
+              boxShadow: "0 35px 90px rgba(0,0,0,0.42)",
+              background: "#020617",
+              position: "relative",
+              backgroundImage:
+                "linear-gradient(#020617, #020617), conic-gradient(from 0deg, #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA)",
+              backgroundOrigin: "border-box",
+              backgroundClip: "padding-box, border-box",
+              border: "1px solid transparent",
+              animation: "rotateGradient 4s linear infinite",
+            }}
+          >
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "24px",
+              }}
+            >
+              <div style={{ padding: 0, overflow: "hidden", borderRadius: "24px" }}>
+                <img
+                  src="/UYG.JPG"
+                  alt="Collage of documentary interview and community footage"
+                  style={sharedImageStyle}
+                />
+              </div>
 
-          <div className="premium-border-card" style={{ padding: "0", overflow: "hidden" }}>
-            <img
-              src="/WhatsApp Image 2026-06-05 at 12.11.25.jpeg"
-              alt="Behind the scenes collage showing documentary filming process"
-              style={sharedImageStyle}
-            />
+              <div style={{ padding: 0, overflow: "hidden", borderRadius: "24px" }}>
+                <img
+                  src="/WhatsApp Image 2026-06-05 at 12.11.25.jpeg"
+                  alt="Behind the scenes collage showing documentary filming process"
+                  style={{ ...sharedImageStyle, objectPosition: "center 18%" }}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1265,76 +1285,115 @@ function FilmProjectsPage() {
         </div>
 
         <div
-          className="film-process-grid"
+          className="premium-border-card"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "24px",
-            alignItems: "stretch",
+            padding: "18px",
+            borderRadius: "32px",
+            boxShadow: "0 35px 90px rgba(0,0,0,0.42)",
+            background: "#020617",
+            position: "relative",
+            backgroundImage:
+              "linear-gradient(#020617, #020617), conic-gradient(from 0deg, #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA)",
+            backgroundOrigin: "border-box",
+            backgroundClip: "padding-box, border-box",
+            border: "1px solid transparent",
+            animation: "rotateGradient 4s linear infinite",
+            marginBottom: "72px",
           }}
         >
           <div
-            className="premium-border-card"
+            className="film-process-grid"
             style={{
-              height: "100%",
-              display: "flex",
-              padding: "0",
-              overflow: "hidden",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "24px",
+              alignItems: "stretch",
             }}
           >
-            <img
-              src="/Capture98080.JPG"
-              alt="Behind the scenes collage showing documentary filming process"
-              style={sharedImageStyle}
-            />
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                padding: "0",
+                overflow: "hidden",
+                borderRadius: "24px",
+              }}
+            >
+              <img
+                src="/Capture98080.JPG"
+                alt="Behind the scenes collage showing documentary filming process"
+                style={sharedImageStyle}
+              />
+            </div>
+
+            <div
+              style={{
+                padding: "30px",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                borderRadius: "24px",
+                background: "rgba(255,255,255,0.03)",
+              }}
+            >
+              <p style={sectionTag}>Process</p>
+              <h3
+                style={{
+                  margin: "0 0 16px",
+                  fontSize: "36px",
+                  letterSpacing: "-1px",
+                }}
+              >
+                From fieldwork to final film
+              </h3>
+
+              <p style={filmBodyText}>
+                The work combines documentary interviews, environmental detail,
+                location-based observation and concise editing choices to hold
+                attention while preserving context.
+              </p>
+
+              <ul
+                style={{
+                  margin: "18px 0 0",
+                  paddingLeft: "20px",
+                  color: "#E2E8F0",
+                  lineHeight: "2",
+                }}
+              >
+                <li>Interview-led narrative structure</li>
+                <li>Community and environmental context shots</li>
+                <li>Accessible, issue-led public storytelling</li>
+                <li>Production adapted for live social settings</li>
+                <li>6K internal raw camera workflow for greater image fidelity</li>
+                <li>Multi-camera setup for broader coverage and continuity</li>
+                <li>Variety of stabilisers for controlled movement</li>
+                <li>Prime and zoom lens combinations for flexible framing</li>
+                <li>Focus pulling for subject isolation and transitions</li>
+                <li>Drone footage for scale, movement and location context</li>
+              </ul>
+            </div>
           </div>
+        </div>
 
-          <div
-            className="premium-border-card"
-            style={{
-              padding: "30px",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <p style={sectionTag}>Process</p>
-            <h3
-              style={{
-                margin: "0 0 16px",
-                fontSize: "36px",
-                letterSpacing: "-1px",
-              }}
-            >
-              From fieldwork to final film
-            </h3>
-
-            <p style={filmBodyText}>
-              The work combines documentary interviews, environmental detail,
-              location-based observation and concise editing choices to hold
-              attention while preserving context.
+        {/* CTA Section at bottom */}
+        <div style={{ marginTop: "100px", textAlign: "center" }}>
+          <div className="premium-border-card" style={{ padding: "50px 30px" }}>
+            <h2 style={{ fontSize: "42px", marginBottom: "20px" }}>
+              Ready to bring your story to life?
+            </h2>
+            <p style={{ color: "#CBD5E1", maxWidth: "600px", margin: "0 auto 30px auto", fontSize: "18px" }}>
+              Let's discuss how film can amplify your message and drive real change.
             </p>
-
-            <ul
-              style={{
-                margin: "18px 0 0",
-                paddingLeft: "20px",
-                color: "#E2E8F0",
-                lineHeight: "2",
-              }}
+            <a
+              href="https://forms.office.com/r/qa1Z2eSKM1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ ...primaryButton, textDecoration: "none" }}
             >
-              <li>Interview-led narrative structure</li>
-              <li>Community and environmental context shots</li>
-              <li>Accessible, issue-led public storytelling</li>
-              <li>Production adapted for live social settings</li>
-              <li>6K internal raw camera workflow for greater image fidelity</li>
-              <li>Multi-camera setup for broader coverage and continuity</li>
-              <li>Variety of stabilisers for controlled movement</li>
-              <li>Prime and zoom lens combinations for flexible framing</li>
-              <li>Focus pulling for subject isolation and transitions</li>
-              <li>Drone footage for scale, movement and location context</li>
-            </ul>
+              Get a Quote for Your Film →
+            </a>
           </div>
         </div>
       </div>
@@ -1342,7 +1401,7 @@ function FilmProjectsPage() {
   );
 }
 
-/* ---------------- AUTOMATION PAGE (with premium borders) ---------------- */
+/* ---------------- AUTOMATION PAGE ---------------- */
 
 function WorkflowCarousel() {
   const slides = [
@@ -2256,7 +2315,7 @@ function AutomationAIPage() {
               <div style={chipStyle}>Streamlined user journeys</div>
               <div style={chipStyle}>Reduced administrative overhead</div>
               <div style={chipStyle}>Faster service delivery</div>
-              <div style={chipStyle}>Scalable digital solutions</div>            
+              <div style={chipStyle}>Scalable digital solutions</div>
             </div>
 
             <p style={automationText}>
@@ -2299,7 +2358,7 @@ function AutomationAIPage() {
             >
               <img
                 src="/nhs-agent.JPG"
-                alt=" AI-powered knowledge platform"
+                alt="AI-powered knowledge platform"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -2342,12 +2401,21 @@ function AutomationAIPage() {
             </ul>
           </div>
         </div>
+
+        {/* CTA Section at bottom */}
+        <div style={{ marginTop: "80px", textAlign: "center" }}>
+          <div className="premium-border-card" style={{ padding: "50px 30px" }}>
+            <h2 style={{ fontSize: "42px", marginBottom: "20px" }}>Ready to automate and transform your operations?</h2>
+            <p style={{ color: "#CBD5E1", maxWidth: "600px", margin: "0 auto 30px auto", fontSize: "18px" }}>Let's build an intelligent digital solution tailored to your organisation.</p>
+            <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none" }}>Request a Quote for Automation →</a>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- RESEARCH PAGE (with premium borders) ---------------- */
+/* ---------------- RESEARCH PAGE (with all publications restored) ---------------- */
 
 function ResearchPage() {
   const publications = useMemo(
@@ -3062,11 +3130,21 @@ function ResearchPage() {
             </div>
           ))}
         </div>
+
+        {/* CTA Section at bottom */}
+        <div style={{ marginTop: "80px", textAlign: "center" }}>
+          <div className="premium-border-card" style={{ padding: "50px 30px" }}>
+            <h2 style={{ fontSize: "42px", marginBottom: "20px" }}>Looking for evidence‑based insights?</h2>
+            <p style={{ color: "#CBD5E1", maxWidth: "600px", margin: "0 auto 30px auto", fontSize: "18px" }}>Let's discuss how research and evaluation can support your strategic goals.</p>
+            <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none" }}>Request a Quote for Research →</a>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
+/* ---------------- TRUST BAR ---------------- */
 function TrustBar() {
   const items = [
     "Springer Published Author",
@@ -3143,7 +3221,7 @@ function TrustBar() {
   );
 }
 
-/* ---------------- HOME PAGE (with premium testimonial quotes and working consultation button) ---------------- */
+/* ---------------- HOME PAGE ---------------- */
 
 function HomePage({ onNavigate }) {
   const statsRef = useRef(null);
@@ -3152,6 +3230,9 @@ function HomePage({ onNavigate }) {
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [memberEmail, setMemberEmail] = useState("");
+  const [memberStatus, setMemberStatus] = useState("idle");
+  const [memberMessage, setMemberMessage] = useState("");
   const searchContainerRef = useRef(null);
 
   const stats = useMemo(
@@ -3469,6 +3550,57 @@ function HomePage({ onNavigate }) {
     }
   };
 
+  const handleMembershipSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = memberEmail.trim();
+    if (!email) {
+      setMemberStatus("error");
+      setMemberMessage("Please enter an email address.");
+      return;
+    }
+
+    const apiKey = import.meta.env.VITE_MAILERLITE_API_KEY;
+    const groupId = import.meta.env.VITE_MAILERLITE_GROUP_ID;
+
+    if (!apiKey || !groupId) {
+      setMemberStatus("error");
+      setMemberMessage("MailerLite is not configured yet. Add your API key and group ID to continue.");
+      return;
+    }
+
+    setMemberStatus("loading");
+    setMemberMessage("");
+
+    try {
+      const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          email,
+          groups: [groupId],
+          status: "active",
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to subscribe right now. Please try again.");
+      }
+
+      setMemberStatus("success");
+      setMemberMessage("Thanks! You’re on the list and your welcome email can now be sent through MailerLite.");
+      setMemberEmail("");
+    } catch (error) {
+      setMemberStatus("error");
+      setMemberMessage(error.message || "Something went wrong. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
@@ -3505,7 +3637,7 @@ function HomePage({ onNavigate }) {
     }
     autoIntervalRef.current = setInterval(() => {
       nextTestimonials();
-    }, 6000);
+    }, 4500);
     return () => clearInterval(autoIntervalRef.current);
   }, [isHovering, testimonials.length]);
 
@@ -3525,8 +3657,46 @@ function HomePage({ onNavigate }) {
     return () => observer.disconnect();
   }, []);
 
+  const homeAnimatedBorderStyles = `
+    @keyframes rotateGradientHome {
+      0% { --angle-home: 0deg; }
+      100% { --angle-home: 360deg; }
+    }
+    @property --angle-home {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .home-animated-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-radius: 32px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.24);
+      background: transparent;
+    }
+    .home-animated-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle-home), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradientHome 4s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .home-animated-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <>
+      <style>{homeAnimatedBorderStyles}</style>
       <div
         style={{
           width: "100%",
@@ -3784,6 +3954,7 @@ function HomePage({ onNavigate }) {
         }}
       >
         <div
+          className="home-animated-card"
           style={{
             background:
               "linear-gradient(135deg, rgba(37,99,235,0.25), rgba(15,23,42,0.95))",
@@ -3842,7 +4013,8 @@ function HomePage({ onNavigate }) {
               collaboration opportunities.
             </p>
 
-            <div
+            <form
+              onSubmit={handleMembershipSubmit}
               style={{
                 display: "flex",
                 gap: "20px",
@@ -3851,6 +4023,8 @@ function HomePage({ onNavigate }) {
             >
               <input
                 type="email"
+                value={memberEmail}
+                onChange={(e) => setMemberEmail(e.target.value)}
                 placeholder="Enter your email"
                 style={{
                   flex: 1,
@@ -3865,8 +4039,21 @@ function HomePage({ onNavigate }) {
                 }}
               />
 
-              <button style={primaryButton}>Become A Member</button>
-            </div>
+              <button type="submit" style={{ ...primaryButton, border: "none" }} disabled={memberStatus === "loading"}>
+                {memberStatus === "loading" ? "Joining..." : "Become A Member"}
+              </button>
+            </form>
+            {memberMessage ? (
+              <p
+                style={{
+                  marginTop: "14px",
+                  color: memberStatus === "success" ? "#86EFAC" : "#FCA5A5",
+                  fontSize: "15px",
+                }}
+              >
+                {memberMessage}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>
@@ -3897,36 +4084,6 @@ function HomePage({ onNavigate }) {
             position: "relative",
           }}
         >
-          <button
-            onClick={prevTestimonials}
-            style={{
-              ...sliderButton,
-              position: "absolute",
-              left: "8px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 5,
-            }}
-            aria-label="Previous testimonials"
-          >
-            ←
-          </button>
-
-          <button
-            onClick={nextTestimonials}
-            style={{
-              ...sliderButton,
-              position: "absolute",
-              right: "8px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 5,
-            }}
-            aria-label="Next testimonials"
-          >
-            →
-          </button>
-
           <div
             className="testimonial-grid"
             style={{
@@ -3946,7 +4103,7 @@ function HomePage({ onNavigate }) {
                   position: "relative",
                   overflow: "hidden",
                 }}
-                className="premium-testimonial-card"
+                className="premium-testimonial-card home-animated-card"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-8px) scale(1.01)";
                   e.currentTarget.style.borderColor = "rgba(96,165,250,0.3)";
@@ -4031,7 +4188,7 @@ function HomePage({ onNavigate }) {
   );
 }
 
-/* ---------------- SERVICES PAGE (unchanged, already has premium borders) ---------------- */
+/* ---------------- SERVICES PAGE ---------------- */
 
 function ServicesPage() {
   const services = [
@@ -4182,7 +4339,7 @@ function ServicesPage() {
     }
   `;
 
-  const primaryButton = {
+  const primaryButtonLocal = {
     display: "inline-block",
     padding: "12px 24px",
     background: "linear-gradient(135deg, #60A5FA 0%, #A855F7 100%)",
@@ -4248,8 +4405,9 @@ function ServicesPage() {
         <div
           style={{
             display: "flex",
-            flexWrap: "nowrap",
+            flexWrap: "wrap",
             gap: "30px",
+            justifyContent: "center",
           }}
         >
           {services.map((service, idx) => (
@@ -4257,8 +4415,8 @@ function ServicesPage() {
               key={idx}
               className="premium-border-card"
               style={{
-                flex: "1 1 0%",
-                minWidth: 0,
+                flex: "1 1 280px",
+                minWidth: "250px",
                 padding: "32px",
                 display: "flex",
                 flexDirection: "column",
@@ -4325,7 +4483,7 @@ function ServicesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  ...primaryButton,
+                  ...primaryButtonLocal,
                   textAlign: "center",
                   textDecoration: "none",
                   marginTop: "auto",
@@ -4341,7 +4499,7 @@ function ServicesPage() {
   );
 }
 
-/* ---------------- CONTACT PAGE - PREMIUM OVERHAUL (unchanged) ---------------- */
+/* ---------------- CONTACT PAGE ---------------- */
 
 function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -4353,9 +4511,28 @@ function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const subject = `Website enquiry from ${formData.name || "a visitor"}`;
+    const body = [
+      `Name: ${formData.name || ""}`,
+      `Email: ${formData.email || ""}`,
+      "",
+      `Message:\n${formData.message || ""}`,
+    ].join("\n");
+
+    window.location.href = `mailto:impactqi@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
   };
+
+  const assetMapItems = [
+    { title: "Who We Are", value: "Impact-led research, film and digital strategy" },
+    { title: "Where We Worked", value: "NHS, education, communities and public sector partners" },
+    { title: "What We Built", value: "Campaign films, evidence reports and automation systems" },
+    { title: "What We Deliver", value: "Insight, storytelling, engagement and service transformation" },
+  ];
+
+  const assetMapEmbedUrl = "https://www.google.com/maps?q=London%2C%20United%20Kingdom&z=6&output=embed";
 
   return (
     <section
@@ -4434,13 +4611,13 @@ function ContactPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "60px",
-            alignItems: "start",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            gap: "32px",
+            alignItems: "stretch",
           }}
           className="contact-grid"
         >
-          <div>
+          <div style={{ display: "grid", gap: "24px", alignItems: "stretch" }}>
             <div
               style={{
                 background: "rgba(255,255,255,0.05)",
@@ -4448,7 +4625,6 @@ function ContactPage() {
                 borderRadius: "36px",
                 border: "1px solid rgba(255,255,255,0.08)",
                 padding: "40px",
-                marginBottom: "32px",
                 transition: "transform 0.3s, box-shadow 0.3s",
                 position: "relative",
                 overflow: "hidden",
@@ -4563,9 +4739,11 @@ function ContactPage() {
               </div>
               <div>
                 <p style={{ color: "#60A5FA", marginBottom: "8px", fontWeight: 600 }}>Follow Us</p>
-                <div style={{ display: "flex", gap: "20px" }}>
+                <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
@@ -4573,20 +4751,24 @@ function ContactPage() {
                     LinkedIn
                   </a>
                   <a
-                    href="#"
+                    href="https://x.com/ourimpactldn"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    Twitter/X
+                    X @ourimpactldn
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/ourimpactldn"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    GitHub
+                    Instagram @ourimpactldn
                   </a>
                 </div>
               </div>
@@ -4623,9 +4805,41 @@ function ContactPage() {
                 Request a Quote →
               </a>
             </div>
+
+            <div
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(16px)",
+                borderRadius: "36px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "40px",
+              }}
+            >
+              <h2 style={{ fontSize: "28px", marginBottom: "20px", letterSpacing: "-1px" }}>
+                Where to Find Us
+              </h2>
+              <div
+                style={{
+                  height: "320px",
+                  borderRadius: "24px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <iframe
+                  title="Google Map embed"
+                  src={assetMapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
           </div>
 
-          <div>
+          <div style={{ display: "grid", gap: "24px", alignItems: "stretch" }}>
             <div
               style={{
                 background: "rgba(255,255,255,0.05)",
@@ -4661,8 +4875,7 @@ function ContactPage() {
                 Book a Free Consultation
               </h2>
               <p style={{ color: "#CBD5E1", marginBottom: "28px", lineHeight: "1.8" }}>
-                Schedule a 30‑minute discovery call to discuss your needs and explore how we can
-                help.
+                Schedule a 30‑minute discovery call to discuss your needs and explore how we can help.
               </p>
               <a
                 href="https://calendly.com/ourimpactldn/30min"
@@ -4841,364 +5054,9 @@ function ContactPage() {
 }
 
 /* ---------------- FLOATING CHAT WIDGET ---------------- */
+
 function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem("chatMessages");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {}
-    }
-    return [
-      {
-        role: "bot",
-        text: "Hello. I'm the Impact QI AI Assistant. Ask me about publications, research, public health, documentaries, widening participation, or automation projects.",
-        timestamp: Date.now(),
-      },
-    ];
-  });
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
-  }, [messages]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
-
-  useEffect(() => {
-    if (isOpen) setTimeout(() => inputRef.current?.focus(), 200);
-  }, [isOpen]);
-
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
-
-    const userMessage = input.trim();
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", text: userMessage, timestamp: Date.now() },
-    ]);
-    setInput("");
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "bot",
-          text: data.reply || "No response received.",
-          timestamp: Date.now(),
-        },
-      ]);
-    } catch (err) {
-      console.error("Chat fetch error:", err);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "bot",
-          text: `Error: ${err.message}. Check console for details.`,
-          timestamp: Date.now(),
-        },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") sendMessage();
-    if (e.key === "Escape") setIsOpen(false);
-  };
-
-  const clearChat = () => {
-    setMessages([
-      {
-        role: "bot",
-        text: "Chat cleared. Ask me anything!",
-        timestamp: Date.now(),
-      },
-    ]);
-  };
-
-  const formatTime = (timestamp) =>
-    new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-  return (
-    <div style={{ position: "fixed", bottom: "24px", right: "24px", zIndex: 1000 }}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Open chat"
-        style={{
-          width: "60px",
-          height: "60px",
-          borderRadius: "30px",
-          background: "linear-gradient(135deg, #2563EB, #60A5FA)",
-          border: "none",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "transform 0.2s",
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-      >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      </button>
-
-      {isOpen && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "80px",
-            right: "0",
-            width: "380px",
-            maxWidth: "calc(100vw - 48px)",
-            height: "560px",
-            background: "#0A1222",
-            borderRadius: "24px",
-            border: "1px solid rgba(96,165,250,0.4)",
-            boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-            animation: "fadeInUp 0.2s ease-out",
-          }}
-        >
-          <div
-            style={{
-              padding: "16px 20px",
-              background: "rgba(37,99,235,0.15)",
-              borderBottom: "1px solid rgba(255,255,255,0.1)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "5px",
-                  background: "#60A5FA",
-                  boxShadow: "0 0 8px #60A5FA",
-                }}
-              />
-              <span style={{ fontWeight: "bold", color: "#93C5FD" }}>Impact QI AI</span>
-            </div>
-            <div style={{ display: "flex", gap: "12px" }}>
-              <button
-                onClick={clearChat}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#94A3B8",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                }}
-                title="Clear chat"
-              >
-                🗑️
-              </button>
-              <button
-                onClick={() => setIsOpen(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#CBD5E1",
-                  cursor: "pointer",
-                  fontSize: "20px",
-                }}
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              overflowY: "auto",
-              padding: "16px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-            }}
-          >
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: msg.role === "user" ? "flex-end" : "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    maxWidth: "85%",
-                    padding: "10px 14px",
-                    borderRadius: "18px",
-                    background:
-                      msg.role === "user"
-                        ? "linear-gradient(135deg, #2563EB, #60A5FA)"
-                        : "rgba(255,255,255,0.08)",
-                    color: "white",
-                    fontSize: "14px",
-                    lineHeight: "1.4",
-                    wordWrap: "break-word",
-                  }}
-                >
-                  {msg.text}
-                </div>
-                <span
-                  style={{
-                    fontSize: "10px",
-                    color: "#64748B",
-                    marginTop: "4px",
-                    marginLeft: msg.role === "user" ? 0 : "8px",
-                    marginRight: msg.role === "user" ? "8px" : 0,
-                  }}
-                >
-                  {msg.timestamp ? formatTime(msg.timestamp) : ""}
-                </span>
-              </div>
-            ))}
-            {loading && (
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "8px" }}
-              >
-                <div
-                  style={{
-                    background: "rgba(255,255,255,0.08)",
-                    padding: "10px 14px",
-                    borderRadius: "18px",
-                    display: "flex",
-                    gap: "4px",
-                  }}
-                >
-                  <span
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      background: "#93C5FD",
-                      borderRadius: "4px",
-                      animation: "bounce 1.4s infinite ease-in-out",
-                    }}
-                  />
-                  <span
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      background: "#93C5FD",
-                      borderRadius: "4px",
-                      animation: "bounce 1.4s infinite ease-in-out 0.2s",
-                    }}
-                  />
-                  <span
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      background: "#93C5FD",
-                      borderRadius: "4px",
-                      animation: "bounce 1.4s infinite ease-in-out 0.4s",
-                    }}
-                  />
-                </div>
-                <span style={{ fontSize: "12px", color: "#94A3B8" }}>Thinking...</span>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          <div
-            style={{
-              padding: "12px 16px",
-              borderTop: "1px solid rgba(255,255,255,0.1)",
-              background: "rgba(0,0,0,0.2)",
-              display: "flex",
-              gap: "10px",
-            }}
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyPress}
-              placeholder="Ask a question..."
-              style={{
-                flex: 1,
-                padding: "12px 16px",
-                borderRadius: "30px",
-                border: "1px solid rgba(255,255,255,0.2)",
-                background: "rgba(255,255,255,0.05)",
-                color: "white",
-                outline: "none",
-                fontSize: "14px",
-              }}
-            />
-            <button
-              onClick={sendMessage}
-              disabled={loading}
-              style={{
-                background: "linear-gradient(135deg, #2563EB, #60A5FA)",
-                border: "none",
-                borderRadius: "30px",
-                padding: "10px 20px",
-                color: "white",
-                fontWeight: "bold",
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.6 : 1,
-              }}
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        @keyframes bounce {
-          0%, 60%, 100% {
-            transform: translateY(0);
-          }
-          30% {
-            transform: translateY(-6px);
-          }
-        }
-      `}</style>
-    </div>
-  );
+  return <Chatbot />;
 }
 
 /* ---------------- APP ---------------- */
