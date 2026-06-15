@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 const quickPrompts = [
-  "What services do you offer?",
   "Can you explain your automation work?",
   "How do you support film and storytelling?",
   "What about research and evaluation?",
@@ -156,7 +155,7 @@ export default function Chatbot() {
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)",
           }}
         >
-          IQ
+        QI
         </div>
         <div style={{ textAlign: "left", lineHeight: 1.2 }}>
           <div style={{ fontWeight: 800, fontSize: 14 }}>Impact QI</div>

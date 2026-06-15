@@ -1979,7 +1979,6 @@ function AutomationAIPage() {
         >
           Automation AI
         </p>
-        <section id="automation"></section>
         <h1
           style={{
             fontSize: "84px",
