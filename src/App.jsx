@@ -573,6 +573,7 @@ function SequentialStats({ stats, start }) {
 /* ---------------- GIF DECK ---------------- */
 
 function GifDeck() {
+  const isMobile = window.innerWidth < 768;
   const gifs = [
     {
       src: "/hero-1.gif",
@@ -630,7 +631,7 @@ function GifDeck() {
         style={{
           position: "relative",
           width: "100%",
-          height: "850px",
+          height: isMobile ? "520px" : "850px",
         }}
       >
         {gifs.map((item, index) => {
@@ -701,8 +702,8 @@ function GifDeck() {
               <div
                 style={{
                   position: "absolute",
-                  top: "22px",
-                  left: "22px",
+                 top: isMobile ? "12px" : "22px",
+left: isMobile ? "12px" : "22px",
                   zIndex: 8,
                   display: "inline-flex",
                   alignItems: "center",
@@ -756,9 +757,9 @@ function GifDeck() {
           key={activeIndex}
           style={{
             position: "absolute",
-            bottom: "40px",
-            left: "-60px",
-            width: "410px",
+            bottom: isMobile ? "20px" : "40px",
+left: isMobile ? "10px" : "-60px",
+width: isMobile ? "calc(100% - 20px)" : "410px",
             zIndex: 20,
             borderRadius: "30px",
             padding: "1.5px",
@@ -773,7 +774,9 @@ function GifDeck() {
           <div
             style={{
               borderRadius: "28px",
-              padding: "28px 28px 26px",
+              padding: isMobile
+  ? "18px"
+  : "28px 28px 26px",
               background:
                 "linear-gradient(180deg, rgba(14,23,38,0.88), rgba(8,15,28,0.92))",
               backdropFilter: "blur(24px)",
@@ -856,7 +859,11 @@ function GifDeck() {
                 position: "relative",
                 zIndex: 2,
                 margin: 0,
-                fontSize: currentHero.icon === "film" ? "48px" : "56px",
+                fontSize: isMobile
+  ? "34px"
+  : currentHero.icon === "film"
+  ? "48px"
+  : "56px",
                 lineHeight: 1.02,
                 color: "#F8FAFC",
                 textShadow: "0 0 24px rgba(96,165,250,0.12)",
@@ -3223,9 +3230,31 @@ function TrustBar() {
 /* ---------------- HOME PAGE ---------------- */
 
 function HomePage({ onNavigate }) {
+  const [device, setDevice] = useState("desktop");
+
+useEffect(() => {
+  const checkDevice = () => {
+    if (window.innerWidth <= 768) {
+      setDevice("mobile");
+    } else if (window.innerWidth <= 1200) {
+      setDevice("tablet");
+    } else {
+      setDevice("desktop");
+    }
+  };
+
+  checkDevice();
+
+  window.addEventListener("resize", checkDevice);
+
+  return () => {
+    window.removeEventListener("resize", checkDevice);
+  };
+}, []);
   const statsRef = useRef(null);
   const [startStats, setStartStats] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const isMobile = window.innerWidth < 768;
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -3696,29 +3725,6 @@ function HomePage({ onNavigate }) {
   return (
     <>
       <style>{homeAnimatedBorderStyles}</style>
-      <div
-        style={{
-          width: "100%",
-          padding: "14px 80px",
-          marginTop: "108px",
-          background: "rgba(255,255,255,0.03)",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          borderBottom: "1px solid rgba(255,255,255,0.05)",
-          display: "flex",
-          gap: "45px",
-          color: "#CBD5E1",
-          fontSize: "14px",
-          backdropFilter: "blur(12px)",
-          boxSizing: "border-box",
-          flexWrap: "wrap",
-        }}
-      >
-        <span>● AI Systems Active</span>
-        <span>● Workforce Analytics Online</span>
-        <span>● Equity Reporting Enabled</span>
-        <span>● Community Intelligence Live</span>
-      </div>
-
       <section
         style={{
           minHeight: "100vh",
@@ -3816,13 +3822,13 @@ function HomePage({ onNavigate }) {
                   onFocus={() => searchTerm.length >= 2 && setShowResults(true)}
                   style={{
                     flex: 1,
-                    padding: "24px 28px",
+                   padding: window.innerWidth < 768 ? "16px 18px" : "24px 28px",
                     borderRadius: "20px",
                     border: "1px solid rgba(255,255,255,0.08)",
                     background: "rgba(255,255,255,0.06)",
                     backdropFilter: "blur(12px)",
                     color: "white",
-                    fontSize: "17px",
+                    fontSize: window.innerWidth < 768 ? "15px" : "17px",
                     outline: "none",
                     boxShadow: "0 15px 40px rgba(0,0,0,0.25)",
                   }}
@@ -3925,7 +3931,10 @@ function HomePage({ onNavigate }) {
               className="stats-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                gridTemplateColumns:
+  device === "mobile"
+    ? "1fr"
+    : "repeat(3, minmax(0, 1fr))",
                 gap: "22px",
                 maxWidth: "980px",
                 marginTop: "38px",
@@ -3948,7 +3957,10 @@ function HomePage({ onNavigate }) {
       <section
         style={{
           width: "100%",
-          padding: "0 80px 120px",
+          padding:
+  device === "mobile"
+    ? "0 20px 80px"
+    : "0 80px 120px",
           boxSizing: "border-box",
         }}
       >
@@ -5059,10 +5071,20 @@ function ChatWidget() {
 }
 
 /* ---------------- APP ---------------- */
-
+const mobileMenuItem = {
+  width: "100%",
+  padding: "14px 18px",
+  textAlign: "left",
+  background: "transparent",
+  border: "none",
+  color: "white",
+  cursor: "pointer",
+  fontSize: "15px",
+};
 export default function App() {
   const [activePage, setActivePage] = useState("home");
-
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const isMobile = window.innerWidth < 768;
   const navItemStyle = (page) => ({
     color: activePage === page ? "#93C5FD" : "#CBD5E1",
     textDecoration: "none",
@@ -5230,7 +5252,6 @@ export default function App() {
               objectFit: "contain",
             }}
           />
-
           <h1
             style={{
               margin: 0,
@@ -5242,14 +5263,30 @@ export default function App() {
             ImpactQi
           </h1>
         </div>
-
-        <div
-          className="main-nav"
-          style={{
-            display: "flex",
-            gap: "40px",
-          }}
-        >
+        {isMobile && (
+  <button
+    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    style={{
+      background: "rgba(255,255,255,0.08)",
+      border: "1px solid rgba(255,255,255,0.1)",
+      borderRadius: "12px",
+      padding: "10px 14px",
+      color: "white",
+      cursor: "pointer",
+      fontSize: "16px",
+    }}
+  >
+    ☰ Menu
+  </button>
+)}
+{!isMobile && (
+  <div
+    className="main-nav"
+    style={{
+      display: "flex",
+      gap: "40px",
+    }}
+  >
           <button onClick={() => setActivePage("home")} style={navButtonReset}>
             <span style={navItemStyle("home")}>Home</span>
           </button>
@@ -5266,10 +5303,88 @@ export default function App() {
             <span style={navItemStyle("research")}>Research</span>
           </button>
           <button onClick={() => setActivePage("contact")} style={navButtonReset}>
-            <span style={navItemStyle("contact")}>Contact</span>
+  <span style={navItemStyle("contact")}>Contact</span>
+</button>
+  </div>
+)}
+      </nav>
+
+      {isMobile && mobileMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "95px",
+            right: "20px",
+            width: "220px",
+            background: "#07111F",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: "16px",
+            overflow: "hidden",
+            zIndex: 9999,
+            boxShadow: "0 20px 50px rgba(0,0,0,0.4)",
+          }}
+        >
+          <button
+            onClick={() => {
+              setActivePage("home");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Home
+          </button>
+
+          <button
+            onClick={() => {
+              setActivePage("services");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Services
+          </button>
+
+          <button
+            onClick={() => {
+              setActivePage("automation");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Automation & AI
+          </button>
+
+          <button
+            onClick={() => {
+              setActivePage("film");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Film Project
+          </button>
+
+          <button
+            onClick={() => {
+              setActivePage("research");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Research
+          </button>
+
+          <button
+            onClick={() => {
+              setActivePage("contact");
+              setMobileMenuOpen(false);
+            }}
+            style={mobileMenuItem}
+          >
+            Contact
           </button>
         </div>
-      </nav>
+      )}
 
       {activePage === "research" ? (
         <ResearchPage />
