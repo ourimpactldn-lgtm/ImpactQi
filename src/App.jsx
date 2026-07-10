@@ -4719,6 +4719,16 @@ function GovernancePage() {
                     <li>Audit-ready evaluation reports</li>
                     <li>Quality assurance playbooks</li>
                   </ul>
+
+                  <div style={{ marginTop: "18px" }}>
+                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px" }}>
+                      <img
+                        src="/governance-services-illustration.jpg"
+                        alt="Illustration showing governance, people and systems"
+                        style={{ width: "100%", height: "auto", maxHeight: "220px", objectFit: "cover", display: "block", borderRadius: "10px" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
