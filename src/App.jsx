@@ -4750,7 +4750,7 @@ function GovernancePage() {
             ))}
           </div>
 
-          <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", overflow: "hidden", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "0px" }}>
+          <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "0px" }}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", alignItems: "start" }}>
               <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
