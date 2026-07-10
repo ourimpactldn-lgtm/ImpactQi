@@ -119,6 +119,36 @@ export default function Chatbot() {
   const formatTime = (timestamp) =>
     new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+  function linkify(text) {
+    if (!text) return null;
+    const urlRegex = /https?:\/\/[^"]+/i;
+    const parts = text.split(/(https?:\/\/[^\s]+)/g);
+    return parts.map((part, i) => {
+      if (!part) return null;
+      if (part.match(/https?:\/\//i)) {
+        // Render friendly labels for known forms/quote links
+        try {
+          const urlObj = new URL(part);
+          const hostname = urlObj.hostname || "";
+          const isForms = hostname.includes("forms.office.com") || hostname.includes("office.com");
+          const label = isForms ? "Request a Quote" : null;
+          return (
+            <a key={i} href={part} target="_blank" rel="noopener noreferrer" aria-label={label || part} style={{ color: "#93C5FD", textDecoration: "underline" }}>
+              {label || part}
+            </a>
+          );
+        } catch (e) {
+          return (
+            <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: "#93C5FD", textDecoration: "underline" }}>
+              {part}
+            </a>
+          );
+        }
+      }
+      return <span key={i}>{part}</span>;
+    });
+  }
+
   return (
     <div style={{ position: "fixed", bottom: 20, right: 20, zIndex: 1100 }}>
       <button
@@ -206,7 +236,7 @@ export default function Chatbot() {
                       whiteSpace: "pre-wrap",
                     }}
                   >
-                    {message.text}
+                    {linkify(message.text) || message.text}
                   </div>
                   <div style={{ fontSize: 11, color: "#64748B", marginTop: 4, textAlign: message.role === "user" ? "right" : "left" }}>{message.timestamp ? formatTime(message.timestamp) : ""}</div>
                 </div>

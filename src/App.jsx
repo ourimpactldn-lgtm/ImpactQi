@@ -1,4 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+
+// Small hook to detect mobile viewport reliably and avoid direct window reads
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < 768 : false);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    handler();
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
 import Chatbot from "./components/Chatbot";
 
 /* ---------------- GLOBAL STYLES (shared across components) ---------------- */
@@ -573,7 +585,7 @@ function SequentialStats({ stats, start }) {
 /* ---------------- GIF DECK ---------------- */
 
 function GifDeck() {
-  const isMobile = window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const gifs = [
     {
       src: "/hero-1.gif",
@@ -3254,7 +3266,7 @@ useEffect(() => {
   const statsRef = useRef(null);
   const [startStats, setStartStats] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const isMobile = window.innerWidth < 768;
+  const isMobile = device === "mobile";
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -3729,7 +3741,7 @@ useEffect(() => {
         style={{
           minHeight: "100vh",
           width: "100%",
-          padding: "120px 80px 100px",
+          padding: device === "mobile" ? "80px 20px 60px" : "120px 80px 100px",
           position: "relative",
           overflow: "hidden",
           boxSizing: "border-box",
@@ -3738,26 +3750,26 @@ useEffect(() => {
         <div
           style={{
             position: "absolute",
-            top: "80px",
-            left: "-250px",
-            width: "700px",
-            height: "700px",
+            top: device === "mobile" ? "40px" : "80px",
+            left: device === "mobile" ? "-120px" : "-250px",
+            width: device === "mobile" ? "320px" : "700px",
+            height: device === "mobile" ? "320px" : "700px",
             background:
               "radial-gradient(circle, rgba(0,94,184,0.35) 0%, rgba(0,94,184,0) 70%)",
-            filter: "blur(90px)",
+            filter: device === "mobile" ? "blur(36px)" : "blur(90px)",
             animation: "glow 6s infinite ease-in-out",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: "-250px",
-            right: "-250px",
-            width: "800px",
-            height: "800px",
+            bottom: device === "mobile" ? "-120px" : "-250px",
+            right: device === "mobile" ? "-120px" : "-250px",
+            width: device === "mobile" ? "420px" : "800px",
+            height: device === "mobile" ? "420px" : "800px",
             background:
               "radial-gradient(circle, rgba(59,130,246,0.28) 0%, rgba(59,130,246,0) 70%)",
-            filter: "blur(90px)",
+            filter: device === "mobile" ? "blur(48px)" : "blur(90px)",
             animation: "glow 8s infinite ease-in-out",
           }}
         />
@@ -3820,15 +3832,15 @@ useEffect(() => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={handleKeyDown}
                   onFocus={() => searchTerm.length >= 2 && setShowResults(true)}
-                  style={{
+                    style={{
                     flex: 1,
-                   padding: window.innerWidth < 768 ? "16px 18px" : "24px 28px",
+                   padding: isMobile ? "16px 18px" : "24px 28px",
                     borderRadius: "20px",
                     border: "1px solid rgba(255,255,255,0.08)",
                     background: "rgba(255,255,255,0.06)",
                     backdropFilter: "blur(12px)",
                     color: "white",
-                    fontSize: window.innerWidth < 768 ? "15px" : "17px",
+                    fontSize: isMobile ? "15px" : "17px",
                     outline: "none",
                     boxShadow: "0 15px 40px rgba(0,0,0,0.25)",
                   }}
@@ -5082,7 +5094,7 @@ const mobileMenuItem = {
 export default function App() {
   const [activePage, setActivePage] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-const isMobile = window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const navItemStyle = (page) => ({
     color: activePage === page ? "#93C5FD" : "#CBD5E1",
     textDecoration: "none",
