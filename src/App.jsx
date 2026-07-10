@@ -4675,27 +4675,33 @@ function GovernancePage() {
       border-radius: 28px;
       transition: transform 0.3s, box-shadow 0.3s;
       isolation: isolate;
-      overflow: hidden;
+      overflow: visible;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 18px 50px rgba(2, 6, 23, 0.38);
     }
     .premium-border-card::before {
       content: '';
       position: absolute;
-      inset: -2px;
+      inset: -3px;
       border-radius: inherit;
-      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
-      animation: rotateGradient 4s linear infinite;
+      background: conic-gradient(from var(--angle), rgba(96,165,250,0.98), rgba(168,85,247,0.98), rgba(236,72,153,0.95), rgba(249,115,22,0.9), rgba(96,165,250,0.98));
+      animation: rotateGradient 2.2s linear infinite;
       z-index: -2;
+      filter: blur(0.3px) saturate(1.2);
     }
     .premium-border-card::after {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: 1px;
       border-radius: inherit;
-      background: rgba(15, 22, 34, 0.96);
+      background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));
       z-index: -1;
     }
+    .premium-border-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.22), 0 20px 55px rgba(2, 6, 23, 0.5), 0 0 34px rgba(96,165,250,0.16);
+    }
     .premium-border-card:hover::before {
-      filter: blur(3px);
+      filter: blur(2px) saturate(1.3);
       transition: filter 0.3s ease;
     }
   `;
@@ -4750,95 +4756,93 @@ function GovernancePage() {
             ))}
           </div>
 
-          <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "0px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", alignItems: "start" }}>
-              <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-                <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
-                <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
-                  <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
-                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "180px" : "220px" }}>
-                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
-                        <img
-                          src="/governance-services-illustration.JPG"
-                          alt="Illustration showing governance, people and systems"
-                          style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}
-                        />
-                      </div>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", alignItems: "start", marginBottom: "0px" }}>
+            <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
+              <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
+                <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
+                  <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "180px" : "220px" }}>
+                    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
+                      <img
+                        src="/governance-services-illustration.JPG"
+                        alt="Illustration showing governance, people and systems"
+                        style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}
+                      />
                     </div>
                   </div>
+                </div>
 
-                  <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
-                  <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
-                    <li>AI policy and maturity assessment</li>
-                    <li>Governance operating models</li>
-                    <li>Audit-ready evaluation reports</li>
-                    <li>Quality assurance playbooks</li>
-                  </ul>
+                <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
+                <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
+                  <li>AI policy and maturity assessment</li>
+                  <li>Governance operating models</li>
+                  <li>Audit-ready evaluation reports</li>
+                  <li>Quality assurance playbooks</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <div>
+                <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
+                <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
+                  <li>Governance design and maturity assessment</li>
+                  <li>Audit planning, execution and reporting</li>
+                  <li>Quality checks for data, models and UX</li>
+                  <li>Training and governance handover for operations teams</li>
+                  <li>Testing and validation of AI systems</li>
+                  <li>Playground preparation and sandbox/pilot setup</li>
+                  <li>Evaluation &amp; Theory of Change modelling</li>
+                </ul>
+              </div>
+
+              <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
+                <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>
+                  <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>
+                </div>
+                <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Audit-ready outcomes</strong>
+                  <span style={{ color: "#CBD5E1" }}>We support evidence-based audit trails and evaluation reporting for safer decision-making.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="premium-border-card" style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
+              <div style={{ marginBottom: "18px" }}>
+                <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "280px" }}>
+                  <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }} />
                 </div>
               </div>
 
-              <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-                <div>
-                  <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
-                  <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
-                    <li>Governance design and maturity assessment</li>
-                    <li>Audit planning, execution and reporting</li>
-                    <li>Quality checks for data, models and UX</li>
-                    <li>Training and governance handover for operations teams</li>
-                    <li>Testing and validation of AI systems</li>
-                    <li>Playground preparation and sandbox/pilot setup</li>
-                    <li>Evaluation &amp; Theory of Change modelling</li>
-                  </ul>
+              <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Reduce legal, regulatory and reputational risk</strong>
+                  <span style={{ color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions by establishing policy, roles, and clear audit trails that align with sector regulations and public expectations.</span>
                 </div>
 
-                <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
-                  <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>
-                    <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>
-                  </div>
-                  <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Audit-ready outcomes</strong>
-                    <span style={{ color: "#CBD5E1" }}>We support evidence-based audit trails and evaluation reporting for safer decision-making.</span>
-                  </div>
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Explainable outcomes</strong>
+                  <span style={{ color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors through transparent documentation, decision logging and accessible explanations of model behaviour.</span>
+                </div>
+
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Consistent performance</strong>
+                  <span style={{ color: "#CBD5E1" }}>Keep performance consistent as systems learn and change by embedding monitoring, drift detection and scheduled reviews into operational routines.</span>
+                </div>
+
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Higher quality handoffs</strong>
+                  <span style={{ color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs with controlled releases, integration tests and clear handover documentation to reduce operational risk.</span>
                 </div>
               </div>
 
-              <div className="premium-border-card" style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
-                <div style={{ marginBottom: "18px" }}>
-                  <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "280px" }}>
-                    <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }} />
-                  </div>
-                </div>
-
-                <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Reduce legal, regulatory and reputational risk</strong>
-                    <span style={{ color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions by establishing policy, roles, and clear audit trails that align with sector regulations and public expectations.</span>
-                  </div>
-
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Explainable outcomes</strong>
-                    <span style={{ color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors through transparent documentation, decision logging and accessible explanations of model behaviour.</span>
-                  </div>
-
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Consistent performance</strong>
-                    <span style={{ color: "#CBD5E1" }}>Keep performance consistent as systems learn and change by embedding monitoring, drift detection and scheduled reviews into operational routines.</span>
-                  </div>
-
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Higher quality handoffs</strong>
-                    <span style={{ color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs with controlled releases, integration tests and clear handover documentation to reduce operational risk.</span>
-                  </div>
-                </div>
-
-                <div style={{ marginTop: "12px", display: "flex", justifyContent: isMobile ? "stretch" : "flex-start" }}>
-                  <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "12px 22px", borderRadius: "40px", boxShadow: "0 12px 28px rgba(37,99,235,0.18), 0 4px 12px rgba(59,130,246,0.08)" }}>
-                    Find out more →
-                  </a>
-                </div>
+              <div style={{ marginTop: "12px", display: "flex", justifyContent: isMobile ? "stretch" : "flex-start" }}>
+                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "12px 22px", borderRadius: "40px", boxShadow: "0 12px 28px rgba(37,99,235,0.18), 0 4px 12px rgba(59,130,246,0.08)" }}>
+                  Find out more →
+                </a>
               </div>
             </div>
           </div>
