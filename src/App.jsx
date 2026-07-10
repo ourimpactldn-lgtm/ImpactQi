@@ -3808,7 +3808,7 @@ useEffect(() => {
                 marginBottom: "45px",
               }}
             >
-              Transforming complex processes into intelligent digital services through automation, analytics and AI, reducing administrative burden, improving visibility and enabling better decisions.
+              ImpactQi helps organisations move from fragmented processes to elegant, measurable digital solutions. We combine intelligent automation, evidence-led research, public health storytelling, and capability building to create lasting operational value.
             </p>
 
             <div ref={searchContainerRef} style={{ position: "relative", width: "100%", maxWidth: "720px", marginBottom: "40px" }}>
@@ -3916,13 +3916,13 @@ useEffect(() => {
                 style={primaryButton}
                 onClick={() => onNavigate("services")}
               >
-                Book a Consultation
+                Book a Strategic Consultation
               </button>
               <button
                 style={secondaryButton}
                 onClick={() => onNavigate("automation")}
               >
-                View Case Studies
+                Explore Our Work
               </button>
             </div>
             <TrustBar />
@@ -4007,7 +4007,7 @@ useEffect(() => {
                 marginBottom: "30px",
               }}
             >
-              Join The Intelligent Impact Network
+              Join the Intelligent Impact Network
             </h1>
 
             <p
@@ -4019,9 +4019,7 @@ useEffect(() => {
                 maxWidth: "760px",
               }}
             >
-              Access exclusive workforce intelligence, AI insight reports,
-              strategic dashboards, creative health research and cross-sector
-              collaboration opportunities.
+              Gain access to strategic insight, practical AI guidance, research-led perspectives, and curated opportunities to collaborate across health, education, and digital innovation.
             </p>
 
             <form
@@ -4205,8 +4203,8 @@ function ServicesPage() {
   const services = [
     {
       title: "AI Automation & Digital Transformation",
-      description: "Streamline your operations and reduce manual overhead with intelligent workflow automation.",
-      detailedDescription: "We build custom AI solutions that automate repetitive tasks, connect your systems, and provide real-time visibility into your operations. Our approach combines Power Automate, SharePoint, Power BI, and AI agents to create end-to-end digital services that save time and money.",
+      description: "Design intelligent, scalable systems that reduce friction and unlock operational efficiency.",
+      detailedDescription: "We create tailored AI and automation solutions that simplify complex workflows, connect critical systems, and surface real-time insight. By combining Power Automate, SharePoint, Power BI, and intelligent agents, we help organisations modernise delivery with measurable impact.",
       quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
       benefits: [
         "4,160+ annual work hours saved",
@@ -4235,8 +4233,8 @@ function ServicesPage() {
     },
     {
       title: "Film & Documentary Production",
-      description: "Tell your story through powerful, human-centred visual narratives.",
-      detailedDescription: "Our film projects focus on public health, community impact, and social change. We produce documentaries, interviews, and campaign films that amplify underrepresented voices and drive engagement. From concept to final edit, we handle everything.",
+      description: "Create compelling visual stories that inform, persuade, and inspire action.",
+      detailedDescription: "We develop documentary films, interviews, and campaign content that bring public health, community insight, and social impact to life. Our work is rooted in clarity, credibility, and audience connection, helping organisations communicate with depth and conviction.",
       quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
       benefits: [
         "Community-centred documentaries and interviews",
@@ -4260,8 +4258,8 @@ function ServicesPage() {
     },
     {
       title: "Research & Insights",
-      description: "Evidence-based research that drives informed decision-making.",
-      detailedDescription: "We provide high-quality research, evaluation, impact measurement, and strategic reporting services for public, private, and third-sector organisations. From programme evaluations and stakeholder research to evidence reviews and policy analysis, we help clients generate the insights needed to drive improvement and demonstrate impact.",
+      description: "Deliver evidence-led strategies with clarity, rigor, and lasting relevance.",
+      detailedDescription: "We deliver high-quality research, evaluation, impact measurement, and strategic reporting for public, private, and third-sector organisations. From programme evaluations and stakeholder research to evidence reviews and policy analysis, we help clients turn insight into confident action.",
       quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
       benefits: [
         "Independent evaluations",
@@ -4285,8 +4283,8 @@ function ServicesPage() {
     },
     {
       title: "Training & Capability Building",
-      description: "Empowering teams with the knowledge and skills to thrive.",
-      detailedDescription: "We design and deliver bespoke training programmes covering Artificial Intelligence (AI), Equality, Diversity & Inclusion (EDI), digital skills, workforce development, and organisational change. Our interactive workshops equip teams with practical tools, actionable strategies, and the confidence to drive meaningful improvement.",
+      description: "Build confident teams with practical knowledge and future-ready capability.",
+      detailedDescription: "We design bespoke programmes in AI literacy, equality and inclusion, digital skills, and organisational development. Our interactive workshops equip teams with practical tools, strategic thinking, and the confidence to lead meaningful change.",
       quoteLink: "https://forms.office.com/r/qa1Z2eSKM1",
       benefits: [
         "AI & digital transformation training",
