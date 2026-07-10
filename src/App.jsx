@@ -2366,25 +2366,31 @@ function AutomationAIPage() {
             <div
               className="premium-border-card"
               style={{
-                height: "720px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: 0,
                 overflow: "hidden",
+                width: "100%",
+                minHeight: "480px",
+                maxHeight: "780px",
               }}
             >
-              <img
-                src="/nhs-agent.JPG"
-                alt="AI-powered knowledge platform"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#020617"
-                }}
-              />
+              <div style={{ width: "100%", height: "100%", aspectRatio: "16 / 10", overflow: "hidden", display: "block" }}>
+                <img
+                  src="/nhs-agent.JPG"
+                  alt="AI-powered knowledge platform"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    display: "block",
+                    background: "#020617",
+                  }}
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
 
@@ -2446,8 +2452,8 @@ function AutomationAIPage() {
             </div>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: 420 }}>
-                <img src="/automation-training1.jfif" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: 420, aspectRatio: "16 / 10", overflow: "hidden" }}>
+                <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} loading="lazy" />
               </div>
             </div>
           </div>
@@ -5128,6 +5134,53 @@ export default function App() {
   const [activePage, setActivePage] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
+  const mobileMenuRef = useRef(null);
+  const lastFocusedRef = useRef(null);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    if (mobileMenuOpen) {
+      lastFocusedRef.current = document.activeElement;
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKey);
+      // focus first focusable element in menu after open
+      setTimeout(() => {
+        const el = mobileMenuRef.current?.querySelector('button, a, [tabindex]:not([tabindex="-1"])');
+        el?.focus();
+      }, 80);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+      try { lastFocusedRef.current?.focus(); } catch {}
+    };
+  }, [mobileMenuOpen]);
+
+  // focus trap inside mobile menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const el = mobileMenuRef.current;
+    if (!el) return;
+    const focusable = el.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const onKey = (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mobileMenuOpen]);
   const navItemStyle = (page) => ({
     color: activePage === page ? "#93C5FD" : "#CBD5E1",
     textDecoration: "none",
@@ -5150,6 +5203,7 @@ export default function App() {
         color: "white",
         width: "100%",
         minHeight: "100vh",
+        paddingTop: isMobile ? "96px" : undefined,
         overflowX: "hidden",
       }}
     >
@@ -5250,6 +5304,21 @@ export default function App() {
 
             .testimonial-slider-wrap {
               padding: 0 14px !important;
+            }
+            /* Mobile heading adjustments to avoid clipping and reduce size */
+            h1 {
+              font-size: 36px !important;
+              line-height: 1.06 !important;
+            }
+            h2 {
+              font-size: 22px !important;
+            }
+            h1, h2 {
+              scroll-margin-top: 110px;
+            }
+            @keyframes slideInPanel {
+              from { transform: translateX(24px); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
             }
           }
 
@@ -5353,81 +5422,70 @@ export default function App() {
       </nav>
 
       {isMobile && mobileMenuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: "95px",
-            right: "20px",
-            width: "220px",
-            background: "#07111F",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "16px",
-            overflow: "hidden",
-            zIndex: 9999,
-            boxShadow: "0 20px 50px rgba(0,0,0,0.4)",
-          }}
-        >
-          <button
-            onClick={() => {
-              setActivePage("home");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Home
-          </button>
+              <div
+                role="dialog"
+                aria-modal="true"
+                ref={mobileMenuRef}
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  zIndex: 9999,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-end",
+                  background: "rgba(2,6,23,0.52)",
+                  backdropFilter: "blur(8px)",
+                  animation: "fadeIn 220ms ease",
+                }}
+                onClick={(e) => {
+                  if (e.target === mobileMenuRef.current) setMobileMenuOpen(false);
+                }}
+              >
+                <div
+                  style={{
+                    width: "92%",
+                    maxWidth: 420,
+                    height: "100%",
+                    background: "linear-gradient(180deg, rgba(15,22,34,0.98), rgba(7,17,31,0.99))",
+                    boxShadow: "-24px 0 60px rgba(2,6,23,0.6)",
+                    padding: "28px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 18,
+                    transform: "translateX(0)",
+                    animation: "slideInPanel 260ms ease",
+                    animationFillMode: "forwards",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <img src="/logo.png" alt="logo" style={{ width: 48, height: 48, objectFit: "contain" }} />
+                      <div>
+                        <div style={{ fontWeight: 800, fontSize: 18 }}>ImpactQi</div>
+                        <div style={{ fontSize: 12, color: "#93C5FD" }}>Navigate</div>
+                      </div>
+                    </div>
 
-          <button
-            onClick={() => {
-              setActivePage("services");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Services
-          </button>
+                    <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu" style={{ background: "transparent", border: "none", color: "#CBD5E1", fontSize: 28, cursor: "pointer" }}>✕</button>
+                  </div>
 
-          <button
-            onClick={() => {
-              setActivePage("automation");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Automation & AI
-          </button>
+                  <nav style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 12 }}>
+                    <button onClick={() => { setActivePage("home"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>🏠</span>Home</button>
+                    <button onClick={() => { setActivePage("services"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>⚙️</span>Services</button>
+                    <button onClick={() => { setActivePage("automation"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "linear-gradient(90deg,#0f172a,#0b1a2f)", border: "1px solid rgba(96,165,250,0.12)", color: "#93C5FD", fontSize: 18, fontWeight: 800 }}><span style={{ marginRight: 10 }}>🤖</span>Automation & AI</button>
+                    <button onClick={() => { setActivePage("film"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>🎬</span>Film Project</button>
+                    <button onClick={() => { setActivePage("research"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>📚</span>Research</button>
+                    <button onClick={() => { setActivePage("contact"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>✉️</span>Contact</button>
+                  </nav>
 
-          <button
-            onClick={() => {
-              setActivePage("film");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Film Project
-          </button>
-
-          <button
-            onClick={() => {
-              setActivePage("research");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Research
-          </button>
-
-          <button
-            onClick={() => {
-              setActivePage("contact");
-              setMobileMenuOpen(false);
-            }}
-            style={mobileMenuItem}
-          >
-            Contact
-          </button>
-        </div>
-      )}
+                  <div style={{ marginTop: "auto", display: "flex", gap: 12, flexDirection: "column" }}>
+                    <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center" }}>Request a Quote</a>
+                    <a href="/contact" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center" }}>Help & Support</a>
+                    <div style={{ color: "#94A3B8", fontSize: 13, textAlign: "center", paddingTop: 8 }}>Tap outside the panel or press Esc to close</div>
+                  </div>
+                </div>
+              </div>
+            )}
 
       {activePage === "research" ? (
         <ResearchPage />
