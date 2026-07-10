@@ -4709,10 +4709,10 @@ function GovernancePage() {
 
           <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", overflow: "hidden", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "36px" }}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "28px", alignItems: "stretch", gridAutoRows: "1fr" }}>
-              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
                 <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
-                  <div style={{ marginBottom: "18px", display: "flex", justifyContent: "center" }}>
+                  <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
                     <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px", width: "100%" }}>
                       <div style={{ width: "100%", height: "220px", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
                         <img
@@ -4734,7 +4734,7 @@ function GovernancePage() {
                 </div>
               </div>
 
-              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <div>
                   <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
                   <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
@@ -4748,7 +4748,7 @@ function GovernancePage() {
                   </ul>
                 </div>
 
-                <div style={{ display: "grid", gap: "12px", marginTop: "24px" }}>
+                <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
                   <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                     <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>
                     <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>
