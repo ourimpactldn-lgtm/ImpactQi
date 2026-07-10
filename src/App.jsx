@@ -1888,6 +1888,7 @@ function AutomationImageCarousel() {
 }
 
 function AutomationAIPage() {
+  const isMobile = useIsMobile();
   const surfaceCard = {
     background: "rgba(255,255,255,0.05)",
     border: "1px solid rgba(255,255,255,0.08)",
@@ -2363,33 +2364,25 @@ function AutomationAIPage() {
             >
               AI-Powered Knowledge and Service Platforms
             </h2>
-            <div
-              className="premium-border-card"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: 0,
-                overflow: "hidden",
-                width: "100%",
-                minHeight: "480px",
-                maxHeight: "780px",
-              }}
-            >
-              <div style={{ width: "100%", height: "100%", aspectRatio: "16 / 10", overflow: "hidden", display: "block" }}>
-                <img
-                  src="/nhs-agent.JPG"
-                  alt="AI-powered knowledge platform"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "85% center",
-                    display: "block",
-                    background: "#020617",
-                  }}
-                  loading="lazy"
-                />
+            <div className="premium-border-card" style={{ padding: 24 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: 12 }}>
+                {[
+                  "Researcher",
+                  "Analyst",
+                  "Neurodiverse research",
+                  "Interview Questions",
+                  "Work Experience",
+                  "Surveys",
+                  "EDI WP Web Agent",
+                  "EDI & WP Team Chat",
+                ].map((label, i) => (
+                  <div key={label} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 12px", borderRadius: 12, background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))", border: "1px solid rgba(255,255,255,0.04)" }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(90deg,#60A5FA,#A78BFA)", color: "white", fontWeight: 800, fontSize: 12 }}>
+                      {label.split(" ")[0].slice(0,2).toUpperCase()}
+                    </div>
+                    <div style={{ color: "#E2E8F0", fontSize: 14, fontWeight: 700 }}>{label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -2452,9 +2445,9 @@ function AutomationAIPage() {
             </div>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: 420, aspectRatio: "16 / 10", overflow: "hidden" }}>
-                <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} loading="lazy" />
-              </div>
+                  <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: isMobile ? "100%" : 420, aspectRatio: isMobile ? "4 / 3" : "16 / 10", overflow: "hidden", marginTop: isMobile ? 16 : 0 }}>
+                    <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} loading="lazy" />
+                  </div>
             </div>
           </div>
         </div>
@@ -5135,6 +5128,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
   const mobileMenuRef = useRef(null);
+
   const lastFocusedRef = useRef(null);
 
   useEffect(() => {
@@ -5159,6 +5153,8 @@ export default function App() {
       try { lastFocusedRef.current?.focus(); } catch {}
     };
   }, [mobileMenuOpen]);
+
+  const menuVariant = isMobile && activePage === "automation" ? "compact" : "drawer";
 
   // focus trap inside mobile menu
   useEffect(() => {
@@ -5353,7 +5349,13 @@ export default function App() {
             gap: "18px",
             cursor: "pointer",
           }}
-          onClick={() => setActivePage("home")}
+          onClick={() => {
+            if (isMobile) {
+              setMobileMenuOpen(!mobileMenuOpen);
+            } else {
+              setActivePage("home");
+            }
+          }}
         >
           <img
             src="/logo.png"
@@ -5375,22 +5377,7 @@ export default function App() {
             ImpactQi
           </h1>
         </div>
-        {isMobile && (
-  <button
-    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-    style={{
-      background: "rgba(255,255,255,0.08)",
-      border: "1px solid rgba(255,255,255,0.1)",
-      borderRadius: "12px",
-      padding: "10px 14px",
-      color: "white",
-      cursor: "pointer",
-      fontSize: "16px",
-    }}
-  >
-    ☰ Menu
-  </button>
-)}
+        
 {!isMobile && (
   <div
     className="main-nav"
@@ -5422,66 +5409,65 @@ export default function App() {
       </nav>
 
       {isMobile && mobileMenuOpen && (
-              <div
-                role="dialog"
-                aria-modal="true"
-                ref={mobileMenuRef}
-                style={{
-                  position: "fixed",
-                  inset: 0,
-                  zIndex: 9999,
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-end",
-                  background: "rgba(2,6,23,0.52)",
-                  backdropFilter: "blur(8px)",
-                  animation: "fadeIn 220ms ease",
-                }}
-                onClick={(e) => {
-                  if (e.target === mobileMenuRef.current) setMobileMenuOpen(false);
-                }}
-              >
-                <div
-                  style={{
-                    width: "92%",
-                    maxWidth: 420,
-                    height: "100%",
-                    background: "linear-gradient(180deg, rgba(15,22,34,0.98), rgba(7,17,31,0.99))",
-                    boxShadow: "-24px 0 60px rgba(2,6,23,0.6)",
-                    padding: "28px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 18,
-                    transform: "translateX(0)",
-                    animation: "slideInPanel 260ms ease",
-                    animationFillMode: "forwards",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      <img src="/logo.png" alt="logo" style={{ width: 48, height: 48, objectFit: "contain" }} />
+        <div
+          role="dialog"
+          aria-modal="true"
+          ref={mobileMenuRef}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            background: "rgba(2,6,23,0.12)",
+            backdropFilter: "blur(4px)",
+            animation: "fadeIn 220ms ease",
+            paddingTop: "6px",
+          }}
+          onClick={(e) => {
+            if (e.target === mobileMenuRef.current) setMobileMenuOpen(false);
+          }}
+        >
+          <div
+            style={{
+              width: "min(680px,94%)",
+              maxWidth: 680,
+              height: "auto",
+              marginTop: "84px",
+              background: "linear-gradient(180deg, rgba(12,18,28,0.98), rgba(8,14,22,0.99))",
+              boxShadow: "0 30px 70px rgba(2,6,23,0.7)",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              transform: "translateX(0)",
+              animation: "slideInPanel 260ms ease",
+              animationFillMode: "forwards",
+              borderRadius: 20,
+              maxHeight: "80vh",
+              overflow: "auto",
+            }}
+          >
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <div>
                         <div style={{ fontWeight: 800, fontSize: 18 }}>ImpactQi</div>
                         <div style={{ fontSize: 12, color: "#93C5FD" }}>Navigate</div>
                       </div>
                     </div>
 
-                    <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu" style={{ background: "transparent", border: "none", color: "#CBD5E1", fontSize: 28, cursor: "pointer" }}>✕</button>
-                  </div>
-
-                  <nav style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 12 }}>
-                    <button onClick={() => { setActivePage("home"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>🏠</span>Home</button>
-                    <button onClick={() => { setActivePage("services"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>⚙️</span>Services</button>
-                    <button onClick={() => { setActivePage("automation"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "linear-gradient(90deg,#0f172a,#0b1a2f)", border: "1px solid rgba(96,165,250,0.12)", color: "#93C5FD", fontSize: 18, fontWeight: 800 }}><span style={{ marginRight: 10 }}>🤖</span>Automation & AI</button>
-                    <button onClick={() => { setActivePage("film"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>🎬</span>Film Project</button>
-                    <button onClick={() => { setActivePage("research"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>📚</span>Research</button>
-                    <button onClick={() => { setActivePage("contact"); setMobileMenuOpen(false); }} style={{ textAlign: "left", padding: "14px 12px", borderRadius: 12, background: "transparent", border: "1px solid rgba(255,255,255,0.04)", color: "white", fontSize: 18, fontWeight: 700 }}><span style={{ marginRight: 10 }}>✉️</span>Contact</button>
+                  <nav style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 12 }}>
+                    <button onClick={() => { setActivePage("home"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Home</button>
+                    <button onClick={() => { setActivePage("services"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Services</button>
+                    <button onClick={() => { setActivePage("automation"); setMobileMenuOpen(false); }} style={{ ...mobileMenuItem, background: "linear-gradient(90deg,#0f172a,#0b1a2f)", border: "1px solid rgba(96,165,250,0.08)", color: "#93C5FD", fontWeight: 800 }}>Automation & AI</button>
+                    <button onClick={() => { setActivePage("film"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Film Project</button>
+                    <button onClick={() => { setActivePage("research"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Research</button>
+                    <button onClick={() => { setActivePage("contact"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Contact</button>
                   </nav>
 
                   <div style={{ marginTop: "auto", display: "flex", gap: 12, flexDirection: "column" }}>
                     <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center" }}>Request a Quote</a>
                     <a href="/contact" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center" }}>Help & Support</a>
-                    <div style={{ color: "#94A3B8", fontSize: 13, textAlign: "center", paddingTop: 8 }}>Tap outside the panel or press Esc to close</div>
                   </div>
                 </div>
               </div>
