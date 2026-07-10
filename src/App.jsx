@@ -4712,15 +4712,7 @@ function GovernancePage() {
               <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
                 <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
-                  <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
-                  <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
-                    <li>AI policy and maturity assessment</li>
-                    <li>Governance operating models</li>
-                    <li>Audit-ready evaluation reports</li>
-                    <li>Quality assurance playbooks</li>
-                  </ul>
-
-                  <div style={{ marginTop: "18px" }}>
+                  <div style={{ marginBottom: "18px" }}>
                     <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px" }}>
                       <img
                         src="/governance-services-illustration.jpg"
@@ -4729,6 +4721,14 @@ function GovernancePage() {
                       />
                     </div>
                   </div>
+
+                  <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
+                  <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
+                    <li>AI policy and maturity assessment</li>
+                    <li>Governance operating models</li>
+                    <li>Audit-ready evaluation reports</li>
+                    <li>Quality assurance playbooks</li>
+                  </ul>
                 </div>
               </div>
 
@@ -4758,20 +4758,33 @@ function GovernancePage() {
                 </div>
               </div>
 
-              <div style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "38px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div>
-                  <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "18px" }}>Why choose governance-first AI?</p>
-                  <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.95, margin: 0 }}>
-                    <li>Reduce legal, regulatory and reputational risk from AI decisions.</li>
-                    <li>Ensure explainable outcomes for users, stakeholders and auditors.</li>
-                    <li>Keep performance consistent as systems learn and change.</li>
-                    <li>Maintain higher quality in data, models and service handoffs.</li>
-                  </ul>
+              <div style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
+                <div style={{ marginBottom: "18px" }}>
+                  <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px" }}>
+                    <img src="/governance-hero.jpg" alt="Governance illustration" style={{ width: "100%", height: "auto", maxHeight: "200px", objectFit: "cover", display: "block", borderRadius: "8px" }} />
+                  </div>
                 </div>
 
-                <div style={{ marginTop: "28px" }}>
-                  <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "16px 26px", borderRadius: "40px", boxShadow: "0 18px 40px rgba(37,99,235,0.28), 0 6px 18px rgba(59,130,246,0.12)" }}>
-                    Talk to our governance team →
+                <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>
+
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
+                    <p style={{ margin: 0, color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions.</p>
+                  </div>
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
+                    <p style={{ margin: 0, color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors.</p>
+                  </div>
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
+                    <p style={{ margin: 0, color: "#CBD5E1" }}>Keep performance consistent as systems learn and change.</p>
+                  </div>
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
+                    <p style={{ margin: 0, color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs.</p>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: "12px", display: "flex", justifyContent: isMobile ? "stretch" : "flex-start" }}>
+                  <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "12px 22px", borderRadius: "40px", boxShadow: "0 12px 28px rgba(37,99,235,0.18), 0 4px 12px rgba(59,130,246,0.08)" }}>
+                    Find out more →
                   </a>
                 </div>
               </div>
