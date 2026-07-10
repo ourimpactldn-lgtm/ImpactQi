@@ -2384,7 +2384,7 @@ function AutomationAIPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center",
+                    objectPosition: "85% center",
                     display: "block",
                     background: "#020617",
                   }}
