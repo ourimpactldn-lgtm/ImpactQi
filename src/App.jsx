@@ -4712,13 +4712,15 @@ function GovernancePage() {
               <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
                 <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
-                  <div style={{ marginBottom: "18px" }}>
-                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px" }}>
-                      <img
-                        src="/governance-services-illustration.jpg"
-                        alt="Illustration showing governance, people and systems"
-                        style={{ width: "100%", height: "auto", maxHeight: "220px", objectFit: "cover", display: "block", borderRadius: "10px" }}
-                      />
+                  <div style={{ marginBottom: "18px", display: "flex", justifyContent: "center" }}>
+                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px", width: "100%" }}>
+                      <div style={{ width: "100%", height: "220px", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
+                        <img
+                          src="/governance-services-illustration.JPG"
+                          alt="Illustration showing governance, people and systems"
+                          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -4761,24 +4763,31 @@ function GovernancePage() {
               <div style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
                 <div style={{ marginBottom: "18px" }}>
                   <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px" }}>
-                    <img src="/governance-hero.jpg" alt="Governance illustration" style={{ width: "100%", height: "auto", maxHeight: "200px", objectFit: "cover", display: "block", borderRadius: "8px" }} />
+                    <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "auto", maxHeight: "200px", objectFit: "cover", display: "block", borderRadius: "8px" }} />
                   </div>
                 </div>
 
                 <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>
 
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
-                    <p style={{ margin: 0, color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions.</p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Reduce legal, regulatory and reputational risk</strong>
+                    <span style={{ color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions by establishing policy, roles, and clear audit trails that align with sector regulations and public expectations.</span>
                   </div>
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
-                    <p style={{ margin: 0, color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors.</p>
+
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Explainable outcomes</strong>
+                    <span style={{ color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors through transparent documentation, decision logging and accessible explanations of model behaviour.</span>
                   </div>
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
-                    <p style={{ margin: 0, color: "#CBD5E1" }}>Keep performance consistent as systems learn and change.</p>
+
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Consistent performance</strong>
+                    <span style={{ color: "#CBD5E1" }}>Keep performance consistent as systems learn and change by embedding monitoring, drift detection and scheduled reviews into operational routines.</span>
                   </div>
-                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", minHeight: "auto" }}>
-                    <p style={{ margin: 0, color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs.</p>
+
+                  <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Higher quality handoffs</strong>
+                    <span style={{ color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs with controlled releases, integration tests and clear handover documentation to reduce operational risk.</span>
                   </div>
                 </div>
 
