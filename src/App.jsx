@@ -4659,6 +4659,47 @@ function GovernancePage() {
     );
   };
 
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(15, 22, 34, 0.96);
+      z-index: -1;
+    }
+    .premium-border-card:hover::before {
+      filter: blur(3px);
+      transition: filter 0.3s ease;
+    }
+  `;
+
   return (
     <section
       style={{
@@ -4670,6 +4711,7 @@ function GovernancePage() {
         boxSizing: "border-box",
       }}
     >
+      <style>{animatedBorderStyles}</style>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <p style={{ ...sectionTag, marginBottom: "18px" }}>Governance & Quality</p>
         <div>
@@ -4685,6 +4727,7 @@ function GovernancePage() {
             {amenities.map((item) => (
               <div
                 key={item.title}
+                className="premium-border-card"
                 style={{
                   padding: "24px",
                   borderRadius: "22px",
@@ -4709,7 +4752,7 @@ function GovernancePage() {
 
           <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", overflow: "hidden", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "0px" }}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", alignItems: "start" }}>
-              <div style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
                 <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
                   <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
@@ -4734,7 +4777,7 @@ function GovernancePage() {
                 </div>
               </div>
 
-              <div style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <div className="premium-border-card" style={{ padding: "20px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <div>
                   <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
                   <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
@@ -4760,10 +4803,10 @@ function GovernancePage() {
                 </div>
               </div>
 
-              <div style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
+              <div className="premium-border-card" style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
                 <div style={{ marginBottom: "18px" }}>
-                  <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px" }}>
-                    <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "auto", maxHeight: "200px", objectFit: "cover", display: "block", borderRadius: "8px" }} />
+                  <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "280px" }}>
+                    <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }} />
                   </div>
                 </div>
 
