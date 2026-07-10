@@ -1007,7 +1007,10 @@ function FilmProjectsPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        padding: "140px 80px 100px",
+        padding:
+window.innerWidth < 768
+    ? "100px 20px 60px"
+        : "140px 80px 100px",
         background: "#07111F",
         color: "white",
         boxSizing: "border-box",
@@ -1028,14 +1031,14 @@ function FilmProjectsPage() {
         </p>
 
         <h1
-          style={{
-            fontSize: "76px",
-            lineHeight: "0.96",
-            letterSpacing: "-3px",
-            margin: "0 0 20px",
-            maxWidth: "980px",
-          }}
-        >
+  style={{
+    fontSize: window.innerWidth < 768 ? "42px" : "76px",
+    lineHeight: "1.1",
+    letterSpacing: "-2px",
+    margin: "10px 0 20px",
+    maxWidth: "980px",
+  }}
+>
           {project.title}
         </h1>
 
@@ -1967,7 +1970,10 @@ function AutomationAIPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        padding: "140px 80px 100px",
+        padding:
+window.innerWidth < 768
+    ? "100px 20px 60px"
+        : "140px 80px 100px",
         background: "#07111F",
         color: "white",
         boxSizing: "border-box"
@@ -2696,7 +2702,10 @@ function ResearchPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        padding: "140px 80px 100px",
+        padding:
+window.innerWidth < 768
+    ? "100px 20px 60px"
+        : "140px 80px 100px",
         background: "#07111F",
         color: "white",
         boxSizing: "border-box",
@@ -4369,7 +4378,10 @@ function ServicesPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        padding: "140px 80px 100px",
+        padding:
+window.innerWidth < 768
+    ? "100px 20px 60px"
+        : "140px 80px 100px",
         background: "#07111F",
         color: "white",
         boxSizing: "border-box",
@@ -4389,15 +4401,15 @@ function ServicesPage() {
           What We Offer
         </p>
 
-        <h1
-          style={{
-            fontSize: "76px",
-            lineHeight: "0.96",
-            letterSpacing: "-3px",
-            margin: "0 0 20px",
-            maxWidth: "980px",
-          }}
-        >
+       <h1
+  style={{
+    fontSize: window.innerWidth < 768 ? "42px" : "76px",
+    lineHeight: "1.1",
+    letterSpacing: "-2px",
+    margin: "10px 0 20px",
+    maxWidth: "980px",
+  }}
+>
           Services That Drive Real Impact
         </h1>
 
@@ -4550,7 +4562,10 @@ function ContactPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        padding: "140px 80px 100px",
+        padding:
+window.innerWidth < 768
+    ? "100px 20px 60px"
+        : "140px 80px 100px",
         background: "#07111F",
         color: "white",
         boxSizing: "border-box",
