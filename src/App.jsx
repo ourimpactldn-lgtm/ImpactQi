@@ -4756,12 +4756,12 @@ function GovernancePage() {
                 <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
                 <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
                   <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
-                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "8px", width: "100%" }}>
-                      <div style={{ width: "100%", height: "220px", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
+                    <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "260px" }}>
+                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
                         <img
                           src="/governance-services-illustration.JPG"
                           alt="Illustration showing governance, people and systems"
-                          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}
+                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }}
                         />
                       </div>
                     </div>
