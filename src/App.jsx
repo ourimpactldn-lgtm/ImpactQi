@@ -2308,6 +2308,7 @@ function AutomationAIPage() {
             style={{
               height: "100%",
               padding: "30px",
+              minHeight: isMobile ? undefined : 420,
             }}
           >
             <p style={sectionTag}>What this demonstrates</p>
@@ -2348,7 +2349,8 @@ function AutomationAIPage() {
             marginBottom: "100px",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "28px"
+            gap: "28px",
+            alignItems: "stretch",
           }}
           className="automation-gallery-grid"
         >
@@ -2364,8 +2366,8 @@ function AutomationAIPage() {
             >
               AI-Powered Knowledge and Service Platforms
             </h2>
-            <div className="premium-border-card" style={{ padding: 24 }}>
-              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: 12 }}>
+            <div className="premium-border-card" style={{ padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: isMobile ? undefined : 520 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 12 }}>
                 {[
                   "Researcher",
                   "Analyst",
@@ -2376,11 +2378,11 @@ function AutomationAIPage() {
                   "EDI WP Web Agent",
                   "EDI & WP Team Chat",
                 ].map((label, i) => (
-                  <div key={label} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 12px", borderRadius: 12, background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))", border: "1px solid rgba(255,255,255,0.04)" }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(90deg,#60A5FA,#A78BFA)", color: "white", fontWeight: 800, fontSize: 12 }}>
+                  <div key={label} style={{ display: "flex", gap: 12, alignItems: "center", padding: "12px 14px", borderRadius: 12, background: "linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01))", border: "1px solid rgba(255,255,255,0.04)", minHeight: 64 }}>
+                    <div style={{ width: 44, height: 44, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(90deg,#60A5FA,#A78BFA)", color: "white", fontWeight: 800, fontSize: 13 }}>
                       {label.split(" ")[0].slice(0,2).toUpperCase()}
                     </div>
-                    <div style={{ color: "#E2E8F0", fontSize: 14, fontWeight: 700 }}>{label}</div>
+                    <div style={{ color: "#E2E8F0", fontSize: 15, fontWeight: 700 }}>{label}</div>
                   </div>
                 ))}
               </div>
@@ -2392,6 +2394,7 @@ function AutomationAIPage() {
             style={{
               height: "100%",
               padding: "30px",
+              minHeight: isMobile ? undefined : 520,
             }}
           >
             <p style={sectionTag}>Platform Capabilities</p>
@@ -2421,7 +2424,7 @@ function AutomationAIPage() {
 
         {/* Training & Codesign Section */}
         <div style={{ marginBottom: "80px" }}>
-          <div className="premium-border-card" style={{ padding: "36px", display: "grid", gridTemplateColumns: "1fr 420px", gap: "28px", alignItems: "center" }}>
+          <div className="premium-border-card" style={{ padding: "36px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 520px", gap: "28px", alignItems: "center" }}>
             <div>
               <p style={sectionTag}>Capability Building</p>
               <h2 style={{ margin: "0 0 18px", fontSize: "42px", color: "white" }}>Training, Workshops & Codesign</h2>
@@ -2444,9 +2447,15 @@ function AutomationAIPage() {
               </div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: isMobile ? "100%" : 420, aspectRatio: isMobile ? "4 / 3" : "16 / 10", overflow: "hidden", marginTop: isMobile ? 16 : 0 }}>
-                    <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} loading="lazy" />
+            <div style={{ display: "flex", justifyContent: isMobile ? "center" : "flex-end" }}>
+                  <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: isMobile ? "100%" : 520, overflow: "hidden", marginTop: isMobile ? 18 : 0, borderRadius: 18, minHeight: isMobile ? undefined : 420 }}>
+                    {isMobile ? (
+                      <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "auto", objectFit: "cover", objectPosition: "center", display: "block" }} loading="lazy" />
+                    ) : (
+                      <div style={{ width: "100%", height: 420, overflow: "hidden", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "70% center" }} loading="lazy" />
+                      </div>
+                    )}
                   </div>
             </div>
           </div>
@@ -4552,6 +4561,217 @@ function ServicesPage() {
   );
 }
 
+/* ---------------- GOVERNANCE PAGE ---------------- */
+
+function GovernancePage() {
+  const isMobile = useIsMobile();
+  const amenities = [
+    {
+      title: "AI Governance Frameworks",
+      text: "Define policy, risk controls and decision rights so AI systems are managed consistently across people, data and technology.",
+      type: "framework",
+    },
+    {
+      title: "Audit & Evaluation",
+      text: "Assess system performance, fairness, security and compliance with evidence-led reviews, gap analysis and continuous improvement.",
+      type: "audit",
+    },
+    {
+      title: "Quality Assurance",
+      text: "Embed checks for data quality, model outputs, user experience and operational reliability to protect trust and service outcomes.",
+      type: "quality",
+    },
+    {
+      title: "Change Enablement",
+      text: "Support teams with governance training, stakeholder engagement and practical routines that make assurance repeatable and sustainable.",
+      type: "change",
+    },
+  ];
+
+  const GovernanceIcon = ({ type }) => {
+    const common = {
+      width: 28,
+      height: 28,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+    };
+
+    if (type === "framework") {
+      return (
+        <svg {...common}>
+          <path d="M12 3L4 7V11C4 16 7.5 20.5 12 21C16.5 20.5 20 16 20 11V7L12 3Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8 10L12 13L16 10" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    if (type === "audit") {
+      return (
+        <svg {...common}>
+          <path d="M6 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4Z" stroke="url(#govGrad)" strokeWidth="1.5"/>
+          <path d="M8 9H16" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M8 13H13" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M8 17H12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    if (type === "quality") {
+      return (
+        <svg {...common}>
+          <path d="M12 4L5 7V11C5 15.86 8.74 19.97 12 21C15.26 19.97 19 15.86 19 11V7L12 4Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9.5 12.5L11.5 14.5L15.5 10.5" stroke="url(#govGrad)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    return (
+      <svg {...common}>
+        <path d="M4 12H20" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 4L16 8L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 20L16 16L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <defs>
+          <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#60A5FA" />
+            <stop offset="100%" stopColor="#A855F7" />
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  };
+
+  return (
+    <section
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        padding: isMobile ? "120px 18px 60px" : "140px 80px 100px",
+        background: "#07111F",
+        color: "white",
+        boxSizing: "border-box",
+      }}
+    >
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        <p style={{ ...sectionTag, marginBottom: "18px" }}>Governance & Quality</p>
+        <div>
+          <h1 style={{ fontSize: isMobile ? "42px" : "64px", lineHeight: 1.05, margin: 0, maxWidth: "760px" }}>
+            Trusted AI governance, audit and evaluation
+          </h1>
+          <p style={{ color: "#CBD5E1", fontSize: "18px", lineHeight: 1.9, maxWidth: "700px", margin: "24px 0 32px" }}>
+            We help organisations build robust oversight for automation and AI by aligning governance policy, quality assurance, and evaluation with operational delivery.
+            Our approach ensures systems are safe, ethical, transparent and consistently delivering the right outcomes.
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))", gap: "18px", marginBottom: "36px" }}>
+            {amenities.map((item) => (
+              <div
+                key={item.title}
+                style={{
+                  padding: "24px",
+                  borderRadius: "22px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  minHeight: "160px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "18px" }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 14, display: "grid", placeItems: "center", background: "rgba(96,165,250,0.16)", border: "1px solid rgba(96,165,250,0.28)" }}>
+                    <GovernanceIcon type={item.type} />
+                  </div>
+                  <h3 style={{ margin: 0, fontSize: "20px", color: "#F8FAFC" }}>{item.title}</h3>
+                </div>
+                <p style={{ color: "#CBD5E1", fontSize: "15px", lineHeight: 1.8, margin: 0 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "0.95fr 1.05fr", gap: "28px", alignItems: "start" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", minHeight: "260px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
+                  <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
+                    <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
+                    <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
+                      <li>AI policy and maturity assessment</li>
+                      <li>Governance operating models</li>
+                      <li>Audit-ready evaluation reports</li>
+                      <li>Quality assurance playbooks</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", minHeight: "420px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
+                  <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
+                    <li>Governance design and maturity assessment</li>
+                    <li>Audit planning, execution and reporting</li>
+                    <li>Quality checks for data, models and UX</li>
+                    <li>Training and governance handover for operations teams</li>
+                  </ul>
+                </div>
+
+                <div style={{ display: "grid", gap: "12px", marginTop: "24px" }}>
+                  <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>
+                    <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>
+                  </div>
+                  <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Audit-ready outcomes</strong>
+                    <span style={{ color: "#CBD5E1" }}>We support evidence-based audit trails and evaluation reporting for safer decision-making.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ padding: "38px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", minHeight: "520px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "18px" }}>Why choose governance-first AI?</p>
+                <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.95, margin: 0 }}>
+                  <li>Reduce legal, regulatory and reputational risk from AI decisions.</li>
+                  <li>Ensure explainable outcomes for users, stakeholders and auditors.</li>
+                  <li>Keep performance consistent as systems learn and change.</li>
+                  <li>Maintain higher quality in data, models and service handoffs.</li>
+                </ul>
+              </div>
+
+              <div style={{ marginTop: "28px" }}>
+                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto" }}>
+                  Talk to our governance team →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------- CONTACT PAGE ---------------- */
 
 function ContactPage() {
@@ -5395,6 +5615,9 @@ export default function App() {
           <button onClick={() => setActivePage("automation")} style={navButtonReset}>
             <span style={navItemStyle("automation")}>Automation & AI</span>
           </button>
+          <button onClick={() => setActivePage("governance")} style={navButtonReset}>
+            <span style={navItemStyle("governance")}>Governance & Quality</span>
+          </button>
           <button onClick={() => setActivePage("film")} style={navButtonReset}>
             <span style={navItemStyle("film")}>Film Project</span>
           </button>
@@ -5460,6 +5683,7 @@ export default function App() {
                     <button onClick={() => { setActivePage("home"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Home</button>
                     <button onClick={() => { setActivePage("services"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Services</button>
                     <button onClick={() => { setActivePage("automation"); setMobileMenuOpen(false); }} style={{ ...mobileMenuItem, background: "linear-gradient(90deg,#0f172a,#0b1a2f)", border: "1px solid rgba(96,165,250,0.08)", color: "#93C5FD", fontWeight: 800 }}>Automation & AI</button>
+                    <button onClick={() => { setActivePage("governance"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Governance & Quality</button>
                     <button onClick={() => { setActivePage("film"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Film Project</button>
                     <button onClick={() => { setActivePage("research"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Research</button>
                     <button onClick={() => { setActivePage("contact"); setMobileMenuOpen(false); }} style={mobileMenuItem}>Contact</button>
@@ -5479,6 +5703,8 @@ export default function App() {
         <FilmProjectsPage />
       ) : activePage === "automation" ? (
         <AutomationAIPage />
+      ) : activePage === "governance" ? (
+        <GovernancePage />
       ) : activePage === "services" ? (
         <ServicesPage />
       ) : activePage === "contact" ? (
