@@ -4707,7 +4707,8 @@ function GovernancePage() {
             ))}
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "0.95fr 1.05fr", gap: "28px", alignItems: "start" }}>
+          <div className="premium-border-card" style={{ padding: "20px", borderRadius: "32px", overflow: "hidden", background: "linear-gradient(180deg, rgba(14,23,38,0.92), rgba(8,15,28,0.96))", border: "1px solid rgba(255,255,255,0.04)", marginBottom: "36px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "0.95fr 1.05fr", gap: "28px", alignItems: "start" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
               <div style={{ padding: "32px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", minHeight: "260px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
@@ -4748,7 +4749,7 @@ function GovernancePage() {
               </div>
             </div>
 
-            <div style={{ padding: "38px", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", minHeight: "520px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ padding: "38px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", minHeight: "520px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
                 <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "18px" }}>Why choose governance-first AI?</p>
                 <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.95, margin: 0 }}>
@@ -4760,11 +4761,12 @@ function GovernancePage() {
               </div>
 
               <div style={{ marginTop: "28px" }}>
-                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto" }}>
+                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "16px 26px", borderRadius: "40px", boxShadow: "0 18px 40px rgba(37,99,235,0.28), 0 6px 18px rgba(59,130,246,0.12)" }}>
                   Talk to our governance team →
                 </a>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
