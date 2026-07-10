@@ -2447,7 +2447,7 @@ function AutomationAIPage() {
 
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: 420 }}>
-                <img src="/automation-training.jfif" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <img src="/automation-training1.jfif" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             </div>
           </div>
