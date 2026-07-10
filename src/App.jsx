@@ -2420,6 +2420,39 @@ function AutomationAIPage() {
           </div>
         </div>
 
+        {/* Training & Codesign Section */}
+        <div style={{ marginBottom: "80px" }}>
+          <div className="premium-border-card" style={{ padding: "36px", display: "grid", gridTemplateColumns: "1fr 420px", gap: "28px", alignItems: "center" }}>
+            <div>
+              <p style={sectionTag}>Capability Building</p>
+              <h2 style={{ margin: "0 0 18px", fontSize: "42px", color: "white" }}>Training, Workshops & Codesign</h2>
+
+              <p style={{ color: "#CBD5E1", fontSize: "16px", lineHeight: 1.8, marginBottom: "18px" }}>
+                We work with teams to build practical skills, confidence and ownership across automation and AI. Our delivery blends short, high-impact workshops with longer codesign sprints so that technical solutions are aligned to real operational needs and local capability is strengthened.
+              </p>
+
+              <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 2, marginBottom: "18px" }}>
+                <li>Practical workshops that demystify AI and automation for non-technical teams.</li>
+                <li>Codesign sprints to map current processes, identify high-value automation opportunities and rapidly prototype solutions.</li>
+                <li>Hands-on training sessions covering Power Platform, conversational agents, and operational governance.</li>
+                <li>Train-the-trainer and governance clinics to embed sustainable ownership and safe, ethical use of AI.</li>
+                <li>Follow-up coaching and peer-learning to ensure capability is sustained after deployment.</li>
+              </ul>
+
+              <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none" }}>Discuss a Workshop →</a>
+                <a href="/contact" style={{ ...secondaryButton, textDecoration: "none", display: "inline-flex", alignItems: "center" }}>Contact Us</a>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="premium-border-card" style={{ padding: 0, width: "100%", maxWidth: 420 }}>
+                <img src="/automation-training.jpg" alt="Team workshop and codesign" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* CTA Section at bottom */}
         <div style={{ marginTop: "80px", textAlign: "center" }}>
           <div className="premium-border-card" style={{ padding: "50px 30px" }}>
