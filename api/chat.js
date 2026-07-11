@@ -154,9 +154,9 @@ throw new Error(error);
   }
 
   const data = await response.json();
-  const aiReply = data.choices?.[0]?.message?.content?.trim();
+const aiReply = data.choices?.[0]?.message?.content?.trim();
 
-  return aiReply || fallbackReply;
+return withQuotePrompt(aiReply || fallbackReply);
 }
 
 export default async function handler(req, res) {
