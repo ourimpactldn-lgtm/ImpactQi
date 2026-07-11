@@ -115,14 +115,15 @@ export function buildProfessionalReply(message) {
 }
 
 async function getAiFallbackReply(message, fallbackReply) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
     return fallbackReply;
   }
 
-  const endpoint = process.env.OPENAI_API_BASE || "https://api.openai.com/v1/chat/completions";
-  const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+  const endpoint = "https://openrouter.ai/api/v1/chat/completions";
+  const model =
+  process.env.OPENAI_MODEL || "openai/gpt-4o-mini";
 
   const response = await fetch(endpoint, {
     method: "POST",
@@ -147,7 +148,9 @@ async function getAiFallbackReply(message, fallbackReply) {
   });
 
   if (!response.ok) {
-    throw new Error(`OpenAI request failed with ${response.status}`);
+    const error = await response.text();
+console.error(error);
+throw new Error(error);
   }
 
   const data = await response.json();
@@ -172,7 +175,7 @@ export default async function handler(req, res) {
     let reply = faqReply;
     let mode = "faq";
 
-    if (!faqMatched && process.env.OPENAI_API_KEY) {
+  if (!faqMatched && process.env.OPENROUTER_API_KEY) {
       try {
         reply = await getAiFallbackReply(message, faqReply);
         mode = "ai";
