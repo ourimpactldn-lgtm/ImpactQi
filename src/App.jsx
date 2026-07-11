@@ -4561,15 +4561,302 @@ function ServicesPage() {
   );
 }
 
-/* ---------------- GOVERNANCE PAGE ---------------- */ function GovernancePage() {   const isMobile = useIsMobile();   const amenities = [     {       title: "AI Governance Frameworks",       text: "Define policy, risk controls and decision rights so AI systems are managed consistently across people, data and technology.",       type: "framework",     },     {       title: "Audit & Evaluation",       text: "Assess system performance, fairness, security and compliance with evidence-led reviews, gap analysis and continuous improvement.",       type: "audit",     },     {       title: "Quality Assurance",       text: "Embed checks for data quality, model outputs, user experience and operational reliability to protect trust and service outcomes.",       type: "quality",     },     {       title: "Change Enablement",       text: "Support teams with governance training, stakeholder engagement and practical routines that make assurance repeatable and sustainable.",       type: "change",     },   ];   const GovernanceIcon = ({ type }) => {     const common = {       width: 28,       height: 28,       viewBox: "0 0 24 24",       fill: "none",       xmlns: "http://www.w3.org/2000/svg",     };     if (type === "framework") {       return (         <svg {...common}>           <path d="M12 3L4 7V11C4 16 7.5 20.5 12 21C16.5 20.5 20 16 20 11V7L12 3Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />           <path d="M8 10L12 13L16 10" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />           <defs>             <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">               <stop offset="0%" stopColor="#60A5FA" />               <stop offset="100%" stopColor="#A855F7" />             </linearGradient>           </defs>         </svg>       );     }     if (type === "audit") {       return (         <svg {...common}>           <path d="M6 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4Z" stroke="url(#govGrad)" strokeWidth="1.5"/>           <path d="M8 9H16" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>           <path d="M8 13H13" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>           <path d="M8 17H12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>           <defs>             <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">               <stop offset="0%" stopColor="#60A5FA" />               <stop offset="100%" stopColor="#A855F7" />             </linearGradient>           </defs>         </svg>       );     }     if (type === "quality") {       return (         <svg {...common}>           <path d="M12 4L5 7V11C5 15.86 8.74 19.97 12 21C15.26 19.97 19 15.86 19 11V7L12 4Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />           <path d="M9.5 12.5L11.5 14.5L15.5 10.5" stroke="url(#govGrad)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />           <defs>             <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">               <stop offset="0%" stopColor="#60A5FA" />               <stop offset="100%" stopColor="#A855F7" />             </linearGradient>           </defs>         </svg>       );     }     return (       <svg {...common}>         <path d="M4 12H20" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" />         <path d="M12 4L16 8L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />         <path d="M12 20L16 16L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />         <defs>           <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">             <stop offset="0%" stopColor="#60A5FA" />             <stop offset="100%" stopColor="#A855F7" />           </linearGradient>         </defs>       </svg>     );   };   const animatedBorderStyles = `     @keyframes rotateGradient {       0% { --angle: 0deg; }       100% { --angle: 360deg; }     }     @property --angle {       syntax: '<angle>';       initial-value: 0deg;       inherits: false;     }     .premium-border-card {       position: relative;       background: #0F1622;       border-radius: 28px;       transition: transform 0.3s, box-shadow 0.3s;       isolation: isolate;       overflow: visible;       box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 18px 50px rgba(2, 6, 23, 0.38);     }     .premium-border-card::before {       content: '';       position: absolute;       inset: -3px;       border-radius: inherit;       background: conic-gradient(from var(--angle), rgba(96,165,250,0.98), rgba(168,85,247,0.98), rgba(236,72,153,0.95), rgba(249,115,22,0.9), rgba(96,165,250,0.98));       animation: rotateGradient 2.2s linear infinite;       z-index: -2;       filter: blur(0.3px) saturate(1.2);     }     .premium-border-card::after {       content: '';       position: absolute;       inset: 1px;       border-radius: inherit;       background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));       z-index: -1;     }     .premium-border-card:hover {       transform: translateY(-3px);       box-shadow: 0 0 0 1px rgba(96,165,250,0.22), 0 20px 55px rgba(2, 6, 23, 0.5), 0 0 34px rgba(96,165,250,0.16);     }     .premium-border-card:hover::before {       filter: blur(2px) saturate(1.3);       transition: filter 0.3s ease;     }   `;   return (     <section       style={{         width: "100%",         minHeight: "100vh",         padding: isMobile ? "120px 18px 60px" : "140px 80px 100px",         background: "#07111F",         color: "white",         boxSizing: "border-box",       }}     >       <style>{animatedBorderStyles}</style>       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>         <p style={{ ...sectionTag, marginBottom: "18px" }}>Governance & Quality</p>         <div>           <h1 style={{ fontSize: isMobile ? "42px" : "64px", lineHeight: 1.05, margin: 0, maxWidth: "760px" }}>             Trusted AI governance, audit and evaluation           </h1>           <p style={{ color: "#CBD5E1", fontSize: "18px", lineHeight: 1.9, maxWidth: "700px", margin: "24px 0 32px" }}>             We help organisations build robust oversight for automation and AI by aligning governance policy, quality assurance, and evaluation with operational delivery.             Our approach ensures systems are safe, ethical, transparent and consistently delivering the right outcomes.           </p>           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))", gap: "18px", marginBottom: "36px" }}>             {amenities.map((item) => (               <div                 key={item.title}                 className="premium-border-card"                 style={{                   padding: "24px",                   borderRadius: "22px",                   background: "rgba(255,255,255,0.04)",                   border: "1px solid rgba(255,255,255,0.08)",                   minHeight: "160px",                   display: "flex",                   flexDirection: "column",                   justifyContent: "space-between",                 }}               >                 <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "18px" }}>                   <div style={{ width: 48, height: 48, borderRadius: 14, display: "grid", placeItems: "center", background: "rgba(96,165,250,0.16)", border: "1px solid rgba(96,165,250,0.28)" }}>                     <GovernanceIcon type={item.type} />                   </div>                   <h3 style={{ margin: 0, fontSize: "20px", color: "#F8FAFC" }}>{item.title}</h3>                 </div>                 <p style={{ color: "#CBD5E1", fontSize: "15px", lineHeight: 1.8, margin: 0 }}>{item.text}</p>               </div>             ))}           </div>          <div
+/* ---------------- GOVERNANCE PAGE ---------------- */
+
+function GovernancePage() {
+  const isMobile = useIsMobile();
+  const amenities = [
+    {
+      title: "AI Governance Frameworks",
+      text: "Define policy, risk controls and decision rights so AI systems are managed consistently across people, data and technology.",
+      type: "framework",
+    },
+    {
+      title: "Audit & Evaluation",
+      text: "Assess system performance, fairness, security and compliance with evidence-led reviews, gap analysis and continuous improvement.",
+      type: "audit",
+    },
+    {
+      title: "Quality Assurance",
+      text: "Embed checks for data quality, model outputs, user experience and operational reliability to protect trust and service outcomes.",
+      type: "quality",
+    },
+    {
+      title: "Change Enablement",
+      text: "Support teams with governance training, stakeholder engagement and practical routines that make assurance repeatable and sustainable.",
+      type: "change",
+    },
+  ];
+
+  const GovernanceIcon = ({ type }) => {
+    const common = {
+      width: 28,
+      height: 28,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+    };
+
+    if (type === "framework") {
+      return (
+        <svg {...common}>
+          <path d="M12 3L4 7V11C4 16 7.5 20.5 12 21C16.5 20.5 20 16 20 11V7L12 3Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8 10L12 13L16 10" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    if (type === "audit") {
+      return (
+        <svg {...common}>
+          <path d="M6 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H6C4.9 20 4 19.1 4 18V6C4 4.9 4.9 4 6 4Z" stroke="url(#govGrad)" strokeWidth="1.5"/>
+          <path d="M8 9H16" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M8 13H13" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M8 17H12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round"/>
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    if (type === "quality") {
+      return (
+        <svg {...common}>
+          <path d="M12 4L5 7V11C5 15.86 8.74 19.97 12 21C15.26 19.97 19 15.86 19 11V7L12 4Z" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9.5 12.5L11.5 14.5L15.5 10.5" stroke="url(#govGrad)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <defs>
+            <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#A855F7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      );
+    }
+
+    return (
+      <svg {...common}>
+        <path d="M4 12H20" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 4L16 8L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 20L16 16L12 12" stroke="url(#govGrad)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <defs>
+          <linearGradient id="govGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#60A5FA" />
+            <stop offset="100%" stopColor="#A855F7" />
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  };
+
+  const animatedBorderStyles = `
+    @keyframes rotateGradient {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .premium-border-card {
+      position: relative;
+      background: #0F1622;
+      border-radius: 28px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      isolation: isolate;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 18px 50px rgba(2, 6, 23, 0.38);
+    }
+    .premium-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--angle), rgba(96,165,250,0.98), rgba(168,85,247,0.98), rgba(236,72,153,0.95), rgba(249,115,22,0.9), rgba(96,165,250,0.98));
+      animation: rotateGradient 4s linear infinite;
+      z-index: -2;
+    }
+    .premium-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: l#0F1622;
+      z-index: -1;
+    }
+    .premium-border-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.22), 0 20px 55px rgba(2, 6, 23, 0.5), 0 0 34px rgba(96,165,250,0.16);
+    }
+    .premium-border-card:hover::before {
+      filter: blur(2px) saturate(1.3);
+      transition: filter 0.3s ease;
+    }
+  `;
+
+  return (
+    <section
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        padding: isMobile ? "120px 18px 60px" : "140px 80px 100px",
+        background: "#07111F",
+        color: "white",
+        boxSizing: "border-box",
+      }}
+    >
+      <style>{animatedBorderStyles}</style>
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        <p style={{ ...sectionTag, marginBottom: "18px" }}>Governance & Quality</p>
+        <div>
+          <h1 style={{ fontSize: isMobile ? "42px" : "64px", lineHeight: 1.05, margin: 0, maxWidth: "760px" }}>
+            Trusted AI governance, audit and evaluation
+          </h1>
+          <p style={{ color: "#CBD5E1", fontSize: "18px", lineHeight: 1.9, maxWidth: "700px", margin: "24px 0 32px" }}>
+            We help organisations build robust oversight for automation and AI by aligning governance policy, quality assurance, and evaluation with operational delivery.
+            Our approach ensures systems are safe, ethical, transparent and consistently delivering the right outcomes.
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))", gap: "18px", marginBottom: "36px" }}>
+            {amenities.map((item) => (
+              <div
+                key={item.title}
+                className="premium-border-card"
+                style={{
+                  padding: "24px",
+                  borderRadius: "22px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  minHeight: "160px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "18px" }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 14, display: "grid", placeItems: "center", background: "rgba(96,165,250,0.16)", border: "1px solid rgba(96,165,250,0.28)" }}>
+                    <GovernanceIcon type={item.type} />
+                  </div>
+                  <h3 style={{ margin: 0, fontSize: "20px", color: "#F8FAFC" }}>{item.title}</h3>
+                </div>
+                <p style={{ color: "#CBD5E1", fontSize: "15px", lineHeight: 1.8, margin: 0 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+         <div
   style={{
     display: "grid",
     gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-    gap: isMobile ? "20px" : "24px 16px",
+    columnGap: "12px",
+    rowGap: "6px",
     alignItems: "stretch"
   }}
 >
-           <div className="premium-border-card" style={{ padding: "20px", height: "100%", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>               <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>               <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>                 <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>                   <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "180px" : "220px" }}>                     <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>                       <img                         src="/governance-services-illustration.JPG"                         alt="Illustration showing governance, people and systems"                         style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}                       />                     </div>                   </div>                 </div>                 <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>                 <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>                   <li>AI policy and maturity assessment</li>                   <li>Governance operating models</li>                   <li>Audit-ready evaluation reports</li>                   <li>Quality assurance playbooks</li>                 </ul>               </div>             </div>             <div className="premium-border-card" style={{ padding: "20px", height: "100%", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>               <div>                 <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>                 <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>                   <li>Governance design and maturity assessment</li>                   <li>Audit planning, execution and reporting</li>                   <li>Quality checks for data, models and UX</li>                   <li>Training and governance handover for operations teams</li>                   <li>Testing and validation of AI systems</li>                   <li>Playground preparation and sandbox/pilot setup</li>                   <li>Evaluation &amp; Theory of Change modelling</li>                 </ul>               </div>               <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>                 <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>                   <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>                 </div>                 <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Audit-ready outcomes</strong>                   <span style={{ color: "#CBD5E1" }}>We support evidence-based audit trails and evaluation reporting for safer decision-making.</span>                 </div>               </div>             </div>             <div className="premium-border-card" style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>               <div style={{ marginBottom: "18px" }}>                 <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "280px" }}>                   <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }} />                 </div>               </div>               <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>               <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>                 <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Reduce legal, regulatory and reputational risk</strong>                   <span style={{ color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions by establishing policy, roles, and clear audit trails that align with sector regulations and public expectations.</span>                 </div>                 <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Explainable outcomes</strong>                   <span style={{ color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors through transparent documentation, decision logging and accessible explanations of model behaviour.</span>                 </div>                 <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Consistent performance</strong>                   <span style={{ color: "#CBD5E1" }}>Keep performance consistent as systems learn and change by embedding monitoring, drift detection and scheduled reviews into operational routines.</span>                 </div>                 <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>                   <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Higher quality handoffs</strong>                   <span style={{ color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs with controlled releases, integration tests and clear handover documentation to reduce operational risk.</span>                 </div>               </div>               <div style={{ marginTop: "12px", display: "flex", justifyContent: isMobile ? "stretch" : "flex-start" }}>                 <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "12px 22px", borderRadius: "40px", boxShadow: "0 12px 28px rgba(37,99,235,0.18), 0 4px 12px rgba(59,130,246,0.08)" }}>                   Find out more →                 </a>               </div>             </div>           </div>         </div>       </div>     </section>   ); }
+            <div className="premium-border-card" style={{ padding: "20px", height: "100%", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <h3 style={{ fontSize: "24px", margin: 0, color: "#F8FAFC" }}>Services included</h3>
+              <div style={{ marginTop: "18px", color: "#CBD5E1", lineHeight: 1.85 }}>
+                <div style={{ marginBottom: "12px", display: "flex", justifyContent: "center" }}>
+                  <div style={{ borderRadius: "14px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "180px" : "220px" }}>
+                    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#07111F" }}>
+                      <img
+                        src="/governance-services-illustration.JPG"
+                        alt="Illustration showing governance, people and systems"
+                        style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", borderRadius: "8px" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <p style={{ margin: 0 }}>We deliver streamlined, practical governance and assurance support for:</p>
+                <ul style={{ paddingLeft: "20px", marginTop: "14px" }}>
+                  <li>AI policy and maturity assessment</li>
+                  <li>Governance operating models</li>
+                  <li>Audit-ready evaluation reports</li>
+                  <li>Quality assurance playbooks</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="premium-border-card" style={{ padding: "20px", height: "100%", borderRadius: "28px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+              <div>
+                <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", marginBottom: "14px" }}>Our practical assurance approach</p>
+                <ul style={{ color: "#CBD5E1", paddingLeft: "20px", lineHeight: 1.9, margin: 0 }}>
+                  <li>Governance design and maturity assessment</li>
+                  <li>Audit planning, execution and reporting</li>
+                  <li>Quality checks for data, models and UX</li>
+                  <li>Training and governance handover for operations teams</li>
+                  <li>Testing and validation of AI systems</li>
+                  <li>Playground preparation and sandbox/pilot setup</li>
+                  <li>Evaluation &amp; Theory of Change modelling</li>
+                </ul>
+              </div>
+
+              <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
+                <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Built for public services</strong>
+                  <span style={{ color: "#CBD5E1" }}>Our governance work is designed for health, education and public-sector delivery teams.</span>
+                </div>
+                <div style={{ padding: "20px", borderRadius: "18px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "8px" }}>Audit-ready outcomes</strong>
+                  <span style={{ color: "#CBD5E1" }}>We support evidence-based audit trails and evaluation reporting for safer decision-making.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="premium-border-card" style={{ gridColumn: isMobile ? "auto" : "1 / span 2", padding: "24px", borderRadius: "28px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", display: "flex", flexDirection: "column" }}>
+              <div style={{ marginBottom: "18px" }}>
+                <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.04)", background: "rgba(2,6,23,0.6)", padding: "6px", width: "100%", height: isMobile ? "220px" : "280px" }}>
+                  <img src="/governance-hero.png" alt="Governance illustration" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "8px" }} />
+                </div>
+              </div>
+
+              <p style={{ color: "#60A5FA", fontWeight: 700, letterSpacing: "1px", margin: "0 0 12px 0" }}>Why choose governance-first AI?</p>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Reduce legal, regulatory and reputational risk</strong>
+                  <span style={{ color: "#CBD5E1" }}>Reduce legal, regulatory and reputational risk from AI decisions by establishing policy, roles, and clear audit trails that align with sector regulations and public expectations.</span>
+                </div>
+
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Explainable outcomes</strong>
+                  <span style={{ color: "#CBD5E1" }}>Ensure explainable outcomes for users, stakeholders and auditors through transparent documentation, decision logging and accessible explanations of model behaviour.</span>
+                </div>
+
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Consistent performance</strong>
+                  <span style={{ color: "#CBD5E1" }}>Keep performance consistent as systems learn and change by embedding monitoring, drift detection and scheduled reviews into operational routines.</span>
+                </div>
+
+                <div style={{ padding: "18px", borderRadius: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <strong style={{ display: "block", color: "#F8FAFC", marginBottom: "6px" }}>Higher quality handoffs</strong>
+                  <span style={{ color: "#CBD5E1" }}>Maintain higher quality in data, models and service handoffs with controlled releases, integration tests and clear handover documentation to reduce operational risk.</span>
+                </div>
+              </div>
+
+              <div style={{ marginTop: "12px", display: "flex", justifyContent: isMobile ? "stretch" : "flex-start" }}>
+                <a href="https://forms.office.com/r/qa1Z2eSKM1" target="_blank" rel="noopener noreferrer" style={{ ...primaryButton, textDecoration: "none", display: "inline-flex", justifyContent: "center", width: isMobile ? "100%" : "auto", padding: "12px 22px", borderRadius: "40px", boxShadow: "0 12px 28px rgba(37,99,235,0.18), 0 4px 12px rgba(59,130,246,0.08)" }}>
+                  Find out more →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ---------------- CONTACT PAGE ---------------- */
 
