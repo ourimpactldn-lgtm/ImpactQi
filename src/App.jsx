@@ -4675,23 +4675,25 @@ function GovernancePage() {
       border-radius: 28px;
       transition: transform 0.3s, box-shadow 0.3s;
       isolation: isolate;
+      overflow: visible;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 18px 50px rgba(2, 6, 23, 0.38);
     }
     .premium-border-card::before {
       content: '';
       position: absolute;
-      inset: -2px;
+      inset: -3px;
       border-radius: inherit;
       background: conic-gradient(from var(--angle), rgba(96,165,250,0.98), rgba(168,85,247,0.98), rgba(236,72,153,0.95), rgba(249,115,22,0.9), rgba(96,165,250,0.98));
-      animation: rotateGradient 4s linear infinite;
+      animation: rotateGradient 2.2s linear infinite;
       z-index: -2;
+      filter: blur(0.3px) saturate(1.2);
     }
     .premium-border-card::after {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: 1px;
       border-radius: inherit;
-      background: l#0F1622;
+      background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));
       z-index: -1;
     }
     .premium-border-card:hover {
