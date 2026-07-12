@@ -5055,7 +5055,7 @@ function ContactPage() {
                       href="mailto:info@impactqi.online"
                       style={{ color: "#E2E8F0", textDecoration: "none", fontSize: "18px" }}
                     >
-                      ImpactQi@proton.me
+                      info@ImpactQi@online
                     </a>
                   </div>
                 </div>
@@ -5119,7 +5119,7 @@ function ContactPage() {
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    X @impact_qi
+                    X
                   </a>
                   <a
                     href="https://www.instagram.com/impact_qi"
@@ -5129,7 +5129,7 @@ function ContactPage() {
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    Instagram @impact_qi
+                    Instagram
                   </a>
                 </div>
               </div>
