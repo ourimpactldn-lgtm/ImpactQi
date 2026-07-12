@@ -4881,7 +4881,7 @@ function ContactPage() {
       `Message:\n${formData.message || ""}`,
     ].join("\n");
 
-    window.location.href = `mailto:impactqi@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:info@impactqi.online?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
   };
@@ -5052,7 +5052,7 @@ function ContactPage() {
                       Email
                     </p>
                     <a
-                      href="mailto:impactqi@proton.me"
+                      href="mailto:info@impactqi.online"
                       style={{ color: "#E2E8F0", textDecoration: "none", fontSize: "18px" }}
                     >
                       ImpactQi@proton.me
@@ -5102,7 +5102,7 @@ function ContactPage() {
                 <p style={{ color: "#60A5FA", marginBottom: "8px", fontWeight: 600 }}>Follow Us</p>
                 <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
                   <a
-                    href="https://www.linkedin.com/"
+                    href="https://www.linkedin.com/company/impactqi/"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
@@ -5112,24 +5112,24 @@ function ContactPage() {
                     LinkedIn
                   </a>
                   <a
-                    href="https://x.com/ourimpactldn"
+                    href="https://x.com/impact_qi"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    X @ourimpactldn
+                    X @impact_qi
                   </a>
                   <a
-                    href="https://www.instagram.com/ourimpactldn"
+                    href="https://www.instagram.com/impact_qi"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#CBD5E1", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#60A5FA")}
                     onMouseLeave={(e) => (e.target.style.color = "#CBD5E1")}
                   >
-                    Instagram @ourimpactldn
+                    Instagram @impact_qi
                   </a>
                 </div>
               </div>
