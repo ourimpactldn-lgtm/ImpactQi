@@ -5055,7 +5055,7 @@ function ContactPage() {
                       href="mailto:info@impactqi.online"
                       style={{ color: "#E2E8F0", textDecoration: "none", fontSize: "18px" }}
                     >
-                      info@ImpactQi.online
+                      info@impactqi.online
                     </a>
                   </div>
                 </div>
