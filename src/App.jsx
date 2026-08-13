@@ -13,6 +13,7 @@ function useIsMobile() {
 }
 import Chatbot from "./components/Chatbot";
 import AIReadinessAssessment from "./components/AIReadinessAssessment";
+import ROICalculator from "./components/ROICalculator";
 
 /* ---------------- GLOBAL STYLES (shared across components) ---------------- */
 const sectionTag = {
@@ -4015,6 +4016,16 @@ useEffect(() => {
         }}
       >
         <AIReadinessAssessment onConsult={() => onNavigate("services")} />
+      </section>
+
+      <section
+        style={{
+          width: "100%",
+          padding: device === "mobile" ? "40px 20px 60px" : "60px 80px 80px",
+          boxSizing: "border-box",
+        }}
+      >
+        <ROICalculator onAutomation={() => onNavigate("services")} />
       </section>
 
       <section
