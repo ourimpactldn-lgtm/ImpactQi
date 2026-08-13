@@ -14,21 +14,27 @@ const animatedBorderStyles = `
     position: relative;
     border-radius: 28px;
     isolation: isolate;
-    overflow: visible;
     padding: 22px;
-    background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));
-    border: 1px solid rgba(255,255,255,0.04);
+    border: 1px solid transparent;
     box-shadow: 0 18px 45px rgba(0,0,0,0.36);
   }
-  .premium-border-card.ai-readiness::before{
+  .premium-border-card.ai-readiness::before {
     content: '';
     position: absolute;
-    inset: -3px;
+    inset: -2px;
     border-radius: inherit;
-    background: conic-gradient(from var(--angle), rgba(96,165,250,0.98), rgba(168,85,247,0.98), rgba(236,72,153,0.95), rgba(249,115,22,0.9), rgba(96,165,250,0.98));
+    background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
     animation: rotateGradient 3s linear infinite;
     z-index: -2;
-    filter: blur(0.6px) saturate(1.1);
+    filter: blur(0.6px);
+  }
+  .premium-border-card.ai-readiness::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));
+    z-index: -1;
   }
   .ai-questions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
   .ai-question { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 12px; border-radius: 14px; display:flex; flex-direction:column; gap:10px; }
@@ -122,8 +128,8 @@ export default function AIReadinessAssessment({ onConsult }) {
   return (
     <div style={{ margin: "36px 0" }}>
       <style>{animatedBorderStyles}</style>
-      <div className="premium-border-card ai-readiness">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 22, flexWrap: 'wrap' }}>
+      <div className="premium-border-card ai-readiness" style={{ position: 'relative' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 22, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
           <div style={{ flex: '1 1 320px', minWidth: 0 }}>
             <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: 0 }}>Premium Assessment</p>
             <h2 style={{ margin: '10px 0 8px', fontSize: '36px' }}>AI Readiness Assessment</h2>
