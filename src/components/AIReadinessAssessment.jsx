@@ -20,6 +20,8 @@ const animatedBorderStyles = `
     padding: 50px;
     overflow: hidden;
     backdropFilter: blur(18px);
+    width: 100%;
+    box-sizing: border-box;
   }
   .premium-border-card.ai-readiness::before {
     content: '';
@@ -135,9 +137,9 @@ export default function AIReadinessAssessment({ onConsult }) {
   }
 
   return (
-    <div style={{ margin: "0 0 40px 0", width: "100%" }}>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
       <style>{animatedBorderStyles}</style>
-      <div className="premium-border-card ai-readiness">
+      <div className="premium-border-card ai-readiness" style={{ width: "100%" }}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: "0 0 12px 0" }}>Premium Assessment</p>
           <h2 style={{ margin: '0 0 12px', fontSize: '32px', color: '#F8FAFC' }}>AI Readiness Assessment</h2>
