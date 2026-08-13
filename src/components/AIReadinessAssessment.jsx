@@ -12,8 +12,7 @@ const animatedBorderStyles = `
   }
   .premium-border-card.ai-readiness {
     position: relative;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
     border-radius: 40px;
     transition: transform 0.3s, box-shadow 0.3s;
     isolation: isolate;
@@ -31,7 +30,6 @@ const animatedBorderStyles = `
     background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
     animation: rotateGradient 4s linear infinite;
     z-index: -2;
-    opacity: 0.6;
   }
   .premium-border-card.ai-readiness::after {
     content: '';
