@@ -2096,6 +2096,10 @@ function AutomationAIPage() {
           </div>
         </div>
 
+        <div style={{ marginTop: "80px", marginBottom: "100px" }}>
+          <AIReadinessAssessment onConsult={() => undefined} />
+        </div>
+
         <div
           className="premium-border-card"
           style={{
@@ -2460,11 +2464,6 @@ function AutomationAIPage() {
                   </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA Section at bottom */}
-        <div style={{ marginTop: "80px" }}>
-          <AIReadinessAssessment onConsult={() => undefined} />
         </div>
 
         <div style={{ marginTop: "80px", textAlign: "center" }}>
