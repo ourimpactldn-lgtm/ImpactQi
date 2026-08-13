@@ -18,15 +18,23 @@ const animatedBorderStyles = `
     backdropFilter: blur(18px);
     width: 100%;
     box-sizing: border-box;
+    background: #0F1622;
   }
   .premium-border-card.ai-readiness::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 40px;
+    padding: 2px;
     background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
     animation: rotateGradient 4s linear infinite;
-    z-index: -2;
+    z-index: -1;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
   }
   .premium-border-card.ai-readiness::after {
     content: '';
@@ -34,7 +42,7 @@ const animatedBorderStyles = `
     inset: 0;
     border-radius: 40px;
     background: #0F1622;
-    z-index: -1;
+    z-index: -2;
   }
   .premium-border-card.ai-readiness:hover::before {
     filter: blur(3px);
