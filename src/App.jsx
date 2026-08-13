@@ -12,6 +12,7 @@ function useIsMobile() {
   return isMobile;
 }
 import Chatbot from "./components/Chatbot";
+import AIReadinessAssessment from "./components/AIReadinessAssessment";
 
 /* ---------------- GLOBAL STYLES (shared across components) ---------------- */
 const sectionTag = {
@@ -3979,6 +3980,7 @@ useEffect(() => {
               </button>
             </div>
             <TrustBar />
+            <AIReadinessAssessment onConsult={() => onNavigate("services")} />
             <div
               ref={statsRef}
               className="stats-grid"
