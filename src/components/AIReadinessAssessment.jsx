@@ -214,7 +214,7 @@ export default function AIReadinessAssessment({ onConsult }) {
                 <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 1.8, fontSize: '14px' }}>
                   {recommendations.slice(0,3).map((r, idx) => <li key={idx} style={{ marginBottom: 8 }}>{r}</li>)}
                 </ul>
-                <button className="cta-btn" onClick={() => { if (onConsult) onConsult(); else window.location.href = '#contact'; }} style={{ marginTop: 16, width: '100%' }}>Book an AI Strategy Consultation</button>
+                <button className="cta-btn" onClick={() => window.location.href = 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__fCewOVUMUg0RVRNMzNNNEpBU1BGTEhKWDZGTFo2OS4u&route=shorturl'} style={{ marginTop: 16, width: '100%' }}>Book an AI Strategy Consultation</button>
               </div>
             </div>
           </div>
