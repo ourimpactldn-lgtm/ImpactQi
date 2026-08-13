@@ -57,9 +57,11 @@ const animatedBorderStyles = `
   .cta-btn:active { transform: translateY(0); }
   @media (max-width: 768px) {
     .premium-border-card.ai-readiness { padding: 18px; }
-    .gauge { width:110px; height:110px; }
-    .gauge .value { font-size:18px; }
-    .cta-btn { padding:10px 14px; font-size:12px; }
+    .gauge { width:100px; height:100px; }
+    .gauge .value { font-size:16px; }
+    .cta-btn { padding:10px 14px; font-size:12px; width: 100%; }
+    .ai-question { padding: 10px; }
+    .ai-pill { padding: 6px 10px; font-size: 12px; }
   }
 `;
 
@@ -129,77 +131,78 @@ export default function AIReadinessAssessment({ onConsult }) {
   }
 
   return (
-    <div style={{ margin: "36px 0" }}>
+    <div style={{ margin: "0 0 40px 0", width: "100%" }}>
       <style>{animatedBorderStyles}</style>
-      <div className="premium-border-card ai-readiness" style={{ position: 'relative' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 22, flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-          <div style={{ flex: '1 1 320px', minWidth: 0 }}>
-            <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: 0 }}>Premium Assessment</p>
-            <h2 style={{ margin: '10px 0 8px', fontSize: '36px' }}>AI Readiness Assessment</h2>
-            <p style={{ color: '#CBD5E1', margin: 0 }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 10 questions for an immediate, personalised score and recommendations.</p>
+      <div className="premium-border-card ai-readiness">
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: "0 0 12px 0" }}>Premium Assessment</p>
+          <h2 style={{ margin: '0 0 12px', fontSize: '32px', color: '#F8FAFC' }}>AI Readiness Assessment</h2>
+          <p style={{ color: '#CBD5E1', margin: "0 0 24px 0", fontSize: '15px', lineHeight: '1.6' }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 10 questions for an immediate, personalised score and recommendations.</p>
 
-            <div className="ai-questions" style={{ marginTop: 18 }}>
-              {QUESTIONS.map((q, i) => (
-                <div className="ai-question" key={i}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ fontWeight: 700, color: '#F8FAFC' }}>{q}</div>
-                    <div className="ai-toggle">
-                      <div
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => setAnswer(i, true)}
-                        onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, true)}
-                        className={`ai-pill yes ${answers[i] === true ? 'active' : ''}`}
-                        aria-pressed={answers[i] === true}
-                      >
-                        Yes
-                      </div>
-                      <div
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => setAnswer(i, false)}
-                        onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, false)}
-                        className={`ai-pill no ${answers[i] === false ? 'active' : ''}`}
-                        aria-pressed={answers[i] === false}
-                      >
-                        No
-                      </div>
+          <div className="ai-questions" style={{ marginBottom: 24 }}>
+            {QUESTIONS.map((q, i) => (
+              <div className="ai-question" key={i}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                  <div style={{ fontWeight: 700, color: '#F8FAFC', fontSize: '14px', flex: 1 }}>{q}</div>
+                  <div className="ai-toggle">
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setAnswer(i, true)}
+                      onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, true)}
+                      className={`ai-pill yes ${answers[i] === true ? 'active' : ''}`}
+                      aria-pressed={answers[i] === true}
+                    >
+                      Yes
+                    </div>
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setAnswer(i, false)}
+                      onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, false)}
+                      className={`ai-pill no ${answers[i] === false ? 'active' : ''}`}
+                      aria-pressed={answers[i] === false}
+                    >
+                      No
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
-          <div style={{ width: 320, minWidth: 260, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="gauge" aria-hidden>
-              <svg width="140" height="140" viewBox="0 0 140 140">
-                <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#60A5FA" />
-                    <stop offset="100%" stopColor="#A855F7" />
-                  </linearGradient>
-                </defs>
-                <g transform="translate(70,70)">
-                  <circle r="56" cx="0" cy="0" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="12" />
-                  <circle ref={circleRef} r="56" cx="0" cy="0" fill="none" stroke="url(#g1)" strokeWidth="12" strokeLinecap="round" transform="rotate(-90)" />
-                </g>
-              </svg>
-              <div className="value" style={{ fontSize: 22 }}>{score}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'center' }}>
+            <div>
+              <p style={{ color: '#93C5FD', fontSize: '14px', fontWeight: 700, margin: '0 0 12px 0' }}>Your Score</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div className="gauge" aria-hidden>
+                  <svg width="140" height="140" viewBox="0 0 140 140">
+                    <defs>
+                      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#60A5FA" />
+                        <stop offset="100%" stopColor="#A855F7" />
+                      </linearGradient>
+                    </defs>
+                    <g transform="translate(70,70)">
+                      <circle r="56" cx="0" cy="0" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="12" />
+                      <circle ref={circleRef} r="56" cx="0" cy="0" fill="none" stroke="url(#g1)" strokeWidth="12" strokeLinecap="round" transform="rotate(-90)" />
+                    </g>
+                  </svg>
+                  <div className="value" style={{ fontSize: 22 }}>{score}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '28px', fontWeight: 800, color: '#F8FAFC', marginBottom: 8 }}>/100</div>
+                  <div className="status-badge" style={{ background: badgeColor, color: '#021018' }}>{rating}</div>
+                </div>
+              </div>
             </div>
 
-            <div style={{ marginTop: 12, textAlign: 'center' }}>
-              <div className="status-badge" style={{ background: badgeColor, color: '#021018' }}>{rating}</div>
-              <div style={{ color: '#CBD5E1', marginTop: 12, maxWidth: 280, textAlign: 'left' }}>
-                <strong style={{ color: '#F8FAFC' }}>What's next</strong>
-                <ul style={{ margin: '8px 0 0 16px', padding: 0, color: '#CBD5E1' }}>
-                  {recommendations.slice(0,3).map((r, idx) => <li key={idx} style={{ marginBottom: 6 }}>{r}</li>)}
-                </ul>
-              </div>
-
-              <div style={{ marginTop: 14, display: 'flex', gap: 10 }}>
-                <button className="cta-btn" onClick={() => { if (onConsult) onConsult(); else window.location.href = '#contact'; }}>Book an AI Strategy Consultation</button>
-              </div>
+            <div style={{ color: '#CBD5E1' }}>
+              <p style={{ fontWeight: 700, color: '#F8FAFC', marginBottom: 12, fontSize: '16px' }}>What's Next</p>
+              <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 1.8, fontSize: '14px' }}>
+                {recommendations.slice(0,3).map((r, idx) => <li key={idx} style={{ marginBottom: 8 }}>{r}</li>)}
+              </ul>
+              <button className="cta-btn" onClick={() => { if (onConsult) onConsult(); else window.location.href = '#contact'; }} style={{ marginTop: 16, width: '100%' }}>Book an AI Strategy Consultation</button>
             </div>
           </div>
         </div>

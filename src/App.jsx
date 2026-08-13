@@ -4014,9 +4014,7 @@ useEffect(() => {
           boxSizing: "border-box",
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-          <AIReadinessAssessment onConsult={() => onNavigate("services")} />
-        </div>
+        <AIReadinessAssessment onConsult={() => onNavigate("services")} />
       </section>
 
       <section
