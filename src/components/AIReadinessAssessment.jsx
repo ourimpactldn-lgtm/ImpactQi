@@ -12,7 +12,7 @@ const animatedBorderStyles = `
   }
   .premium-border-card.ai-readiness {
     position: relative;
-    background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
+    background: transparent;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 40px;
     transition: transform 0.3s, box-shadow 0.3s;
