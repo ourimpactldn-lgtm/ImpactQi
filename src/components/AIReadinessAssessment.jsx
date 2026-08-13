@@ -12,10 +12,7 @@ const animatedBorderStyles = `
   }
   .premium-border-card.ai-readiness {
     position: relative;
-    background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
     border-radius: 40px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    isolation: isolate;
     padding: 50px;
     overflow: hidden;
     backdropFilter: blur(18px);
@@ -26,7 +23,7 @@ const animatedBorderStyles = `
     content: '';
     position: absolute;
     inset: -2px;
-    border-radius: inherit;
+    border-radius: 40px;
     background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
     animation: rotateGradient 4s linear infinite;
     z-index: -2;
@@ -35,7 +32,7 @@ const animatedBorderStyles = `
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: inherit;
+    border-radius: 40px;
     background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
     z-index: -1;
   }
