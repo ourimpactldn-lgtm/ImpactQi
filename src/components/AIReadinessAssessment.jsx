@@ -38,7 +38,7 @@ const animatedBorderStyles = `
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: transparent;
+    background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
     z-index: -1;
   }
   .premium-border-card.ai-readiness:hover::before {
