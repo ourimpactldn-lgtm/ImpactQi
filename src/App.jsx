@@ -2096,10 +2096,6 @@ function AutomationAIPage() {
           </div>
         </div>
 
-        <div style={{ marginTop: "80px", marginBottom: "100px" }}>
-          <AIReadinessAssessment onConsult={() => undefined} />
-        </div>
-
         <div
           className="premium-border-card"
           style={{
@@ -4008,6 +4004,18 @@ useEffect(() => {
           >
             <GifDeck />
           </div>
+        </div>
+      </section>
+
+      <section
+        style={{
+          width: "100%",
+          padding: device === "mobile" ? "40px 20px 60px" : "60px 80px 80px",
+          boxSizing: "border-box",
+        }}
+      >
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <AIReadinessAssessment onConsult={() => onNavigate("services")} />
         </div>
       </section>
 
