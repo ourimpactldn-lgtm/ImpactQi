@@ -33,14 +33,25 @@ const animatedBorderStyles = `
   .ai-questions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
   .ai-question { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 12px; border-radius: 14px; display:flex; flex-direction:column; gap:10px; }
   .ai-toggle { display:inline-flex; gap:8px; }
-  .ai-pill { padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:700; font-size:13px; }
+  .ai-pill { padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:700; font-size:13px; transition:all 200ms ease; border:1px solid transparent; }
   .ai-pill.yes { background: linear-gradient(90deg,#60A5FA,#A855F7); color:#fff; }
   .ai-pill.no { background: rgba(255,255,255,0.04); color:#E6EEF8; border:1px solid rgba(255,255,255,0.03); }
+  .ai-pill:hover { transform: translateY(-2px); }
+  .ai-pill.yes:hover { box-shadow: 0 8px 24px rgba(96,165,250,0.28); }
+  .ai-pill.no:hover { background: rgba(255,255,255,0.08); }
+  .ai-pill:focus-visible { outline: 2px solid #60A5FA; outline-offset: 2px; }
   .ai-results { display:flex; gap:18px; align-items:center; margin-top:18px; flex-wrap:wrap; }
   .gauge { width:140px; height:140px; position:relative; }
   .gauge .value { position:absolute; inset:0; display:grid; place-items:center; font-weight:800; color:#F8FAFC; }
   .status-badge { padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; }
-  .cta-btn { padding:12px 18px; border-radius:40px; background:linear-gradient(135deg,#60A5FA,#A855F7); color:white; border:none; cursor:pointer; font-weight:700; }
+  .cta-btn { padding:12px 18px; border-radius:40px; background:linear-gradient(135deg,#60A5FA,#A855F7); color:white; border:none; cursor:pointer; font-weight:700; transition:all 200ms ease; }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(96,165,250,0.32); }
+  .cta-btn:active { transform: translateY(0); }
+  @media (max-width: 768px) {
+    .gauge { width:110px; height:110px; }
+    .gauge .value { font-size:18px; }
+    .cta-btn { padding:10px 14px; font-size:12px; }
+  }
 `;
 
 const QUESTIONS = [
@@ -113,7 +124,7 @@ export default function AIReadinessAssessment({ onConsult }) {
       <style>{animatedBorderStyles}</style>
       <div className="premium-border-card ai-readiness">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 22, flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 640px', minWidth: 280 }}>
+          <div style={{ flex: '1 1 320px', minWidth: 0 }}>
             <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: 0 }}>Premium Assessment</p>
             <h2 style={{ margin: '10px 0 8px', fontSize: '36px' }}>AI Readiness Assessment</h2>
             <p style={{ color: '#CBD5E1', margin: 0 }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 10 questions for an immediate, personalised score and recommendations.</p>
@@ -128,6 +139,7 @@ export default function AIReadinessAssessment({ onConsult }) {
                         role="button"
                         tabIndex={0}
                         onClick={() => setAnswer(i, true)}
+                        onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, true)}
                         className={`ai-pill yes ${answers[i] === true ? 'active' : ''}`}
                         aria-pressed={answers[i] === true}
                       >
@@ -137,6 +149,7 @@ export default function AIReadinessAssessment({ onConsult }) {
                         role="button"
                         tabIndex={0}
                         onClick={() => setAnswer(i, false)}
+                        onKeyDown={(e) => e.key === 'Enter' && setAnswer(i, false)}
                         className={`ai-pill no ${answers[i] === false ? 'active' : ''}`}
                         aria-pressed={answers[i] === false}
                       >
