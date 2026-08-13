@@ -12,11 +12,11 @@ const animatedBorderStyles = `
   }
   .premium-border-card.ai-readiness {
     position: relative;
+    background: #0F1622;
     border-radius: 28px;
+    transition: transform 0.3s, box-shadow 0.3s;
     isolation: isolate;
-    padding: 22px;
-    border: 1px solid transparent;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.36);
+    padding: 30px;
   }
   .premium-border-card.ai-readiness::before {
     content: '';
@@ -24,17 +24,20 @@ const animatedBorderStyles = `
     inset: -2px;
     border-radius: inherit;
     background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
-    animation: rotateGradient 3s linear infinite;
+    animation: rotateGradient 4s linear infinite;
     z-index: -2;
-    filter: blur(0.6px);
   }
   .premium-border-card.ai-readiness::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(7,17,31,0.96), rgba(15,23,42,0.98));
+    background: #0F1622;
     z-index: -1;
+  }
+  .premium-border-card.ai-readiness:hover::before {
+    filter: blur(3px);
+    transition: filter 0.3s ease;
   }
   .ai-questions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
   .ai-question { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 12px; border-radius: 14px; display:flex; flex-direction:column; gap:10px; }
@@ -46,7 +49,6 @@ const animatedBorderStyles = `
   .ai-pill.yes:hover { box-shadow: 0 8px 24px rgba(96,165,250,0.28); }
   .ai-pill.no:hover { background: rgba(255,255,255,0.08); }
   .ai-pill:focus-visible { outline: 2px solid #60A5FA; outline-offset: 2px; }
-  .ai-results { display:flex; gap:18px; align-items:center; margin-top:18px; flex-wrap:wrap; }
   .gauge { width:140px; height:140px; position:relative; }
   .gauge .value { position:absolute; inset:0; display:grid; place-items:center; font-weight:800; color:#F8FAFC; }
   .status-badge { padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; }
@@ -54,6 +56,7 @@ const animatedBorderStyles = `
   .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(96,165,250,0.32); }
   .cta-btn:active { transform: translateY(0); }
   @media (max-width: 768px) {
+    .premium-border-card.ai-readiness { padding: 18px; }
     .gauge { width:110px; height:110px; }
     .gauge .value { font-size:18px; }
     .cta-btn { padding:10px 14px; font-size:12px; }

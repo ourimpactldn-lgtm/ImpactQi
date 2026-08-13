@@ -2463,6 +2463,10 @@ function AutomationAIPage() {
         </div>
 
         {/* CTA Section at bottom */}
+        <div style={{ marginTop: "80px" }}>
+          <AIReadinessAssessment onConsult={() => undefined} />
+        </div>
+
         <div style={{ marginTop: "80px", textAlign: "center" }}>
           <div className="premium-border-card" style={{ padding: "50px 30px" }}>
             <h2 style={{ fontSize: "42px", marginBottom: "20px" }}>Ready to automate and transform your operations?</h2>
@@ -3980,7 +3984,6 @@ useEffect(() => {
               </button>
             </div>
             <TrustBar />
-            <AIReadinessAssessment onConsult={() => onNavigate("services")} />
             <div
               ref={statsRef}
               className="stats-grid"
