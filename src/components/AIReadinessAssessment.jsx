@@ -59,8 +59,8 @@ const animatedBorderStyles = `
   .ai-pill.yes:hover { box-shadow: 0 8px 24px rgba(96,165,250,0.28); }
   .ai-pill.no:hover { background: rgba(255,255,255,0.08); }
   .ai-pill:focus-visible { outline: 2px solid #60A5FA; outline-offset: 2px; }
-  .gauge { width:180px; height:180px; position:relative; }
-  .gauge .value { position:absolute; inset:0; display:grid; place-items:center; font-weight:800; color:#F8FAFC; }
+  .gauge { width:220px; height:220px; position:relative; }
+  .gauge .value { position:absolute; inset:0; display:grid; place-items:center; font-weight:800; color:#F8FAFC; font-size:32px; }
   .status-badge { padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; }
   .cta-btn { padding:12px 18px; border-radius:40px; background:linear-gradient(135deg,#60A5FA,#A855F7); color:white; border:none; cursor:pointer; font-weight:700; transition:all 200ms ease; }
   .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(96,165,250,0.32); }
@@ -69,8 +69,8 @@ const animatedBorderStyles = `
     .premium-border-card.ai-readiness { padding: 28px; }
     .ai-assessment-grid { grid-template-columns: 1fr; }
     .ai-questions { grid-template-columns: 1fr; }
-    .gauge { width:120px; height:120px; }
-    .gauge .value { font-size:16px; }
+    .gauge { width:150px; height:150px; }
+    .gauge .value { font-size:20px; }
     .cta-btn { padding:10px 14px; font-size:12px; width: 100%; }
     .ai-question { padding: 10px; }
     .ai-pill { padding: 6px 10px; font-size: 12px; }
@@ -80,7 +80,6 @@ const animatedBorderStyles = `
 const QUESTIONS = [
   "Do you currently use Microsoft 365?",
   "Do staff manually re-enter data between systems?",
-  "Are workflows documented?",
   "Do you use Power BI for reporting?",
   "Do you use Power Automate?",
   "Do you have an AI governance framework?",
@@ -88,13 +87,11 @@ const QUESTIONS = [
   "Do teams use SharePoint effectively?",
   "Have you piloted AI tools?",
   "Do you have digital transformation objectives?",
-  "Do you have an AI adoption roadmap?",
-  "Is your data quality regularly audited?",
 ];
 
 export default function AIReadinessAssessment({ onConsult }) {
   const [answers, setAnswers] = useState(() => Array(QUESTIONS.length).fill(null));
-  const score = useMemo(() => answers.reduce((s, a) => s + (a ? 10 : 0), 0), [answers]);
+  const score = useMemo(() => Math.round((answers.filter(a => a).length / 9) * 100), [answers]);
 
   const rating = useMemo(() => {
     if (score >= 70) return "Advanced";
@@ -151,14 +148,14 @@ export default function AIReadinessAssessment({ onConsult }) {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: "0 0 12px 0" }}>Premium Assessment</p>
           <h2 style={{ margin: '0 0 12px', fontSize: '64px', color: '#F8FAFC' }}>AI Readiness Assessment</h2>
-          <p style={{ color: '#CBD5E1', margin: "0 0 24px 0", fontSize: '15px', lineHeight: '1.6' }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 12 questions for an immediate, personalised score and recommendations.</p>
+          <p style={{ color: '#CBD5E1', margin: "0 0 24px 0", fontSize: '15px', lineHeight: '1.6' }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 9 questions for an immediate, personalised score and recommendations.</p>
 
           <div className="ai-assessment-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, alignItems: 'start' }}>
             <div>
               <p style={{ color: '#93C5FD', fontSize: '14px', fontWeight: 700, margin: '0 0 12px 0' }}>Your Score</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexDirection: 'column' }}>
                 <div className="gauge" aria-hidden>
-                  <svg width="180" height="180" viewBox="0 0 140 140">
+                  <svg width="220" height="220" viewBox="0 0 140 140">
                     <defs>
                       <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
                         <stop offset="0%" stopColor="#60A5FA" />
