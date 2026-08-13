@@ -12,11 +12,14 @@ const animatedBorderStyles = `
   }
   .premium-border-card.ai-readiness {
     position: relative;
-    background: #0F1622;
-    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(15,23,42,0.98));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 40px;
     transition: transform 0.3s, box-shadow 0.3s;
     isolation: isolate;
-    padding: 30px;
+    padding: 50px;
+    overflow: hidden;
+    backdropFilter: blur(18px);
   }
   .premium-border-card.ai-readiness::before {
     content: '';
@@ -26,13 +29,14 @@ const animatedBorderStyles = `
     background: conic-gradient(from var(--angle), #60A5FA, #A855F7, #EC4899, #F97316, #60A5FA);
     animation: rotateGradient 4s linear infinite;
     z-index: -2;
+    opacity: 0.6;
   }
   .premium-border-card.ai-readiness::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: #0F1622;
+    background: transparent;
     z-index: -1;
   }
   .premium-border-card.ai-readiness:hover::before {
@@ -56,7 +60,7 @@ const animatedBorderStyles = `
   .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(96,165,250,0.32); }
   .cta-btn:active { transform: translateY(0); }
   @media (max-width: 768px) {
-    .premium-border-card.ai-readiness { padding: 18px; }
+    .premium-border-card.ai-readiness { padding: 28px; }
     .gauge { width:100px; height:100px; }
     .gauge .value { font-size:16px; }
     .cta-btn { padding:10px 14px; font-size:12px; width: 100%; }
