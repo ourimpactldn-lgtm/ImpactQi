@@ -145,7 +145,7 @@ export default function AIReadinessAssessment({ onConsult }) {
       <div className="premium-border-card ai-readiness" style={{ width: "100%" }}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: '#60A5FA', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '1px', margin: "0 0 12px 0" }}>Premium Assessment</p>
-          <h2 style={{ margin: '0 0 12px', fontSize: '32px', color: '#F8FAFC' }}>AI Readiness Assessment</h2>
+          <h2 style={{ margin: '0 0 12px', fontSize: '64px', color: '#F8FAFC' }}>AI Readiness Assessment</h2>
           <p style={{ color: '#CBD5E1', margin: "0 0 24px 0", fontSize: '15px', lineHeight: '1.6' }}>A quick diagnostic to assess your organisation's preparedness for enterprise AI. Answer the 10 questions for an immediate, personalised score and recommendations.</p>
 
           <div className="ai-questions" style={{ marginBottom: 24 }}>
